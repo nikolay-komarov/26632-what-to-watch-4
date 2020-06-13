@@ -15,12 +15,14 @@ describe(`Render Main`, () => {
       `Stranger Things`,
       `Firefly`
     ];
+    const smallMovieCardTitleHandler = () => {};
 
     const tree = renderer
       .create(
           <Main
             movieCard = {movieCard}
             movieList = {movieList}
+            onSmallMovieCardTitleClick = {smallMovieCardTitleHandler}
           />)
         .toJSON();
 

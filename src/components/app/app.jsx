@@ -9,10 +9,13 @@ const App = (props) => {
     movieList
   } = props;
 
+  const smallMovieCardTitleHandler = () => {};
+
   return (
     <Main
       movieCard = {movieCard}
       movieList = {movieList}
+      onSmallMovieCardTitleClick = {smallMovieCardTitleHandler}
     />
   );
 };

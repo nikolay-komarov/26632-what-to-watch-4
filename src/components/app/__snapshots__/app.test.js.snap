@@ -276,6 +276,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               The Witcher
             </a>
@@ -300,6 +301,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               The Expance
             </a>
@@ -324,6 +326,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               Stranger Things
             </a>
@@ -348,6 +351,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
+              onClick={[Function]}
             >
               Firefly
             </a>
