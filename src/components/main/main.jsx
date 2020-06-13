@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 const Main = (props) => {
   const {
     movieCard,
-    movieList
+    movieList,
+    onSmallMovieCardTitleClick
   } = props;
 
   return (
@@ -103,18 +104,25 @@ const Main = (props) => {
 
           <div className="catalog__movies-list">
 
-            {movieList.map((movie, index) => {
-              return (
-                <article className="small-movie-card catalog__movies-card" key = {index + `_` + movie}>
-                  <div className="small-movie-card__image">
-                    <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={movie} width="280" height="175" />
-                  </div>
-                  <h3 className="small-movie-card__title">
-                    <a className="small-movie-card__link" href="movie-page.html">{movie}</a>
-                  </h3>
-                </article>
-              );
-            })
+            {
+              movieList.map((movie, index) => {
+                return (
+                  <article className="small-movie-card catalog__movies-card" key = {index + `_` + movie}>
+                    <div className="small-movie-card__image">
+                      <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={movie} width="280" height="175" />
+                    </div>
+                    <h3 className="small-movie-card__title">
+                      <a
+                        className="small-movie-card__link"
+                        href="movie-page.html"
+                        onClick={onSmallMovieCardTitleClick}
+                      >
+                        {movie}
+                      </a>
+                    </h3>
+                  </article>
+                );
+              })
             }
 
           </div>
@@ -151,6 +159,7 @@ Main.propTypes = {
   movieList: PropTypes.arrayOf(
       PropTypes.string.isRequired
   ).isRequired,
+  onSmallMovieCardTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;
