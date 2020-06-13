@@ -8,12 +8,19 @@ const Settings = {
     title: `The Grand Budapest Hotel`,
     genre: `Drama`,
     year: `2014`
-  }
+  },
+  movieList: [
+    `Fantastic Beasts: The Crimes of Grindelwald`,
+    `Bohemian Rhapsody`,
+    `Macbeth`,
+    `Aviator`,
+  ]
 };
 
 ReactDOM.render(
     <App
       movieCard = {Settings.movieCard}
+      movieList = {Settings.movieList}
     />,
     document.querySelector(`#root`)
 );
