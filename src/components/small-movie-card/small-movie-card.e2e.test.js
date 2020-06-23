@@ -8,25 +8,67 @@ Enzyme.configure({
 });
 
 describe(`E2E SmallMovieCard tests`, () => {
-  it(`Should smallMovieCardTitle be click`, () => {
-    const smallMovieCard = {
-      name: `Firefly`,
-      posterImage: `posterImage`
-    };
+  const mock = {
+    name: `Firefly`,
+    posterImage: `posterImage`
+  };
+
+  it(`Should SmallMovieCard be hover`, () => {
+    const movieCard = mock;
     const onSmallMovieCardHover = jest.fn();
 
     const smallMovieCardComponent = shallow(
         <SmallMovieCard
-          smallMovieCard = {smallMovieCard}
+          movieCard = {movieCard}
           onSmallMovieCardHover = {onSmallMovieCardHover}
+          onSmallMovieCardLeave = {() => {}}
+          onSmallMovieCardClick = {() => {}}
         />
     );
 
     const smallMovieCardArticle = smallMovieCardComponent.find(`.small-movie-card`);
 
-    smallMovieCardArticle.simulate(`mouseover`);
-
+    smallMovieCardArticle.simulate(`mouseover`, movieCard);
     expect(onSmallMovieCardHover).toHaveBeenCalledTimes(1);
-    expect(onSmallMovieCardHover.mock.calls[0][0]).toMatchObject(smallMovieCard);
+    expect(onSmallMovieCardHover.mock.calls[0][0]).toMatchObject(movieCard);
+  });
+
+  it(`Should SmallMovieCard be leaved`, () => {
+    const movieCard = mock;
+    const onSmallMovieCardLeave = jest.fn();
+
+    const smallMovieCardComponent = shallow(
+        <SmallMovieCard
+          movieCard = {movieCard}
+          onSmallMovieCardHover = {() => {}}
+          onSmallMovieCardLeave = {onSmallMovieCardLeave}
+          onSmallMovieCardClick = {() => {}}
+        />
+    );
+
+    const smallMovieCardArticle = smallMovieCardComponent.find(`.small-movie-card`);
+
+    smallMovieCardArticle.simulate(`mouseleave`);
+    expect(onSmallMovieCardLeave).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Should SmallMovieCard be clicked`, () => {
+    const movieCard = mock;
+    const onSmallMovieCardClick = jest.fn();
+
+    const smallMovieCardComponent = shallow(
+        <SmallMovieCard
+          movieCard = {movieCard}
+          onSmallMovieCardHover = {() => {}}
+          onSmallMovieCardLeave = {() => {}}
+          onSmallMovieCardClick = {onSmallMovieCardClick}
+        />
+    );
+
+    const smallMovieCardArticle = smallMovieCardComponent.find(`.small-movie-card`);
+
+    smallMovieCardArticle.simulate(`click`, movieCard);
+    expect(onSmallMovieCardClick).toHaveBeenCalledTimes(1);
+    expect(onSmallMovieCardClick.mock.calls[0][0]).toMatchObject(movieCard);
   });
 });

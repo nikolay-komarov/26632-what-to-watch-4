@@ -12,8 +12,10 @@ describe(`Render SmallMovieCard`, () => {
     const tree = renderer
       .create(
           <SmallMovieCard
-            smallMovieCard = {smallMovieCard}
+            movieCard = {smallMovieCard}
             onSmallMovieCardHover = {() => {}}
+            onSmallMovieCardLeave = {() => {}}
+            onSmallMovieCardClick = {() => {}}
           />)
         .toJSON();
 

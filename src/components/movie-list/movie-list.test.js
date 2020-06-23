@@ -43,6 +43,7 @@ describe(`Render MoviesList`, () => {
     .create(
         <MoviesList
           moviesList = {moviesList}
+          onSmallMovieCardClick = {() => {}}
         />)
       .toJSON();
 

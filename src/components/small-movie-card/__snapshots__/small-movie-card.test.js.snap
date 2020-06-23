@@ -3,6 +3,9 @@
 exports[`Render SmallMovieCard Should SmallMovieCard render correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  onClick={[Function]}
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
 >
   <div
     className="small-movie-card__image"
