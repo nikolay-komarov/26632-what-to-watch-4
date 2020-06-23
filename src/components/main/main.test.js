@@ -9,20 +9,47 @@ describe(`Render Main`, () => {
       genre: `fantastic`,
       year: `1977`
     };
-    const movieList = [
-      `The Witcher`,
-      `The Expance`,
-      `Stranger Things`,
-      `Firefly`
+    const moviesList = [
+      {
+        name: `Fantastic Beasts: The Crimes of Grindelwald`,
+        posterImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+      },
+      {
+        name: `Bohemian Rhapsody`,
+        posterImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+      },
+      {
+        name: `Macbeth`,
+        posterImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+      },
+      {
+        name: `Aviator`,
+        posterImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+      },
+      {
+        name: `We need to talk about Kevin`,
+        posterImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+      },
+      {
+        name: `What We Do in the Shadows`,
+        posterImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+      },
+      {
+        name: `Revenant`,
+        posterImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+      },
+      {
+        name: `Johnny English`,
+        posterImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+      },
     ];
-    const smallMovieCardTitleHandler = () => {};
 
     const tree = renderer
       .create(
           <Main
             movieCard = {movieCard}
-            movieList = {movieList}
-            onSmallMovieCardTitleClick = {smallMovieCardTitleHandler}
+            moviesList = {moviesList}
+            onSmallMovieCardClick = {() => {}}
           />)
         .toJSON();
 

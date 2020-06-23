@@ -6,16 +6,16 @@ import Main from "../main/main.jsx";
 const App = (props) => {
   const {
     movieCard,
-    movieList
+    moviesList
   } = props;
 
-  const smallMovieCardTitleHandler = () => {};
+  const handleSmallMovieCardClick = () => {};
 
   return (
     <Main
       movieCard = {movieCard}
-      movieList = {movieList}
-      onSmallMovieCardTitleClick = {smallMovieCardTitleHandler}
+      moviesList = {moviesList}
+      onSmallMovieCardClick = {handleSmallMovieCardClick}
     />
   );
 };
@@ -26,9 +26,10 @@ App.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
   }).isRequired,
-  movieList: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-  ).isRequired,
+  moviesList: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default App;
