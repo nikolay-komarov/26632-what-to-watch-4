@@ -1,14 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import MoviesList from "./movie-list.jsx";
 
-describe(`Render Main`, () => {
-  it(`Should Main render correctly`, () => {
-    const movieCard = {
-      title: `Star Wars`,
-      genre: `fantastic`,
-      year: `1977`
-    };
+describe(`Render MoviesList`, () => {
+  it(`Should MoviesList render correctly`, () => {
     const moviesList = [
       {
         name: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -45,13 +40,12 @@ describe(`Render Main`, () => {
     ];
 
     const tree = renderer
-      .create(
-          <Main
-            movieCard = {movieCard}
-            moviesList = {moviesList}
-            onSmallMovieCardClick = {() => {}}
-          />)
-        .toJSON();
+    .create(
+        <MoviesList
+          moviesList = {moviesList}
+          onSmallMovieCardClick = {() => {}}
+        />)
+      .toJSON();
 
     expect(tree).toMatchSnapshot();
   });

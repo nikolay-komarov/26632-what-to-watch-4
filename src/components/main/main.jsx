@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import MovieList from "../movie-list/movie-list.jsx";
+
 const Main = (props) => {
   const {
     movieCard,
-    movieList,
-    onSmallMovieCardTitleClick
+    moviesList,
+    onSmallMovieCardClick
   } = props;
 
   return (
@@ -102,30 +104,10 @@ const Main = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-
-            {
-              movieList.map((movie, index) => {
-                return (
-                  <article className="small-movie-card catalog__movies-card" key = {index + `_` + movie}>
-                    <div className="small-movie-card__image">
-                      <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt={movie} width="280" height="175" />
-                    </div>
-                    <h3 className="small-movie-card__title">
-                      <a
-                        className="small-movie-card__link"
-                        href="movie-page.html"
-                        onClick={onSmallMovieCardTitleClick}
-                      >
-                        {movie}
-                      </a>
-                    </h3>
-                  </article>
-                );
-              })
-            }
-
-          </div>
+          <MovieList
+            moviesList = {moviesList}
+            onSmallMovieCardClick = {onSmallMovieCardClick}
+          />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -156,10 +138,11 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
   }).isRequired,
-  movieList: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-  ).isRequired,
-  onSmallMovieCardTitleClick: PropTypes.func.isRequired,
+  moviesList: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+  })).isRequired,
+  onSmallMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;
