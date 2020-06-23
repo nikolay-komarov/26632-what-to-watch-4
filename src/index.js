@@ -4,18 +4,11 @@ import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
 
 import moviesList from "./mocks/films.js";
-
-const Settings = {
-  movieCard: {
-    title: `The Grand Budapest Hotel`,
-    genre: `Drama`,
-    year: `2014`
-  },
-};
+import movieCard from "./mocks/film.js";
 
 ReactDOM.render(
     <App
-      movieCard = {Settings.movieCard}
+      movieCard = {movieCard}
       moviesList = {moviesList}
     />,
     document.querySelector(`#root`)

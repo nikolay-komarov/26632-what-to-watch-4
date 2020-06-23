@@ -24,7 +24,9 @@ const App = (props) => {
           />
         </Route>
         <Route exact path="/dev-film">
-          <MoviePage />
+          <MoviePage
+            movieDetails = {movieCard}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -34,13 +36,20 @@ const App = (props) => {
 
 App.propTypes = {
   movieCard: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoreCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
   }).isRequired,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
   })).isRequired,
 };
 
