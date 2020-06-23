@@ -13,6 +13,7 @@ describe(`Render SmallMovieCard`, () => {
       .create(
           <SmallMovieCard
             smallMovieCard = {smallMovieCard}
+            onSmallMovieCardHover = {() => {}}
           />)
         .toJSON();
 

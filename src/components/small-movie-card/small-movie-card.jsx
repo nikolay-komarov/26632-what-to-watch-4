@@ -4,10 +4,14 @@ import PropTypes from "prop-types";
 const SmallMovieCard = (props) => {
   const {
     smallMovieCard,
+    onSmallMovieCardHover,
   } = props;
 
   return (
-    <article className="small-movie-card catalog__movies-card">
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseOver={onSmallMovieCardHover(smallMovieCard)}
+    >
       <div className="small-movie-card__image">
         <img src={smallMovieCard.posterImage} alt={smallMovieCard.name} width="280" height="175" />
       </div>
@@ -28,6 +32,7 @@ SmallMovieCard.propTypes = {
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
   }),
+  onSmallMovieCardHover: PropTypes.func.isRequired,
 };
 
 export default SmallMovieCard;

@@ -22,6 +22,7 @@ class MoviesList extends PureComponent {
               <SmallMovieCard
                 key = {`${index}-${movie.name}`}
                 smallMovieCard = {movie}
+                onSmallMovieCardHover = {() => {}}
               />
             );
           })
