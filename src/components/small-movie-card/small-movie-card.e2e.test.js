@@ -10,7 +10,7 @@ Enzyme.configure({
 describe(`E2E SmallMovieCard tests`, () => {
   const mock = {
     name: `Firefly`,
-    posterImage: `posterImage`
+    previewImage: `previewImage`
   };
 
   it(`Should SmallMovieCard be hover`, () => {

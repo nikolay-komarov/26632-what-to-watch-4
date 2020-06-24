@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import MovieList from "../movie-list/movie-list.jsx";
+import MoviesList from "../movies-list/movies-list.jsx";
 
 const Main = (props) => {
   const {
@@ -14,7 +14,7 @@ const Main = (props) => {
     <>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={movieCard.backgroundImage} alt={movieCard.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -38,14 +38,14 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={movieCard.posterImage} alt={movieCard.name + ` poster`} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{movieCard.title}</h2>
+              <h2 className="movie-card__title">{movieCard.name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{movieCard.genre}</span>
-                <span className="movie-card__year">{movieCard.year}</span>
+                <span className="movie-card__year">{movieCard.released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -104,7 +104,7 @@ const Main = (props) => {
             </li>
           </ul>
 
-          <MovieList
+          <MoviesList
             moviesList = {moviesList}
             onSmallMovieCardClick = {onSmallMovieCardClick}
           />
@@ -134,13 +134,20 @@ const Main = (props) => {
 
 Main.propTypes = {
   movieCard: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    scoreCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
   }).isRequired,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
   })).isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
 };
