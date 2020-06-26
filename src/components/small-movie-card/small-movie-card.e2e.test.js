@@ -11,7 +11,7 @@ describe(`E2E SmallMovieCard tests`, () => {
   const mock = {
     name: `Firefly`,
     previewImage: `previewImage`,
-    previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+    previewVideoLink: `previewVideoLink`,
   };
 
   it(`Should SmallMovieCard be hover`, () => {
