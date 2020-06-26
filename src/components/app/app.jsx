@@ -65,6 +65,7 @@ App.propTypes = {
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     scoreCount: PropTypes.number.isRequired,
@@ -76,6 +77,7 @@ App.propTypes = {
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
 };
 
