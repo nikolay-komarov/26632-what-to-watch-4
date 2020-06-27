@@ -10,7 +10,8 @@ Enzyme.configure({
 describe(`E2E SmallMovieCard tests`, () => {
   const mock = {
     name: `Firefly`,
-    previewImage: `previewImage`
+    previewImage: `previewImage`,
+    previewVideoLink: `previewVideoLink`,
   };
 
   it(`Should SmallMovieCard be hover`, () => {
@@ -23,6 +24,7 @@ describe(`E2E SmallMovieCard tests`, () => {
           onSmallMovieCardHover = {onSmallMovieCardHover}
           onSmallMovieCardLeave = {() => {}}
           onSmallMovieCardClick = {() => {}}
+          isPlaying = {false}
         />
     );
 
@@ -43,6 +45,7 @@ describe(`E2E SmallMovieCard tests`, () => {
           onSmallMovieCardHover = {() => {}}
           onSmallMovieCardLeave = {onSmallMovieCardLeave}
           onSmallMovieCardClick = {() => {}}
+          isPlaying = {true}
         />
     );
 
@@ -62,6 +65,7 @@ describe(`E2E SmallMovieCard tests`, () => {
           onSmallMovieCardHover = {() => {}}
           onSmallMovieCardLeave = {() => {}}
           onSmallMovieCardClick = {onSmallMovieCardClick}
+          isPlaying = {true}
         />
     );
 

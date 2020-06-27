@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import VideoPlayer from "../video-player/video-player.jsx";
+
 const SmallMovieCard = (props) => {
   const {
     movieCard,
     onSmallMovieCardHover,
     onSmallMovieCardLeave,
     onSmallMovieCardClick,
+    isPlaying,
   } = props;
 
   return (
@@ -17,7 +20,12 @@ const SmallMovieCard = (props) => {
       onClick={() => onSmallMovieCardClick(movieCard)}
     >
       <div className="small-movie-card__image">
-        <img src={movieCard.previewImage} alt={movieCard.name} width="280" height="175" />
+        <VideoPlayer
+          isPlaying = {isPlaying}
+          movieCard = {movieCard}
+        />
+
+        {/* <img src={movieCard.previewImage} alt={movieCard.name} width="280" height="175" /> */}
       </div>
       <h3 className="small-movie-card__title">
         <a
@@ -39,6 +47,7 @@ SmallMovieCard.propTypes = {
   onSmallMovieCardHover: PropTypes.func.isRequired,
   onSmallMovieCardLeave: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
 };
 
 export default SmallMovieCard;

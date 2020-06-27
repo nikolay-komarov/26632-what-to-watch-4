@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render VideoPlayer VideoPlayer is rendered correctly with pause 1`] = `
+<video
+  height="175"
+  width="280"
+/>
+`;
+
+exports[`Render VideoPlayer VideoPlayer is rendered correctly with play 1`] = `
+<video
+  height="175"
+  width="280"
+/>
+`;
