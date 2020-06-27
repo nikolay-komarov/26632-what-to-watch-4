@@ -9,6 +9,7 @@ export default {
   scoreCount: 240,
   director: `Wes Andreson`,
   staring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+  runTime: 99,
   genre: `Drama`,
   released: 2014,
 };
