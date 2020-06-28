@@ -21,7 +21,7 @@ class Tabs extends PureComponent {
   }
 
   render() {
-    const {movieDetails, comments} = this.props;
+    const {movieDetails, movieComments} = this.props;
     const {
       description,
       rating,
@@ -141,7 +141,7 @@ class Tabs extends PureComponent {
               <>
                 <div className="movie-card__reviews movie-card__row">
                   <div className="movie-card__reviews-col">
-                    {comments.map((review) => (
+                    {movieComments.map((review) => (
                       <div className="review" key={review.id}>
                         <blockquote className="review__quote">
                           <p className="review__text">{review.comment}</p>
@@ -175,7 +175,7 @@ Tabs.propTypes = {
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
   }),
-  comments: PropTypes.arrayOf(PropTypes.shape({
+  movieComments: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     userId: PropTypes.number.isRequired,
     userName: PropTypes.string.isRequired,

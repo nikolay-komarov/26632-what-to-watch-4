@@ -1,23 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {getMovieRatingLevel} from "../../utils.js";
+import Tabs from "../tabs/tabs.jsx";
+// import {getMovieRatingLevel} from "../../utils.js";
 
 const MoviePage = (props) => {
-  const {movieDetails} = props;
+  const {movieDetails, movieComments} = props;
   const {
     name,
     posterImage,
     backgroundImage,
-    description,
-    rating,
-    scoreCount,
-    director,
-    staring,
+    // description,
+    // rating,
+    // scoreCount,
+    // director,
+    // staring,
     genre,
     released,
   } = movieDetails;
-  const movieRatingLevel = getMovieRatingLevel(rating);
+  // const movieRatingLevel = getMovieRatingLevel(rating);
 
   return (
     <>
@@ -78,35 +79,11 @@ const MoviePage = (props) => {
               <img src={posterImage} alt={name + ` poster`} width="218" height="327" />
             </div>
 
-            <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+            <Tabs
+              movieDetails = {movieDetails}
+              movieComments = {movieComments}
+            />
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{movieRatingLevel}</span>
-                  <span className="movie-rating__count">{scoreCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                <p>{description}</p>
-                <p className="movie-card__director"><strong>Director: {director}</strong></p>
-                <p className="movie-card__starring"><strong>Starring: {staring.join(`, `)} and other</strong></p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -182,9 +159,18 @@ MoviePage.propTypes = {
     scoreCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
-  })
+  }),
+  movieComments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    userId: PropTypes.number.isRequired,
+    userName: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
+  })).isRequired,
 };
 
 export default MoviePage;

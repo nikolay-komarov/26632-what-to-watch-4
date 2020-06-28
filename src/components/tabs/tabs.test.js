@@ -14,7 +14,7 @@ describe(`Render Tabs`, () => {
       genre: `Drama`,
       released: 2014,
     };
-    const comments = [
+    const movieComments = [
       {
         id: 1,
         userId: 4,
@@ -61,7 +61,7 @@ describe(`Render Tabs`, () => {
       .create(
           <Tabs
             movieDetails = {movieDetails}
-            comments = {comments}
+            movieComments = {movieComments}
           />)
         .toJSON();
 

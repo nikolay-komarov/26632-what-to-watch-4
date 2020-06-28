@@ -20,7 +20,7 @@ describe(`E2E Tabs tests`, () => {
     genre: `Drama`,
     released: 2014,
   };
-  const comments = [
+  const movieComments = [
     {
       id: 1,
       userId: 4,
@@ -67,7 +67,7 @@ describe(`E2E Tabs tests`, () => {
     const tabs = shallow(
         <Tabs
           movieDetails = {movieDetails}
-          comments = {comments}
+          movieComments = {movieComments}
         />);
 
     const movieNavItems = tabs.find(`.movie-nav__item`);

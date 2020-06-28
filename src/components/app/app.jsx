@@ -17,6 +17,7 @@ class App extends React.PureComponent {
   _renderApp() {
     const {
       movieCard,
+      movieComments,
       moviesList
     } = this.props;
     const {currentMovie} = this.state;
@@ -25,6 +26,7 @@ class App extends React.PureComponent {
       return (
         <MoviePage
           movieDetails = {currentMovie}
+          movieComments = {movieComments}
         />
       );
     }
@@ -41,7 +43,10 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {movieCard} = this.props;
+    const {
+      movieCard,
+      movieComments,
+    } = this.props;
 
     return (
       <BrowserRouter>
@@ -52,6 +57,7 @@ class App extends React.PureComponent {
           <Route exact path="/dev-film">
             <MoviePage
               movieDetails = {movieCard}
+              movieComments = {movieComments}
             />
           </Route>
         </Switch>
@@ -71,9 +77,18 @@ App.propTypes = {
     scoreCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
   }).isRequired,
+  movieComments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    userId: PropTypes.number.isRequired,
+    userName: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
+  })).isRequired,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
