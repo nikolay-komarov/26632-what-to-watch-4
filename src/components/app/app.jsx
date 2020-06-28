@@ -12,6 +12,12 @@ class App extends React.PureComponent {
     this.state = {
       currentMovie: null,
     };
+
+    this.handleSmallMovieCardClick = this.handleSmallMovieCardClick.bind(this);
+  }
+
+  handleSmallMovieCardClick(movie) {
+    this.setState({currentMovie: movie});
   }
 
   _renderApp() {
@@ -27,6 +33,11 @@ class App extends React.PureComponent {
         <MoviePage
           movieDetails = {currentMovie}
           movieComments = {movieComments}
+          moviesList = {moviesList}
+          // onSmallMovieCardClick = {(movie) => {
+          //   this.setState({currentMovie: movie});
+          // }}
+          onSmallMovieCardClick = {this.handleSmallMovieCardClick}
         />
       );
     }
@@ -35,9 +46,10 @@ class App extends React.PureComponent {
       <Main
         movieCard = {movieCard}
         moviesList = {moviesList}
-        onSmallMovieCardClick = {(movie) => {
-          this.setState({currentMovie: movie});
-        }}
+        onSmallMovieCardClick = {this.handleSmallMovieCardClick}
+        // onSmallMovieCardClick = {(movie) => {
+        //   this.setState({currentMovie: movie});
+        // }}
       />
     );
   }
@@ -46,6 +58,7 @@ class App extends React.PureComponent {
     const {
       movieCard,
       movieComments,
+      moviesList
     } = this.props;
 
     return (
@@ -58,6 +71,11 @@ class App extends React.PureComponent {
             <MoviePage
               movieDetails = {movieCard}
               movieComments = {movieComments}
+              moviesList = {moviesList}
+              onSmallMovieCardClick = {this.handleSmallMovieCardClick}
+              // onSmallMovieCardClick = {(movie) => {
+              //   this.setState({currentMovie: movie});
+              // }}
             />
           </Route>
         </Switch>

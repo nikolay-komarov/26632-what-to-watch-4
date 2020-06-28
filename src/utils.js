@@ -28,3 +28,10 @@ export const getTimeFromMins = (mins) => {
     hours + `h ` + minutes + `m`
   );
 };
+
+export const getFourSimilarMovies = (movie, movies) => {
+  return movies
+    .filter((similarMovie) =>
+      similarMovie.genre === movie.genre && similarMovie.name !== movie.name)
+    .slice(0, 4);
+};
