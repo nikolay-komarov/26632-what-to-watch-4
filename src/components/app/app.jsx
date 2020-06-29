@@ -12,11 +12,18 @@ class App extends React.PureComponent {
     this.state = {
       currentMovie: null,
     };
+
+    this.handleSmallMovieCardClick = this.handleSmallMovieCardClick.bind(this);
+  }
+
+  handleSmallMovieCardClick(movie) {
+    this.setState({currentMovie: movie});
   }
 
   _renderApp() {
     const {
       movieCard,
+      movieComments,
       moviesList
     } = this.props;
     const {currentMovie} = this.state;
@@ -25,6 +32,12 @@ class App extends React.PureComponent {
       return (
         <MoviePage
           movieDetails = {currentMovie}
+          movieComments = {movieComments}
+          moviesList = {moviesList}
+          // onSmallMovieCardClick = {(movie) => {
+          //   this.setState({currentMovie: movie});
+          // }}
+          onSmallMovieCardClick = {this.handleSmallMovieCardClick}
         />
       );
     }
@@ -33,15 +46,20 @@ class App extends React.PureComponent {
       <Main
         movieCard = {movieCard}
         moviesList = {moviesList}
-        onSmallMovieCardClick = {(movie) => {
-          this.setState({currentMovie: movie});
-        }}
+        onSmallMovieCardClick = {this.handleSmallMovieCardClick}
+        // onSmallMovieCardClick = {(movie) => {
+        //   this.setState({currentMovie: movie});
+        // }}
       />
     );
   }
 
   render() {
-    const {movieCard} = this.props;
+    const {
+      movieCard,
+      movieComments,
+      moviesList
+    } = this.props;
 
     return (
       <BrowserRouter>
@@ -52,6 +70,12 @@ class App extends React.PureComponent {
           <Route exact path="/dev-film">
             <MoviePage
               movieDetails = {movieCard}
+              movieComments = {movieComments}
+              moviesList = {moviesList}
+              onSmallMovieCardClick = {this.handleSmallMovieCardClick}
+              // onSmallMovieCardClick = {(movie) => {
+              //   this.setState({currentMovie: movie});
+              // }}
             />
           </Route>
         </Switch>
@@ -71,9 +95,18 @@ App.propTypes = {
     scoreCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
   }).isRequired,
+  movieComments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    userId: PropTypes.number.isRequired,
+    userName: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    comment: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
+  })).isRequired,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,

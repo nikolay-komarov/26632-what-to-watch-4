@@ -143,6 +143,7 @@ Main.propTypes = {
     scoreCount: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
   }).isRequired,

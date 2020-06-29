@@ -12,3 +12,9 @@ export const MovieLevel = {
   VERRY_GOOD: `Verry good`,
   AWESOME: `Awesome`
 };
+
+export const TabName = {
+  OVERVIEW: `overview`,
+  DETAILS: `details`,
+  REVIEWS: `reviews`
+};
