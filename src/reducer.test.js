@@ -27,14 +27,14 @@ describe(`Reducer tests`, () => {
   });
 
   it(`Reducer should change filteredMoviesList for Drama`, () => {
-    const filteredMoviesListDrama = getMoviesByGenre(films, `Drama`);
+    const filteredMoviesListDrama = getMoviesByGenre(films, `Sci-Fi`);
 
     expect(reducer({
       moviesList: films,
       filteredMoviesList: films,
     }, {
-      type: ActionType.GET_MOVIE_BY_GENRE,
-      payload: `Drama`,
+      type: ActionType.GET_MOVIES_BY_GENRE,
+      payload: `Sci-Fi`,
     })).toEqual({
       moviesList: films,
       filteredMoviesList: filteredMoviesListDrama,

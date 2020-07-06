@@ -49,3 +49,7 @@ export const getMoviesByGenre = (movies, genre) => {
     ? movies
     : movies.filter((movie) => movie.genre === genre);
 };
+
+export const getGenresList = (movies) => {
+  return [GENRE_ALL, ...new Set(movies.map((movie) => movie.genre))];
+};

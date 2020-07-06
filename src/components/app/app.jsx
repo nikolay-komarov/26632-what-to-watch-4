@@ -5,19 +5,27 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 
+import {GENRE_ALL} from "../../const.js";
+
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
       currentMovie: null,
+      currentGenre: GENRE_ALL,
     };
 
     this.handleSmallMovieCardClick = this.handleSmallMovieCardClick.bind(this);
+    this.handleGenreItemClick = this.handleGenreItemClick.bind(this);
   }
 
   handleSmallMovieCardClick(movie) {
     this.setState({currentMovie: movie});
+  }
+
+  handleGenreItemClick(genre) {
+    this.setState({currentGenre: genre});
   }
 
   _renderApp() {
@@ -26,7 +34,10 @@ class App extends React.PureComponent {
       movieComments,
       moviesList
     } = this.props;
-    const {currentMovie} = this.state;
+    const {
+      currentMovie,
+      currentGenre
+    } = this.state;
 
     if (currentMovie) {
       return (
@@ -42,8 +53,10 @@ class App extends React.PureComponent {
     return (
       <Main
         movieCard = {movieCard}
+        currentGenre = {currentGenre}
         moviesList = {moviesList}
         onSmallMovieCardClick = {this.handleSmallMovieCardClick}
+        onGenreItemClick = {this.handleGenreItemClick}
       />
     );
   }
@@ -102,6 +115,7 @@ App.propTypes = {
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
   })).isRequired,
 };
 

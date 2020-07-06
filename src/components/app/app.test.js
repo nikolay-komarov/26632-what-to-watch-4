@@ -65,41 +65,49 @@ describe(`Render App`, () => {
         name: `Fantastic Beasts: The Crimes of Grindelwald`,
         previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+        genre: `Drama`,
       },
       {
         name: `Bohemian Rhapsody`,
         previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+        genre: `Drama`,
       },
       {
         name: `Macbeth`,
         previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+        genre: `Drama`,
       },
       {
         name: `Aviator`,
         previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+        genre: `Drama`,
       },
       {
         name: `We need to talk about Kevin`,
         previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+        genre: `Drama`,
       },
       {
         name: `What We Do in the Shadows`,
         previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+        genre: `Drama`,
       },
       {
         name: `Revenant`,
         previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+        genre: `Drama`,
       },
       {
         name: `Johnny English`,
         previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+        genre: `Drama`,
       },
     ];
 
