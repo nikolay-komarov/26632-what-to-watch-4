@@ -34,9 +34,6 @@ class App extends React.PureComponent {
           movieDetails = {currentMovie}
           movieComments = {movieComments}
           moviesList = {moviesList}
-          // onSmallMovieCardClick = {(movie) => {
-          //   this.setState({currentMovie: movie});
-          // }}
           onSmallMovieCardClick = {this.handleSmallMovieCardClick}
         />
       );
@@ -47,9 +44,6 @@ class App extends React.PureComponent {
         movieCard = {movieCard}
         moviesList = {moviesList}
         onSmallMovieCardClick = {this.handleSmallMovieCardClick}
-        // onSmallMovieCardClick = {(movie) => {
-        //   this.setState({currentMovie: movie});
-        // }}
       />
     );
   }
@@ -73,9 +67,6 @@ class App extends React.PureComponent {
               movieComments = {movieComments}
               moviesList = {moviesList}
               onSmallMovieCardClick = {this.handleSmallMovieCardClick}
-              // onSmallMovieCardClick = {(movie) => {
-              //   this.setState({currentMovie: movie});
-              // }}
             />
           </Route>
         </Switch>
