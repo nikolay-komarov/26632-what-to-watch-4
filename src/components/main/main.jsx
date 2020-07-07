@@ -5,8 +5,6 @@ import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import {getMoviesByGenre} from "../../utils.js";
 
-// import {GENRE_ALL} from "../../const.js";
-
 const Main = (props) => {
   const {
     movieCard,
