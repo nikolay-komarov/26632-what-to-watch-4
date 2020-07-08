@@ -144,7 +144,7 @@ MoviePage.propTypes = {
     rating: PropTypes.number.isRequired,
     comment: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired
-  })).isRequired,
+  })),
   moviesList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,

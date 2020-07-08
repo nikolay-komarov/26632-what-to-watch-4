@@ -1,6 +1,5 @@
 import {reducer, ActionType, ActionCreator} from "./reducer.js";
 import {GENRE_ALL} from "./const.js";
-import {getMoviesByGenre} from "./utils.js";
 
 import films from "./mocks/films.js";
 import film from "./mocks/film.js";
@@ -12,7 +11,6 @@ describe(`Reducer tests`, () => {
       promoMovieCard: film,
       currentGenre: GENRE_ALL,
       moviesList: films,
-      filteredMoviesList: films, // пока пусть будет
       currentMovie: null,
       currentMovieComments: null,
     });
@@ -26,21 +24,6 @@ describe(`Reducer tests`, () => {
       payload: `Drama`,
     })).toEqual({
       currentGenre: `Drama`,
-    });
-  });
-
-  it(`Reducer should change filteredMoviesList for Drama`, () => {
-    const filteredMoviesListDrama = getMoviesByGenre(films, `Sci-Fi`);
-
-    expect(reducer({
-      moviesList: films,
-      filteredMoviesList: films,
-    }, {
-      type: ActionType.GET_MOVIES_BY_GENRE,
-      payload: `Sci-Fi`,
-    })).toEqual({
-      moviesList: films,
-      filteredMoviesList: filteredMoviesListDrama,
     });
   });
 

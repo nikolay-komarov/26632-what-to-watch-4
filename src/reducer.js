@@ -1,4 +1,4 @@
-import {extend, getMoviesByGenre} from "./utils.js";
+import {extend} from "./utils.js";
 import {GENRE_ALL} from "./const.js";
 
 import promoMovieCard from "./mocks/film.js";
@@ -10,14 +10,12 @@ const initialState = {
   promoMovieCard,
   currentGenre: GENRE_ALL,
   moviesList,
-  filteredMoviesList: moviesList, // пока пусть будет
   currentMovie: null,
   currentMovieComments: null,
 };
 
 const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
-  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
   CHANGE_CURRENT_MOVIE: `CHANGE_CURRENT_MOVIE`,
 };
 
@@ -37,11 +35,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_GENRE:
       return extend(state, {
         currentGenre: action.payload
-      });
-
-    case ActionType.GET_MOVIES_BY_GENRE:
-      return extend(state, {
-        filteredMoviesList: getMoviesByGenre(state.moviesList, action.payload),
       });
 
     case ActionType.CHANGE_CURRENT_MOVIE:
