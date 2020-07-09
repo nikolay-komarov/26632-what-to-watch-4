@@ -1,4 +1,8 @@
-import {MovieScore, MovieLevel} from "./const.js";
+import {
+  MovieScore,
+  MovieLevel,
+  GENRE_ALL,
+} from "./const.js";
 
 export const getMovieRatingLevel = (movieScore) => {
   if (movieScore < 0) {
@@ -34,4 +38,18 @@ export const getFourSimilarMovies = (movie, movies) => {
     .filter((similarMovie) =>
       similarMovie.genre === movie.genre && similarMovie.name !== movie.name)
     .slice(0, 4);
+};
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+export const getMoviesByGenre = (movies, genre) => {
+  return (genre === GENRE_ALL)
+    ? movies
+    : movies.filter((movie) => movie.genre === genre);
+};
+
+export const getGenresList = (movies) => {
+  return [GENRE_ALL, ...new Set(movies.map((movie) => movie.genre))];
 };
