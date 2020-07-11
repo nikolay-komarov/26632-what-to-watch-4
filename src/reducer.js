@@ -1,5 +1,8 @@
 import {extend} from "./utils.js";
-import {GENRE_ALL} from "./const.js";
+import {
+  GENRE_ALL,
+  SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
+} from "./const.js";
 
 import promoMovieCard from "./mocks/film.js";
 import moviesList from "./mocks/films.js";
@@ -10,6 +13,7 @@ const initialState = {
   promoMovieCard,
   currentGenre: GENRE_ALL,
   moviesList,
+  showedItemsInMoviesList: SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
   currentMovie: null,
   currentMovieComments: null,
 };
@@ -17,6 +21,8 @@ const initialState = {
 const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_CURRENT_MOVIE: `CHANGE_CURRENT_MOVIE`,
+  SHOW_MORE_ITEMS_IN_MOVIES_LIST: `SHOW_MORE_ITEMS_IN_MOVIES_LIST`,
+  RESET_SHOWED_ITEMS_IN_MOVIES_LIST: `RESET_SHOWED_ITEMS_IN_MOVIES_LIST`,
 };
 
 const ActionCreator = {
@@ -27,7 +33,13 @@ const ActionCreator = {
   changeCurrentMovie: (movie) => ({
     type: ActionType.CHANGE_CURRENT_MOVIE,
     payload: movie,
-  })
+  }),
+  showMoreItemsInMoviesList: () => ({
+    type: ActionType.SHOW_MORE_ITEMS_IN_MOVIES_LIST
+  }),
+  resetShowedItemsInMoviesList: () => ({
+    type: ActionType.RESET_SHOWED_ITEMS_IN_MOVIES_LIST
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +53,16 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentMovie: action.payload,
         currentMovieComments: movieComments, // временное решение
+      });
+
+    case ActionType.SHOW_MORE_ITEMS_IN_MOVIES_LIST:
+      return extend(state, {
+        showedItemsInMoviesList: state.showedItemsInMoviesList + SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
+      });
+
+    case ActionType.RESET_SHOWED_ITEMS_IN_MOVIES_LIST:
+      return extend(state, {
+        showedItemsInMoviesList: SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
       });
   }
 
