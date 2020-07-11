@@ -4,15 +4,20 @@ import PropTypes from "prop-types";
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import ShowMoreButton from "../show-more-button/show-more-button.jsx";
-import {getMoviesByGenre} from "../../utils.js";
+import {
+  getMoviesByGenre,
+  getShowedMovies
+} from "../../utils.js";
 
 const Main = (props) => {
   const {
     movieCard,
     currentGenre,
     moviesList,
+    showedItemsInMoviesList,
     onSmallMovieCardClick,
-    onGenreItemClick
+    onGenreItemClick,
+    onShowMoreButtonClick,
   } = props;
 
   return (
@@ -83,15 +88,14 @@ const Main = (props) => {
           />
 
           <MoviesList
-            moviesList = {getMoviesByGenre(moviesList, currentGenre)}
+            moviesList = {getShowedMovies(getMoviesByGenre(moviesList, currentGenre), showedItemsInMoviesList)}
             onSmallMovieCardClick = {onSmallMovieCardClick}
           />
 
-          {/* сделать передачу корректных параметров для компонента на следующем шаге */}
           <ShowMoreButton
             moviesListLength = {getMoviesByGenre(moviesList, currentGenre).length}
-            showedItemInMoviesList = {12}
-            onShowMoreButtonClick = {() => {}}
+            showedItemsInMoviesList = {showedItemsInMoviesList}
+            onShowMoreButtonClick = {onShowMoreButtonClick}
           />
         </section>
 
@@ -134,8 +138,10 @@ Main.propTypes = {
     previewImage: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
   })).isRequired,
+  showedItemsInMoviesList: PropTypes.number.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 export default Main;

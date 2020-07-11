@@ -4,7 +4,10 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
 import {App} from "./app.jsx";
-import {GENRE_ALL} from "../../const.js";
+import {
+  GENRE_ALL,
+  SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
+} from "../../const.js";
 
 const mockStore = configureStore([]);
 
@@ -72,6 +75,7 @@ const moviesList = [
     genre: `Drama`,
   },
 ];
+const showedItemsInMoviesList = SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT;
 
 describe(`Render App`, () => {
   it(`Should App render correctly`, () => {
@@ -84,8 +88,10 @@ describe(`Render App`, () => {
               promoMovieCard = {movieCard}
               currentGenre = {GENRE_ALL}
               moviesList = {moviesList}
+              showedItemsInMoviesList = {showedItemsInMoviesList}
               onSmallMovieCardClick = {() => {}}
               onGenreItemClick = {() => {}}
+              onShowMoreButtonClick = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

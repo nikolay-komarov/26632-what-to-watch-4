@@ -5,12 +5,12 @@ import ShowMoreButton from "./show-more-button.jsx";
 describe(`Render ShowMoreButton`, () => {
   it(`ShowMoreButton is rendered`, () => {
     const moviesListLength = 16;
-    const showedItemInMoviesList = 8;
+    const showedItemsInMoviesList = 8;
 
     const tree = renderer.create(
         <ShowMoreButton
           moviesListLength = {moviesListLength}
-          showedItemInMoviesList = {showedItemInMoviesList}
+          showedItemsInMoviesList = {showedItemsInMoviesList}
           onShowMoreButtonClick = {() => {}}
         />
     ).toJSON();

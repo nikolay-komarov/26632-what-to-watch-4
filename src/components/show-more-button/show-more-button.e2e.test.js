@@ -10,13 +10,13 @@ Enzyme.configure({
 describe(`E2E ShowMoreButton tests`, () => {
   it(`Should ShowMoreButton be clicked`, () => {
     const moviesListLength = 16;
-    const showedItemInMoviesList = 8;
+    const showedItemsInMoviesList = 8;
     const onShowMoreButtonClick = jest.fn();
 
     const showMoreButtonComponent = shallow(
         <ShowMoreButton
           moviesListLength = {moviesListLength}
-          showedItemInMoviesList = {showedItemInMoviesList}
+          showedItemsInMoviesList = {showedItemsInMoviesList}
           onShowMoreButtonClick = {onShowMoreButtonClick}
         />
     );

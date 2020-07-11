@@ -2,7 +2,10 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 
-import {GENRE_ALL} from "../../const.js";
+import {
+  GENRE_ALL,
+  SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
+} from "../../const.js";
 
 describe(`Render Main`, () => {
   it(`Should Main render correctly`, () => {
@@ -112,6 +115,7 @@ describe(`Render Main`, () => {
         genre: `Drama`,
       },
     ];
+    const showedItemsInMoviesList = SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT;
 
     const tree = renderer
       .create(
@@ -119,9 +123,11 @@ describe(`Render Main`, () => {
             movieCard = {movieCard}
             currentGenre = {GENRE_ALL}
             movieComments = {movieComments}
+            showedItemsInMoviesList = {showedItemsInMoviesList}
             moviesList = {moviesList}
             onSmallMovieCardClick = {() => {}}
             onGenreItemClick = {() => {}}
+            onShowMoreButtonClick = {() => {}}
           />, {
             createNodeMock: () => {
               return {};

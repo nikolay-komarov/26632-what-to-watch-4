@@ -53,3 +53,7 @@ export const getMoviesByGenre = (movies, genre) => {
 export const getGenresList = (movies) => {
   return [GENRE_ALL, ...new Set(movies.map((movie) => movie.genre))];
 };
+
+export const getShowedMovies = (movies, showedMovies) => {
+  return movies.slice(0, showedMovies);
+};

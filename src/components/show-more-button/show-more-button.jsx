@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 const ShowMoreButton = (props) => {
   const {
     moviesListLength,
-    showedItemInMoviesList,
+    showedItemsInMoviesList,
     onShowMoreButtonClick,
   } = props;
 
-  return showedItemInMoviesList < moviesListLength
+  return showedItemsInMoviesList < moviesListLength
     ? (
       <div className="catalog__more">
         <button
@@ -24,7 +24,7 @@ const ShowMoreButton = (props) => {
 
 ShowMoreButton.propTypes = {
   moviesListLength: PropTypes.number.isRequired,
-  showedItemInMoviesList: PropTypes.number.isRequired,
+  showedItemsInMoviesList: PropTypes.number.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
