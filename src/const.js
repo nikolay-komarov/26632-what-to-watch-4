@@ -20,3 +20,5 @@ export const TabName = {
 };
 
 export const GENRE_ALL = `All genres`;
+
+export const SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT = 8;

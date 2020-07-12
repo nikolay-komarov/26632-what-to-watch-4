@@ -12,10 +12,12 @@ const App = (props) => {
     promoMovieCard,
     currentGenre,
     moviesList,
+    showedItemsInMoviesList,
     currentMovie,
     currentMovieComments,
     onSmallMovieCardClick,
     onGenreItemClick,
+    onShowMoreButtonClick,
   } = props;
 
   const renderApp = () => {
@@ -35,8 +37,10 @@ const App = (props) => {
         movieCard = {promoMovieCard}
         currentGenre = {currentGenre}
         moviesList = {moviesList}
+        showedItemsInMoviesList = {showedItemsInMoviesList}
         onSmallMovieCardClick = {onSmallMovieCardClick}
         onGenreItemClick = {onGenreItemClick}
+        onShowMoreButtonClick = {onShowMoreButtonClick}
       />
     );
   };
@@ -82,6 +86,7 @@ App.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
   })).isRequired,
+  showedItemsInMoviesList: PropTypes.number.isRequired,
   currentMovie: PropTypes.shape({
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
@@ -106,12 +111,14 @@ App.propTypes = {
   })),
   onSmallMovieCardClick: PropTypes.func.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   promoMovieCard: state.promoMovieCard,
   currentGenre: state.currentGenre,
   moviesList: state.moviesList,
+  showedItemsInMoviesList: state.showedItemsInMoviesList,
   currentMovie: state.currentMovie,
   currentMovieComments: state.currentMovieComments,
 });
@@ -122,7 +129,11 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onGenreItemClick(genre) {
     dispatch(ActionCreator.changeGenre(genre));
-  }
+    dispatch(ActionCreator.resetShowedItemsInMoviesList());
+  },
+  onShowMoreButtonClick() {
+    dispatch(ActionCreator.showMoreItemsInMoviesList());
+  },
 });
 
 export {App};

@@ -3,15 +3,21 @@ import PropTypes from "prop-types";
 
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
-import {getMoviesByGenre} from "../../utils.js";
+import ShowMoreButton from "../show-more-button/show-more-button.jsx";
+import {
+  getMoviesByGenre,
+  getShowedMovies
+} from "../../utils.js";
 
 const Main = (props) => {
   const {
     movieCard,
     currentGenre,
     moviesList,
+    showedItemsInMoviesList,
     onSmallMovieCardClick,
-    onGenreItemClick
+    onGenreItemClick,
+    onShowMoreButtonClick,
   } = props;
 
   return (
@@ -82,13 +88,15 @@ const Main = (props) => {
           />
 
           <MoviesList
-            moviesList = {getMoviesByGenre(moviesList, currentGenre)}
+            moviesList = {getShowedMovies(getMoviesByGenre(moviesList, currentGenre), showedItemsInMoviesList)}
             onSmallMovieCardClick = {onSmallMovieCardClick}
           />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton
+            moviesListLength = {getMoviesByGenre(moviesList, currentGenre).length}
+            showedItemsInMoviesList = {showedItemsInMoviesList}
+            onShowMoreButtonClick = {onShowMoreButtonClick}
+          />
         </section>
 
         <footer className="page-footer">
@@ -130,8 +138,10 @@ Main.propTypes = {
     previewImage: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
   })).isRequired,
+  showedItemsInMoviesList: PropTypes.number.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
+  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 export default Main;
