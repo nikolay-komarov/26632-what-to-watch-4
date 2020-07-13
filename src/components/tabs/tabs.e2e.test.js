@@ -64,24 +64,31 @@ describe(`E2E Tabs tests`, () => {
   ];
 
   it(`On Tab click change state`, () => {
+    const onActiveItemChange = jest.fn();
+
     const tabs = shallow(
         <Tabs
           movieDetails = {movieDetails}
           movieComments = {movieComments}
+          activeItem = {TabName.OVERVIEW}
+          onActiveItemChange = {onActiveItemChange}
         />);
 
     const movieNavItems = tabs.find(`.movie-nav__item`);
 
     const tabLinkOverview = movieNavItems.at(0).find(`a`);
-    tabLinkOverview.simulate(`click`);
-    expect(tabs.state(`selectedTab`)).toEqual(TabName.OVERVIEW);
+    tabLinkOverview.simulate(`click`, TabName.OVERVIEW);
+    expect(onActiveItemChange.mock.calls.length).toBe(1);
+    expect(onActiveItemChange.mock.calls[0][0]).toEqual(TabName.OVERVIEW);
 
     const tabLinkDetails = movieNavItems.at(1).find(`a`);
-    tabLinkDetails.simulate(`click`);
-    expect(tabs.state(`selectedTab`)).toEqual(TabName.DETAILS);
+    tabLinkDetails.simulate(`click`, TabName.DETAILS);
+    expect(onActiveItemChange.mock.calls.length).toBe(2);
+    expect(onActiveItemChange.mock.calls[1][0]).toEqual(TabName.DETAILS);
 
     const tabLinkReviews = movieNavItems.at(2).find(`a`);
-    tabLinkReviews.simulate(`click`);
-    expect(tabs.state(`selectedTab`)).toEqual(TabName.REVIEWS);
+    tabLinkReviews.simulate(`click`, TabName.REVIEWS);
+    expect(onActiveItemChange.mock.calls.length).toBe(3);
+    expect(onActiveItemChange.mock.calls[2][0]).toEqual(TabName.REVIEWS);
   });
 });

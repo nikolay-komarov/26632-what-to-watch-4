@@ -62,6 +62,8 @@ describe(`Render Tabs`, () => {
           <Tabs
             movieDetails = {movieDetails}
             movieComments = {movieComments}
+            activeItem = {`defautlTab`}
+            onActiveItemChange = {() => {}}
           />)
         .toJSON();
 

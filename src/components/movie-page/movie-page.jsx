@@ -3,11 +3,15 @@ import PropTypes from "prop-types";
 
 import Tabs from "../tabs/tabs.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
+
+import {TabName} from "../../const.js";
 
 import {getFourSimilarMovies} from "../../utils.js";
 
-const MoviePageWrapped = withActiveMovieCard(MoviesList);
+const TabsWrapped = withActiveItem(Tabs, TabName.OVERVIEW);
+const MoviesListWrapped = withActiveMovieCard(MoviesList);
 
 const MoviePage = (props) => {
   const {
@@ -85,7 +89,7 @@ const MoviePage = (props) => {
               <img src={posterImage} alt={name + ` poster`} width="218" height="327" />
             </div>
 
-            <Tabs
+            <TabsWrapped
               movieDetails = {movieDetails}
               movieComments = {movieComments}
             />
@@ -100,7 +104,7 @@ const MoviePage = (props) => {
             <section className="catalog catalog--like-this">
               <h2 className="catalog__title">More like this</h2>
 
-              <MoviePageWrapped
+              <MoviesListWrapped
                 moviesList = {fourSimilarMovies}
                 onSmallMovieCardClick = {onSmallMovieCardClick}
               />
