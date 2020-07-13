@@ -24,8 +24,6 @@ const SmallMovieCard = (props) => {
           isPlaying = {isPlaying}
           movieCard = {movieCard}
         />
-
-        {/* <img src={movieCard.previewImage} alt={movieCard.name} width="280" height="175" /> */}
       </div>
       <h3 className="small-movie-card__title">
         <a

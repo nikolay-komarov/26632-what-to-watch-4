@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 
 import Tabs from "../tabs/tabs.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
+import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 
 import {getFourSimilarMovies} from "../../utils.js";
+
+const MoviePageWrapped = withActiveMovieCard(MoviesList);
 
 const MoviePage = (props) => {
   const {
@@ -97,7 +100,7 @@ const MoviePage = (props) => {
             <section className="catalog catalog--like-this">
               <h2 className="catalog__title">More like this</h2>
 
-              <MoviesList
+              <MoviePageWrapped
                 moviesList = {fourSimilarMovies}
                 onSmallMovieCardClick = {onSmallMovieCardClick}
               />

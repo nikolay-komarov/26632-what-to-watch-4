@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
+import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 import {
   getMoviesByGenre,
   getShowedMovies
 } from "../../utils.js";
+
+const MoviesListWrapped = withActiveMovieCard(MoviesList);
 
 const Main = (props) => {
   const {
@@ -87,7 +90,7 @@ const Main = (props) => {
             onGenreItemClick = {onGenreItemClick}
           />
 
-          <MoviesList
+          <MoviesListWrapped
             moviesList = {getShowedMovies(getMoviesByGenre(moviesList, currentGenre), showedItemsInMoviesList)}
             onSmallMovieCardClick = {onSmallMovieCardClick}
           />
