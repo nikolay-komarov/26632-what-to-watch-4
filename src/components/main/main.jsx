@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
-import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import ShowMoreButton from "../show-more-button/show-more-button.jsx";
+
 import {
   getMoviesByGenre,
   getShowedMovies
 } from "../../utils.js";
 
-const MoviesListWrapped = withActiveMovieCard(MoviesList);
+const MoviesListWrapped = withActiveItem(MoviesList, null);
 
 const Main = (props) => {
   const {

@@ -6,8 +6,7 @@ import VideoPlayer from "../video-player/video-player.jsx";
 const SmallMovieCard = (props) => {
   const {
     movieCard,
-    onSmallMovieCardHover,
-    onSmallMovieCardLeave,
+    onActiveItemChange,
     onSmallMovieCardClick,
     isPlaying,
   } = props;
@@ -15,8 +14,8 @@ const SmallMovieCard = (props) => {
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseOver={() => onSmallMovieCardHover(movieCard)}
-      onMouseLeave={() => onSmallMovieCardLeave()}
+      onMouseOver = {() => onActiveItemChange(movieCard)}
+      onMouseLeave = {() => onActiveItemChange(null)}
       onClick={() => onSmallMovieCardClick(movieCard)}
     >
       <div className="small-movie-card__image">
@@ -42,8 +41,7 @@ SmallMovieCard.propTypes = {
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
   }),
-  onSmallMovieCardHover: PropTypes.func.isRequired,
-  onSmallMovieCardLeave: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
 };

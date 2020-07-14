@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
 const MoviesList = (props) => {
   const {
     moviesList,
-    onSmallMovieCardHover,
-    onSmallMovieCardLeave,
+    activeItem,
+    onActiveItemChange,
     onSmallMovieCardClick,
-    activeMovieCard,
   } = props;
   return (
     <div className="catalog__movies-list">
@@ -18,10 +18,9 @@ const MoviesList = (props) => {
             <SmallMovieCard
               key = {`${index}-${movie.name}`}
               movieCard = {movie}
-              onSmallMovieCardHover = {onSmallMovieCardHover}
-              onSmallMovieCardLeave = {onSmallMovieCardLeave}
+              onActiveItemChange = {onActiveItemChange}
               onSmallMovieCardClick = {onSmallMovieCardClick}
-              isPlaying = {(activeMovieCard === movie) ? true : false}
+              isPlaying = {(activeItem === movie) ? true : false}
             />
           );
         })
@@ -36,14 +35,13 @@ MoviesList.propTypes = {
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
-  onSmallMovieCardHover: PropTypes.func.isRequired,
-  onSmallMovieCardLeave: PropTypes.func.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired,
-  activeMovieCard: PropTypes.shape({
+  activeItem: PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
   }),
+  onActiveItemChange: PropTypes.func.isRequired,
+  onSmallMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default MoviesList;

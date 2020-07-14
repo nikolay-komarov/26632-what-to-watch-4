@@ -14,8 +14,7 @@ describe(`Render SmallMovieCard`, () => {
       .create(
           <SmallMovieCard
             movieCard = {smallMovieCard}
-            onSmallMovieCardHover = {() => {}}
-            onSmallMovieCardLeave = {() => {}}
+            onActiveItemChange = {() => {}}
             onSmallMovieCardClick = {() => {}}
             isPlaying = {false}
           />, {

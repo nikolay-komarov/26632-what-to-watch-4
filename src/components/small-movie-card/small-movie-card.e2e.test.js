@@ -14,15 +14,14 @@ describe(`E2E SmallMovieCard tests`, () => {
     previewVideoLink: `previewVideoLink`,
   };
 
-  it(`Should SmallMovieCard be hover`, () => {
+  it(`Should SmallMovieCard be hovered & leaved`, () => {
     const movieCard = mock;
-    const onSmallMovieCardHover = jest.fn();
+    const onActiveItemChange = jest.fn();
 
     const smallMovieCardComponent = shallow(
         <SmallMovieCard
           movieCard = {movieCard}
-          onSmallMovieCardHover = {onSmallMovieCardHover}
-          onSmallMovieCardLeave = {() => {}}
+          onActiveItemChange = {onActiveItemChange}
           onSmallMovieCardClick = {() => {}}
           isPlaying = {false}
         />
@@ -31,29 +30,32 @@ describe(`E2E SmallMovieCard tests`, () => {
     const smallMovieCardArticle = smallMovieCardComponent.find(`.small-movie-card`);
 
     smallMovieCardArticle.simulate(`mouseover`, movieCard);
-    expect(onSmallMovieCardHover).toHaveBeenCalledTimes(1);
-    expect(onSmallMovieCardHover.mock.calls[0][0]).toMatchObject(movieCard);
+    expect(onActiveItemChange).toHaveBeenCalledTimes(1);
+    expect(onActiveItemChange.mock.calls[0][0]).toMatchObject(movieCard);
+
+    smallMovieCardArticle.simulate(`mouseleave`, null);
+    expect(onActiveItemChange).toHaveBeenCalledTimes(2);
+    expect(onActiveItemChange.mock.calls[1][0]).toEqual(null);
   });
 
-  it(`Should SmallMovieCard be leaved`, () => {
-    const movieCard = mock;
-    const onSmallMovieCardLeave = jest.fn();
+  // it(`Should SmallMovieCard be leaved`, () => {
+  //   const movieCard = mock;
+  //   const onActiveItemChange = jest.fn();
 
-    const smallMovieCardComponent = shallow(
-        <SmallMovieCard
-          movieCard = {movieCard}
-          onSmallMovieCardHover = {() => {}}
-          onSmallMovieCardLeave = {onSmallMovieCardLeave}
-          onSmallMovieCardClick = {() => {}}
-          isPlaying = {true}
-        />
-    );
+  //   const smallMovieCardComponent = shallow(
+  //       <SmallMovieCard
+  //         movieCard = {movieCard}
+  //         onActiveItemChange = {onActiveItemChange}
+  //         onSmallMovieCardClick = {() => {}}
+  //         isPlaying = {true}
+  //       />
+  //   );
 
-    const smallMovieCardArticle = smallMovieCardComponent.find(`.small-movie-card`);
+  //   const smallMovieCardArticle = smallMovieCardComponent.find(`.small-movie-card`);
 
-    smallMovieCardArticle.simulate(`mouseleave`);
-    expect(onSmallMovieCardLeave).toHaveBeenCalledTimes(1);
-  });
+  //   smallMovieCardArticle.simulate(`mouseleave`);
+  //   expect(onActiveItemChange).toHaveBeenCalledTimes(1);
+  // });
 
   it(`Should SmallMovieCard be clicked`, () => {
     const movieCard = mock;
@@ -62,8 +64,7 @@ describe(`E2E SmallMovieCard tests`, () => {
     const smallMovieCardComponent = shallow(
         <SmallMovieCard
           movieCard = {movieCard}
-          onSmallMovieCardHover = {() => {}}
-          onSmallMovieCardLeave = {() => {}}
+          onActiveItemChange = {() => {}}
           onSmallMovieCardClick = {onSmallMovieCardClick}
           isPlaying = {true}
         />

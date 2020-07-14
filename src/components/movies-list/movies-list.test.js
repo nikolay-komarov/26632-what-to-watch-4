@@ -46,20 +46,19 @@ describe(`Render MoviesList`, () => {
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
       },
     ];
-    const movieCard = {
-      name: `Fantastic Beasts: The Crimes of Grindelwald`,
-      previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
-    };
+    // const movieCard = {
+    //   name: `Fantastic Beasts: The Crimes of Grindelwald`,
+    //   previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    //   previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+    // };
 
     const tree = renderer
     .create(
         <MoviesList
           moviesList = {moviesList}
           onSmallMovieCardClick = {() => {}}
-          onSmallMovieCardHover = {() => {}}
-          onSmallMovieCardLeave = {() => {}}
-          activeMovieCard = {movieCard}
+          activeItem = {null}
+          onActiveItemChange = {() => {}}
         />, {
           createNodeMock: () => {
             return {};

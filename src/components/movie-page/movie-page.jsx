@@ -4,14 +4,12 @@ import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
-import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 
 import {TabName} from "../../const.js";
-
 import {getFourSimilarMovies} from "../../utils.js";
 
 const TabsWrapped = withActiveItem(Tabs, TabName.OVERVIEW);
-const MoviesListWrapped = withActiveMovieCard(MoviesList);
+const MoviesListWrapped = withActiveItem(MoviesList, null);
 
 const MoviePage = (props) => {
   const {
