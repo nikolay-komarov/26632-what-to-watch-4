@@ -9,15 +9,20 @@ describe(`Render SmallMovieCard`, () => {
       previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
       previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
     };
+    const children = <div className="children-mock-component" />;
 
     const tree = renderer
       .create(
           <SmallMovieCard
             movieCard = {smallMovieCard}
             onActiveItemChange = {() => {}}
+            onSmallMovieCardHover = {() => {}}
+            onSmallMovieCardLeave = {() => {}}
             onSmallMovieCardClick = {() => {}}
             isPlaying = {false}
-          />, {
+          >
+            {children}
+          </SmallMovieCard>, {
             createNodeMock: () => {
               return {};
             }

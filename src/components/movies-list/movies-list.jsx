@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
+
+const SmallMovieCardWraped = withVideoPlayer(SmallMovieCard);
 
 const MoviesList = (props) => {
   const {
@@ -15,7 +18,7 @@ const MoviesList = (props) => {
       {
         moviesList.map((movie, index) => {
           return (
-            <SmallMovieCard
+            <SmallMovieCardWraped
               key = {`${index}-${movie.name}`}
               movieCard = {movie}
               onActiveItemChange = {onActiveItemChange}
