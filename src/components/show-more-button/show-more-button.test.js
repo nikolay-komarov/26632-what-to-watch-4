@@ -20,12 +20,12 @@ describe(`Render ShowMoreButton`, () => {
 
   it(`ShowMoreButton is not rendered`, () => {
     const moviesListLength = 16;
-    const showedItemInMoviesList = 16;
+    const showedItemsInMoviesList = 16;
 
     const tree = renderer.create(
         <ShowMoreButton
           moviesListLength = {moviesListLength}
-          showedItemInMoviesList = {showedItemInMoviesList}
+          showedItemsInMoviesList = {showedItemsInMoviesList}
           onShowMoreButtonClick = {() => {}}
         />
     ).toJSON();

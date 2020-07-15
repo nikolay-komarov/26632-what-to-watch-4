@@ -52,6 +52,8 @@ describe(`Render MoviesList`, () => {
         <MoviesList
           moviesList = {moviesList}
           onSmallMovieCardClick = {() => {}}
+          activeItem = {null}
+          onActiveItemChange = {() => {}}
         />, {
           createNodeMock: () => {
             return {};

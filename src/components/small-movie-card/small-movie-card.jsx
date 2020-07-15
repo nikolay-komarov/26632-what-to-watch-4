@@ -1,31 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import VideoPlayer from "../video-player/video-player.jsx";
-
 const SmallMovieCard = (props) => {
   const {
     movieCard,
-    onSmallMovieCardHover,
+    onActiveItemChange,
     onSmallMovieCardLeave,
+    onSmallMovieCardHover,
     onSmallMovieCardClick,
-    isPlaying,
+    children,
   } = props;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseOver={() => onSmallMovieCardHover(movieCard)}
-      onMouseLeave={() => onSmallMovieCardLeave()}
+      onMouseOver = {() => {
+        onActiveItemChange(movieCard);
+        onSmallMovieCardHover();
+      }}
+      onMouseLeave = {() => {
+        onActiveItemChange(null);
+        onSmallMovieCardLeave();
+      }}
       onClick={() => onSmallMovieCardClick(movieCard)}
     >
       <div className="small-movie-card__image">
-        <VideoPlayer
-          isPlaying = {isPlaying}
-          movieCard = {movieCard}
-        />
 
-        {/* <img src={movieCard.previewImage} alt={movieCard.name} width="280" height="175" /> */}
+        {children}
+
       </div>
       <h3 className="small-movie-card__title">
         <a
@@ -44,10 +46,14 @@ SmallMovieCard.propTypes = {
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
   }),
-  onSmallMovieCardHover: PropTypes.func.isRequired,
+  onActiveItemChange: PropTypes.func.isRequired,
   onSmallMovieCardLeave: PropTypes.func.isRequired,
+  onSmallMovieCardHover: PropTypes.func.isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default SmallMovieCard;
