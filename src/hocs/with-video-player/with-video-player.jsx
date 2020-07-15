@@ -9,7 +9,7 @@ const withVideoPlayer = (Component) => {
       this._videoRef = createRef();
 
       this.state = {
-        proress: 0,
+        progress: 0,
         isLoading: true,
         isPlaying: false,
       };
@@ -43,7 +43,7 @@ const withVideoPlayer = (Component) => {
 
     componentDidUpdate() {
       const video = this._videoRef.current;
-      const {isPlaying} = this.props; // !?
+      const {isPlaying} = this.state;
 
       if (isPlaying) {
         video.play();
