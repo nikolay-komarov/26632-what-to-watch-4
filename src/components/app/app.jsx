@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
 
 const App = (props) => {
   const {
@@ -58,6 +59,19 @@ const App = (props) => {
             moviesList = {moviesList}
             onSmallMovieCardClick = {onSmallMovieCardClick}
           />
+        </Route>
+        <Route exact path="/dev-big-player">
+          <BigVideoPlayer
+            movieCard = {moviesList[0]}
+            isPlaying = {false}
+            onPlayButtonClick = {() => {}}
+            onFullScreenButtonClick = {() => {}}
+            getPlaybackProgress = {() => {}}
+            getTimeLeft = {() => {}}
+            onExitButtonClick = {() => {}}
+          >
+            <video />
+          </BigVideoPlayer>
         </Route>
       </Switch>
     </BrowserRouter>
