@@ -7,6 +7,11 @@ import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
+
+import {VideoPlayerMode} from "../../const.js";
+
+const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
 
 const App = (props) => {
   const {
@@ -61,7 +66,7 @@ const App = (props) => {
           />
         </Route>
         <Route exact path="/dev-big-player">
-          <BigVideoPlayer
+          <BigVideoPlayerWrapped
             movieCard = {moviesList[0]}
             isPlaying = {false}
             onPlayButtonClick = {() => {}}
@@ -69,9 +74,7 @@ const App = (props) => {
             getPlaybackProgress = {() => {}}
             getTimeLeft = {() => {}}
             onExitButtonClick = {() => {}}
-          >
-            <video />
-          </BigVideoPlayer>
+          />
         </Route>
       </Switch>
     </BrowserRouter>

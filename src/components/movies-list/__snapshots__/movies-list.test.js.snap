@@ -17,7 +17,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
         height="175"
         width="280"
       />
-      ;
     </div>
     <h3
       className="small-movie-card__title"
@@ -43,7 +42,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
         height="175"
         width="280"
       />
-      ;
     </div>
     <h3
       className="small-movie-card__title"
@@ -69,7 +67,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
         height="175"
         width="280"
       />
-      ;
     </div>
     <h3
       className="small-movie-card__title"
@@ -95,7 +92,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
         height="175"
         width="280"
       />
-      ;
     </div>
     <h3
       className="small-movie-card__title"
@@ -121,7 +117,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
         height="175"
         width="280"
       />
-      ;
     </div>
     <h3
       className="small-movie-card__title"
@@ -147,7 +142,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
         height="175"
         width="280"
       />
-      ;
     </div>
     <h3
       className="small-movie-card__title"
@@ -173,7 +167,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
         height="175"
         width="280"
       />
-      ;
     </div>
     <h3
       className="small-movie-card__title"
@@ -199,7 +192,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
         height="175"
         width="280"
       />
-      ;
     </div>
     <h3
       className="small-movie-card__title"

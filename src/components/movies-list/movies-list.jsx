@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
 
-const SmallMovieCardWraped = withVideoPlayer(SmallMovieCard);
+import {VideoPlayerMode} from "../../const.js";
+
+const SmallMovieCardWraped = withVideoPlayer(SmallMovieCard, VideoPlayerMode.SMALL_MOVIE_CARD);
 
 const MoviesList = (props) => {
   const {
