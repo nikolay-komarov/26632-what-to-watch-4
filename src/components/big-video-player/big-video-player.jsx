@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const BigMoviePlayer = (props) => {
+const BigVideoPlayer = (props) => {
   const {
     movieCard,
     isPlaying,
@@ -82,7 +82,8 @@ const BigMoviePlayer = (props) => {
     </div>
   );
 };
-BigMoviePlayer.propTypes = {
+
+BigVideoPlayer.propTypes = {
   movieCard: PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
@@ -98,4 +99,5 @@ BigMoviePlayer.propTypes = {
     PropTypes.node,
   ]),
 };
-export default BigMoviePlayer;
+
+export default BigVideoPlayer;

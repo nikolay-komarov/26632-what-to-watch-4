@@ -128,6 +128,7 @@ describe(`Render Main`, () => {
             onSmallMovieCardClick = {() => {}}
             onGenreItemClick = {() => {}}
             onShowMoreButtonClick = {() => {}}
+            onPlayButtonClick = {() => {}}
           />, {
             createNodeMock: () => {
               return {};

@@ -2,6 +2,7 @@ import {extend} from "./utils.js";
 import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
+  AppPage,
 } from "./const.js";
 
 import promoMovieCard from "./mocks/film.js";
@@ -10,6 +11,7 @@ import moviesList from "./mocks/films.js";
 import movieComments from "./mocks/comments.js"; // временное решение
 
 const initialState = {
+  currentAppPage: AppPage.MAIN_PAGE,
   promoMovieCard,
   currentGenre: GENRE_ALL,
   moviesList,
@@ -19,6 +21,7 @@ const initialState = {
 };
 
 const ActionType = {
+  CHANGE_CURRENT_APP_PAGE: `CHANGE_CURRENT_APP_PAGE`,
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_CURRENT_MOVIE: `CHANGE_CURRENT_MOVIE`,
   SHOW_MORE_ITEMS_IN_MOVIES_LIST: `SHOW_MORE_ITEMS_IN_MOVIES_LIST`,
@@ -26,6 +29,10 @@ const ActionType = {
 };
 
 const ActionCreator = {
+  changeAppPage: (appPage) => ({
+    type: ActionType.CHANGE_CURRENT_APP_PAGE,
+    payload: appPage,
+  }),
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
     payload: genre,
@@ -44,6 +51,10 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.CHANGE_CURRENT_APP_PAGE:
+      return extend(state, {
+        currentAppPage: action.payload
+      });
     case ActionType.CHANGE_GENRE:
       return extend(state, {
         currentGenre: action.payload

@@ -17,6 +17,7 @@ const MoviePage = (props) => {
     movieComments,
     moviesList,
     onSmallMovieCardClick,
+    onPlayButtonClick,
   } = props;
   const {
     name,
@@ -63,7 +64,11 @@ const MoviePage = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                  onClick = {() => onPlayButtonClick(movieDetails)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -156,6 +161,7 @@ MoviePage.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
   onSmallMovieCardClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func,
 };
 
 export default MoviePage;

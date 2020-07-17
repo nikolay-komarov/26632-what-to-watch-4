@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import PropTypes from "prop-types";
 
 import withVideoPlayer from "./with-video-player.jsx";
+import {VideoPlayerMode} from "../../const.js";
 
 describe(`Render withVideoPlayer`, () => {
   const MockComponent = (props) => {
@@ -22,7 +23,7 @@ describe(`Render withVideoPlayer`, () => {
     ])
   };
 
-  const MockComponentWrapped = withVideoPlayer(MockComponent);
+  const MockComponentWrapped = withVideoPlayer(MockComponent, VideoPlayerMode.SMALL_MOVIE_CARD);
   const movieCard = {
     name: `Fantastic Beasts: The Crimes of Grindelwald`,
     previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
@@ -34,6 +35,7 @@ describe(`Render withVideoPlayer`, () => {
       <MockComponentWrapped
         movieCard = {movieCard}
         isPlaying = {false}
+        onExitButtonClick = {() => {}}
       />), {
       createNodeMock() {
         return {};

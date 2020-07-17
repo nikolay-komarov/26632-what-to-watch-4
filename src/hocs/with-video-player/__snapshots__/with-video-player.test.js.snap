@@ -6,6 +6,5 @@ exports[`Render withVideoPlayer withVideoPlayer is rendered correctly 1`] = `
     height="175"
     width="280"
   />
-  ;
 </div>
 `;

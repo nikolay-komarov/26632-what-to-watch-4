@@ -6,7 +6,8 @@ import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
 import {
   GENRE_ALL,
-  SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
+  SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
+  AppPage
 } from "../../const.js";
 
 const mockStore = configureStore([]);
@@ -85,6 +86,7 @@ describe(`Render App`, () => {
       .create(
           <Provider store = {store}>
             <App
+              currentAppPage = {AppPage.MAIN_PAGE}
               promoMovieCard = {movieCard}
               currentGenre = {GENRE_ALL}
               moviesList = {moviesList}
@@ -92,6 +94,8 @@ describe(`Render App`, () => {
               onSmallMovieCardClick = {() => {}}
               onGenreItemClick = {() => {}}
               onShowMoreButtonClick = {() => {}}
+              onPlayButtonClick = {() => {}}
+              onBigPlayerExitButtonClick = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

@@ -4,6 +4,7 @@ import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import withVideoPlayer from "./with-video-player.jsx";
+import {VideoPlayerMode} from "../../const.js";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -43,7 +44,7 @@ describe(`E2E withVideoPlayer tests`, () => {
   };
 
   it(`Checks that HOC's callback turn on video (play)`, () => {
-    const SmallMovieCardWrapped = withVideoPlayer(SmallMovieCard);
+    const SmallMovieCardWrapped = withVideoPlayer(SmallMovieCard, VideoPlayerMode.SMALL_MOVIE_CARD);
     const wrapper = mount(<SmallMovieCardWrapped
       isPlaying={false}
       movieCard = {movie}
@@ -63,7 +64,7 @@ describe(`E2E withVideoPlayer tests`, () => {
   });
 
   it(`Checks that HOC's callback turn off video (load)`, () => {
-    const SmallMovieCardWrapped = withVideoPlayer(SmallMovieCard);
+    const SmallMovieCardWrapped = withVideoPlayer(SmallMovieCard, VideoPlayerMode.SMALL_MOVIE_CARD);
     const wrapper = mount(<SmallMovieCardWrapped
       isPlaying={false}
       movieCard = {movie}

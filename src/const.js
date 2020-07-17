@@ -29,3 +29,9 @@ export const VideoPlayerMode = {
   SMALL_MOVIE_CARD: `small movie card`,
   BIG_MOVIE_PLAYER: `big movie player`,
 };
+
+export const AppPage = {
+  MAIN_PAGE: `main screen`,
+  MOVIE_PAGE: `movie screen`,
+  BIG_MOVIE_PLAYER: `big movie player`,
+};

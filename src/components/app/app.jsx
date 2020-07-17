@@ -9,12 +9,16 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
 
-import {VideoPlayerMode} from "../../const.js";
+import {
+  VideoPlayerMode,
+  AppPage,
+} from "../../const.js";
 
 const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
 
 const App = (props) => {
   const {
+    currentAppPage,
     promoMovieCard,
     currentGenre,
     moviesList,
@@ -24,31 +28,50 @@ const App = (props) => {
     onSmallMovieCardClick,
     onGenreItemClick,
     onShowMoreButtonClick,
+    onPlayButtonClick,
+    onBigPlayerExitButtonClick,
   } = props;
 
   const renderApp = () => {
-    if (currentMovie) {
-      return (
-        <MoviePage
-          movieDetails = {currentMovie}
-          movieComments = {currentMovieComments}
-          moviesList = {moviesList}
-          onSmallMovieCardClick = {onSmallMovieCardClick}
-        />
-      );
+    let appPageElement;
+    switch (currentAppPage) {
+      case AppPage.MAIN_PAGE:
+        appPageElement = (
+          <Main
+            movieCard = {promoMovieCard}
+            currentGenre = {currentGenre}
+            moviesList = {moviesList}
+            showedItemsInMoviesList = {showedItemsInMoviesList}
+            onSmallMovieCardClick = {onSmallMovieCardClick}
+            onGenreItemClick = {onGenreItemClick}
+            onShowMoreButtonClick = {onShowMoreButtonClick}
+            onPlayButtonClick = {onPlayButtonClick}
+          />
+        );
+        break;
+      case AppPage.MOVIE_PAGE:
+        appPageElement = (
+          <MoviePage
+            movieDetails = {currentMovie}
+            movieComments = {currentMovieComments}
+            moviesList = {moviesList}
+            onSmallMovieCardClick = {onSmallMovieCardClick}
+            onPlayButtonClick = {onPlayButtonClick}
+          />
+        );
+        break;
+      case AppPage.BIG_MOVIE_PLAYER:
+        appPageElement = (
+          <BigVideoPlayerWrapped
+            movieCard = {currentMovie ? currentMovie : promoMovieCard}
+            isPlaying = {false}
+            onExitButtonClick = {onBigPlayerExitButtonClick}
+          />
+        );
+        break;
     }
 
-    return (
-      <Main
-        movieCard = {promoMovieCard}
-        currentGenre = {currentGenre}
-        moviesList = {moviesList}
-        showedItemsInMoviesList = {showedItemsInMoviesList}
-        onSmallMovieCardClick = {onSmallMovieCardClick}
-        onGenreItemClick = {onGenreItemClick}
-        onShowMoreButtonClick = {onShowMoreButtonClick}
-      />
-    );
+    return appPageElement;
   };
 
   return (
@@ -69,11 +92,7 @@ const App = (props) => {
           <BigVideoPlayerWrapped
             movieCard = {moviesList[0]}
             isPlaying = {false}
-            onPlayButtonClick = {() => {}}
-            onFullScreenButtonClick = {() => {}}
-            getPlaybackProgress = {() => {}}
-            getTimeLeft = {() => {}}
-            onExitButtonClick = {() => {}}
+            onExitButtonClick = {onBigPlayerExitButtonClick}
           />
         </Route>
       </Switch>
@@ -82,6 +101,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
+  currentAppPage: PropTypes.string.isRequired,
   promoMovieCard: PropTypes.shape({
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
@@ -129,9 +149,12 @@ App.propTypes = {
   onSmallMovieCardClick: PropTypes.func.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
+  onBigPlayerExitButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  currentAppPage: state.currentAppPage,
   promoMovieCard: state.promoMovieCard,
   currentGenre: state.currentGenre,
   moviesList: state.moviesList,
@@ -143,6 +166,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onSmallMovieCardClick(movie) {
     dispatch(ActionCreator.changeCurrentMovie(movie));
+    dispatch(ActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
   },
   onGenreItemClick(genre) {
     dispatch(ActionCreator.changeGenre(genre));
@@ -151,6 +175,13 @@ const mapDispatchToProps = (dispatch) => ({
   onShowMoreButtonClick() {
     dispatch(ActionCreator.showMoreItemsInMoviesList());
   },
+  onPlayButtonClick(movie) {
+    dispatch(ActionCreator.changeCurrentMovie(movie));
+    dispatch(ActionCreator.changeAppPage(AppPage.BIG_MOVIE_PLAYER));
+  },
+  onBigPlayerExitButtonClick() {
+    dispatch(ActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
+  }
 });
 
 export {App};

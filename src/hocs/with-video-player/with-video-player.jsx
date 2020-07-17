@@ -139,6 +139,8 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
         <Component
           {...this.props}
 
+          isPlaying = {this.state.isPlaying}
+
           onSmallMovieCardHover = {this.handleSmallMovieCardHover}
           onSmallMovieCardLeave = {this.handleSmallMovieCardLeave}
 
@@ -146,7 +148,7 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
           onFullScreenButtonClick = {this.handleFullScreenButtonClick}
           getPlaybackProgress = {this.getPlaybackProgress}
           getTimeLeft = {this.getTimeLeft}
-          onExitButtonClick = {() => {}} // заглушка для разработки
+          onExitButtonClick = {this.props.onExitButtonClick}
         >
           {this._renderVideoElement}
         </Component>
@@ -161,6 +163,7 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
       previewImage: PropTypes.string.isRequired,
       previewVideoLink: PropTypes.string.isRequired,
     }).isRequired,
+    onExitButtonClick: PropTypes.func,
   };
 
   return WithVideoPlayer;

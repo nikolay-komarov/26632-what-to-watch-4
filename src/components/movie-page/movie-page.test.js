@@ -110,6 +110,7 @@ describe(`Render MoviePage`, () => {
             movieComments = {movieComments}
             moviesList = {moviesList}
             onSmallMovieCardClick = {() => {}}
+            onPlayButtonClick = {() => {}}
           />)
         .toJSON();
 
