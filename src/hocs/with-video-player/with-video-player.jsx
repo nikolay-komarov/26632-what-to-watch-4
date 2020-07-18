@@ -107,7 +107,6 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
       const video = this._videoRef.current;
       const {isPlaying} = this.state;
 
-
       if (isPlaying) {
         video.play();
       } else {
