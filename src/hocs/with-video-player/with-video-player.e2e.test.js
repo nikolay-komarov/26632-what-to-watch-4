@@ -123,45 +123,45 @@ describe(`E2E withVideoPlayer for BigVideoPlayer tests`, () => {
     previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
   };
 
-  // it(`Checks that HOC's callback turn on video (play)`, () => {
-  //   const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
-  //   const wrapper = mount(<BigVideoPlayerWrapped
-  //     isPlaying={false}
-  //     movieCard = {movie}
-  //   />);
+  it(`Checks that HOC's callback turn on video (play)`, () => {
+    const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
+    const wrapper = mount(<BigVideoPlayerWrapped
+      isPlaying={false}
+      movieCard = {movie}
+    />);
 
-  //   window.HTMLMediaElement.prototype.play = () => {};
+    window.HTMLMediaElement.prototype.play = () => {};
 
-  //   const {_videoRef} = wrapper.instance();
+    const {_videoRef} = wrapper.instance();
 
-  //   jest.spyOn(_videoRef.current, `play`);
+    jest.spyOn(_videoRef.current, `play`);
 
-  //   wrapper.instance().componentDidMount();
+    wrapper.instance().componentDidMount();
 
-  //   wrapper.find(`button.player__play`).simulate(`click`);
+    wrapper.find(`button.player__play`).simulate(`click`);
 
-  //   expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
-  // });
+    expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
+  });
 
-  // it(`Checks that HOC's callback turn off video (pause)`, () => {
-  //   const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
-  //   const wrapper = mount(<BigVideoPlayerWrapped
-  //     isPlaying={true}
-  //     movieCard = {movie}
-  //   />);
+  it(`Checks that HOC's callback turn off video (pause)`, () => {
+    const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
+    const wrapper = mount(<BigVideoPlayerWrapped
+      isPlaying={true}
+      movieCard = {movie}
+    />);
 
-  //   window.HTMLMediaElement.prototype.pause = () => {};
+    window.HTMLMediaElement.prototype.pause = () => {};
 
-  //   const {_videoRef} = wrapper.instance();
+    const {_videoRef} = wrapper.instance();
 
-  //   jest.spyOn(_videoRef.current, `pause`);
+    jest.spyOn(_videoRef.current, `pause`);
 
-  //   wrapper.instance().componentDidMount();
+    wrapper.instance().componentDidMount();
 
-  //   wrapper.find(`button.player__play`).simulate(`click`);
+    wrapper.find(`button.player__play`).simulate(`click`);
 
-  //   expect(_videoRef.current.pause).toHaveBeenCalledTimes(1);
-  // });
+    expect(_videoRef.current.pause).toHaveBeenCalledTimes(1);
+  });
 
   it(`Checks that HOC's callback fullscreen`, () => {
     const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);

@@ -16,7 +16,7 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
         progress: 0,
         videoDuration: 0,
         isLoading: true,
-        isPlaying: false,
+        isPlaying: this.props.isPlaying,
       };
 
       this.handleSmallMovieCardHover = this.handleSmallMovieCardHover.bind(this);
@@ -54,15 +54,7 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
     }
 
     handlePlayButtonClick() {
-      const video = this._videoRef.current;
-
-      if (video.paused) {
-        video.play();
-        this.setState({isPlaying: true});
-      } else {
-        video.pause();
-        this.setState({isPlaying: false});
-      }
+      this.setState({isPlaying: !this.state.isPlaying});
     }
 
     handleFullScreenButtonClick() {
