@@ -5,8 +5,8 @@ import Tabs from "../tabs/tabs.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
-import {TabName} from "../../const.js";
-import {getFourSimilarMovies} from "../../utils.js";
+import {TabName} from "../../utils/const.js";
+import {getFourSimilarMovies} from "../../utils/utils.js";
 
 const TabsWrapped = withActiveItem(Tabs, TabName.OVERVIEW);
 const MoviesListWrapped = withActiveItem(MoviesList, null);

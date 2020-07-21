@@ -3,7 +3,7 @@ import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import Tabs from "./tabs.jsx";
-import {TabName} from "../../const.js";
+import {TabName} from "../../utils/const.js";
 
 Enzyme.configure({
   adapter: new Adapter()

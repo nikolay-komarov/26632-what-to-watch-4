@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {getGenresList} from "../../utils.js";
+import {getGenresList} from "../../utils/utils.js";
 
 const GenresList = (props) => {
   const {

@@ -8,7 +8,7 @@ import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
   AppPage
-} from "../../const.js";
+} from "../../utils/const.js";
 
 const mockStore = configureStore([]);
 

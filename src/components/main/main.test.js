@@ -5,7 +5,7 @@ import Main from "./main.jsx";
 import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
-} from "../../const.js";
+} from "../../utils/const.js";
 
 describe(`Render Main`, () => {
   it(`Should Main render correctly`, () => {

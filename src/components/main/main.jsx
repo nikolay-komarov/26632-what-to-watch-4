@@ -9,7 +9,7 @@ import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 import {
   getMoviesByGenre,
   getShowedMovies
-} from "../../utils.js";
+} from "../../utils/utils.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 

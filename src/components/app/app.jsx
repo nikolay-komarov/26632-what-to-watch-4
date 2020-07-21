@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/state/state.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
@@ -12,7 +12,9 @@ import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx"
 import {
   VideoPlayerMode,
   AppPage,
-} from "../../const.js";
+} from "../../utils/const.js";
+
+import NameSpace from "../../reducer/name-space.js";
 
 const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
 
@@ -154,13 +156,13 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  currentAppPage: state.currentAppPage,
-  promoMovieCard: state.promoMovieCard,
-  currentGenre: state.currentGenre,
-  moviesList: state.moviesList,
-  showedItemsInMoviesList: state.showedItemsInMoviesList,
-  currentMovie: state.currentMovie,
-  currentMovieComments: state.currentMovieComments,
+  currentAppPage: state[NameSpace.STATE].currentAppPage,
+  promoMovieCard: state[NameSpace.DATA].promoMovieCard,
+  currentGenre: state[NameSpace.STATE].currentGenre,
+  moviesList: state[NameSpace.DATA].moviesList,
+  showedItemsInMoviesList: state[NameSpace.STATE].showedItemsInMoviesList,
+  currentMovie: state[NameSpace.STATE].currentMovie,
+  currentMovieComments: state[NameSpace.STATE].currentMovieComments,
 });
 
 const mapDispatchToProps = (dispatch) => ({

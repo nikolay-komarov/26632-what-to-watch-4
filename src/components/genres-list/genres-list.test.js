@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import GenresList from "./genres-list.jsx";
 
-import {GENRE_ALL} from "../../const.js";
+import {GENRE_ALL} from "../../utils/const.js";
 
 describe(`Render GenresList`, () => {
   it(`Should GenresList render correctly`, () => {

@@ -1,21 +1,18 @@
-import {reducer, ActionType, ActionCreator} from "./reducer.js";
+import {reducer, ActionType, ActionCreator} from "./state.js";
 import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
   AppPage,
-} from "./utils/const.js";
+} from "../../utils/const.js";
 
-import films from "./mocks/films.js";
-import film from "./mocks/film.js";
-import comments from "./mocks/comments.js";
+import film from "../../mocks/film.js";
+import comments from "../../mocks/comments.js";
 
-describe(`Reducer tests`, () => {
+describe(`State Reducer tests`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       currentAppPage: AppPage.MAIN_PAGE,
-      promoMovieCard: film,
       currentGenre: GENRE_ALL,
-      moviesList: films,
       showedItemsInMoviesList: SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
       currentMovie: null,
       currentMovieComments: null,
@@ -79,7 +76,7 @@ describe(`Reducer tests`, () => {
 
 });
 
-describe(`ActionCreator tests`, () => {
+describe(`State ActionCreator tests`, () => {
   it(`ActionCreator for changeAppPage return correct action`, () => {
     expect(ActionCreator.changeAppPage(AppPage.MOVIE_PAGE)).toEqual({
       type: ActionType.CHANGE_CURRENT_APP_PAGE,

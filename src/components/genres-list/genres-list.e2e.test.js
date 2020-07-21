@@ -3,8 +3,8 @@ import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import GenresList from "./genres-list.jsx";
-import {GENRE_ALL} from "../../const.js";
-import {getGenresList} from "../../utils.js";
+import {GENRE_ALL} from "../../utils/const.js";
+import {getGenresList} from "../../utils/utils.js";
 
 Enzyme.configure({
   adapter: new Adapter(),

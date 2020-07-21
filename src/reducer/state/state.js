@@ -1,20 +1,15 @@
-import {extend} from "./utils/utils.js";
+import {extend} from "../../utils/utils.js";
 import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
   AppPage,
-} from "./utils/const.js";
+} from "../../utils/const.js";
 
-import promoMovieCard from "./mocks/film.js";
-import moviesList from "./mocks/films.js";
-
-import movieComments from "./mocks/comments.js"; // временное решение
+import movieComments from "../../mocks/comments.js";
 
 const initialState = {
   currentAppPage: AppPage.MAIN_PAGE,
-  promoMovieCard,
   currentGenre: GENRE_ALL,
-  moviesList,
   showedItemsInMoviesList: SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
   currentMovie: null,
   currentMovieComments: null,
