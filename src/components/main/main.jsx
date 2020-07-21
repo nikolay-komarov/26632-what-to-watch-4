@@ -11,6 +11,8 @@ import {
   getShowedMovies
 } from "../../utils/utils.js";
 
+// import {getMoviesByGenre} from "../../reducer/state/selectors.js";
+
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
 const Main = (props) => {
@@ -98,11 +100,13 @@ const Main = (props) => {
 
           <MoviesListWrapped
             moviesList = {getShowedMovies(getMoviesByGenre(moviesList, currentGenre), showedItemsInMoviesList)}
+            // moviesList = {getShowedMovies(getMoviesByGenre(), showedItemsInMoviesList)}
             onSmallMovieCardClick = {onSmallMovieCardClick}
           />
 
           <ShowMoreButton
             moviesListLength = {getMoviesByGenre(moviesList, currentGenre).length}
+            // moviesListLength = {getMoviesByGenre().length}
             showedItemsInMoviesList = {showedItemsInMoviesList}
             onShowMoreButtonClick = {onShowMoreButtonClick}
           />

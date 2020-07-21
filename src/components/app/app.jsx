@@ -14,7 +14,17 @@ import {
   AppPage,
 } from "../../utils/const.js";
 
-import NameSpace from "../../reducer/name-space.js";
+import {
+  getCurrentAppPage,
+  getCurrentGenre,
+  getShowedItemsInMoviesList,
+  getCurrentMovie,
+  getCurrentMovieComments,
+} from "../../reducer/state/selectors.js";
+import {
+  getPromoMovieCard,
+  getMoviesList
+} from "../../reducer/data/selectors.js";
 
 const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
 
@@ -156,13 +166,13 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  currentAppPage: state[NameSpace.STATE].currentAppPage,
-  promoMovieCard: state[NameSpace.DATA].promoMovieCard,
-  currentGenre: state[NameSpace.STATE].currentGenre,
-  moviesList: state[NameSpace.DATA].moviesList,
-  showedItemsInMoviesList: state[NameSpace.STATE].showedItemsInMoviesList,
-  currentMovie: state[NameSpace.STATE].currentMovie,
-  currentMovieComments: state[NameSpace.STATE].currentMovieComments,
+  currentAppPage: getCurrentAppPage(state),
+  promoMovieCard: getPromoMovieCard(state),
+  currentGenre: getCurrentGenre(state),
+  moviesList: getMoviesList(state),
+  showedItemsInMoviesList: getShowedItemsInMoviesList(state),
+  currentMovie: getCurrentMovie(state),
+  currentMovieComments: getCurrentMovieComments(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
