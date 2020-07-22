@@ -2,7 +2,6 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 
 import {VideoPlayerMode} from "../../utils/const.js";
-
 import {formatTime} from "../../utils/utils.js";
 
 const withVideoPlayer = (Component, videoPlayerMode) => {

@@ -5,7 +5,7 @@ import {
   AppPage,
 } from "../../utils/const.js";
 
-import movieComments from "../../mocks/comments.js";
+import movieComments from "../../mocks/comments.js"; // временно
 
 const initialState = {
   currentAppPage: AppPage.MAIN_PAGE,

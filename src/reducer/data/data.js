@@ -4,12 +4,9 @@ import {
   normalizeMoviesData,
 } from "../../utils/utils.js";
 
-import promoMovieCard from "../../mocks/film.js";
-import moviesList from "../../mocks/films.js";
-
 const initialState = {
-  promoMovieCard,
-  moviesList,
+  promoMovieCard: {},
+  moviesList: [],
 };
 
 const ActionType = {
