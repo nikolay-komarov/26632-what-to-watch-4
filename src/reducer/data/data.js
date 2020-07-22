@@ -1,4 +1,8 @@
-import {extend} from "../../utils/utils.js";
+import {
+  extend,
+  normalizeMovieData,
+  normalizeMoviesData,
+} from "../../utils/utils.js";
 
 import promoMovieCard from "../../mocks/film.js";
 import moviesList from "../../mocks/films.js";
@@ -24,6 +28,21 @@ const ActionCreator = {
   }),
 };
 
+const Operation = {
+  loadPromoMovieCard: () => (dispatch, getState, api) => {
+    return api.get(`/films/promo`)
+     .then((response) => {
+       dispatch(ActionCreator.loadPromoMovieCard(normalizeMovieData(response.data))); // ToDo - add normalize
+     });
+  },
+  loadMoviesList: () => (dispatch, getState, api) => {
+    return api.get(`/films`)
+     .then((response) => {
+       dispatch(ActionCreator.loadMoviesList(normalizeMoviesData(response.data))); // ToDo - add normalize
+     });
+  },
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_PROMO_MOVIE_CARD:
@@ -39,4 +58,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionType, ActionCreator};
+export {reducer, ActionType, ActionCreator, Operation};
