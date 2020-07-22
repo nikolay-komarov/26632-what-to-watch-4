@@ -4,9 +4,28 @@ import {
   normalizeMoviesData,
 } from "../../utils/utils.js";
 
+const initialMovie = {
+  // : ``,
+  name: ``,
+  posterImage: ``,
+  previewImage: ``,
+  backgroundImage: ``,
+  // : ``,
+  // : ``,
+  previewVideoLink: ``,
+  description: ``,
+  rating: 0,
+  scoreCount: 0,
+  director: ``,
+  staring: [``],
+  runTime: 0,
+  genre: ``,
+  released: 0,
+};
+
 const initialState = {
-  promoMovieCard: {},
-  moviesList: [],
+  promoMovieCard: initialMovie,
+  moviesList: [initialMovie],
 };
 
 const ActionType = {
