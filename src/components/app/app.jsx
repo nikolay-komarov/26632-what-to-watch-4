@@ -7,6 +7,7 @@ import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {ActionCreator as StateActionCreator} from "../../reducer/state/state.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
 
@@ -112,6 +113,9 @@ const App = (props) => {
             isPlaying = {false}
             onExitButtonClick = {onBigPlayerExitButtonClick}
           />
+        </Route>
+        <Route exact path="/dev-sign-in">
+          <SignIn />
         </Route>
       </Switch>
     </BrowserRouter>
