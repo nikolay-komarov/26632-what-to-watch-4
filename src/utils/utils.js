@@ -94,7 +94,7 @@ export const normalizeMovieData = (movie) =>
 
 export const normalizeMoviesData = (movies) => movies.map(normalizeMovieData);
 
-export const normalizeCommentData = (comment) =>
+export const normalizeMovieCommentData = (comment) =>
   Object.keys(comment).length
     ? {
       id: comment.id,
@@ -105,3 +105,5 @@ export const normalizeCommentData = (comment) =>
       date: comment.date
     }
     : {};
+
+export const normalizeMovieCommentsData = (movies) => movies.map(normalizeMovieCommentData);

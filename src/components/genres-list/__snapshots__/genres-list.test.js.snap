@@ -5,16 +5,6 @@ exports[`Render GenresList Should GenresList render correctly 1`] = `
   className="catalog__genres-list"
 >
   <li
-    className="catalog__genres-item catalog__genres-item--active"
-  >
-    <a
-      className="catalog__genres-link"
-      onClick={[Function]}
-    >
-      All genres
-    </a>
-  </li>
-  <li
     className="catalog__genres-item "
   >
     <a
@@ -102,6 +92,16 @@ exports[`Render GenresList Should GenresList render correctly 1`] = `
       onClick={[Function]}
     >
       Thrillers
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+  >
+    <a
+      className="catalog__genres-link"
+      onClick={[Function]}
+    >
+      Drama
     </a>
   </li>
 </ul>

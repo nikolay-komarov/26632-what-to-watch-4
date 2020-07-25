@@ -4,7 +4,6 @@ import Adapter from "enzyme-adapter-react-16";
 
 import GenresList from "./genres-list.jsx";
 import {GENRE_ALL} from "../../utils/const.js";
-import {getGenresList} from "../../utils/utils.js";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -12,46 +11,25 @@ Enzyme.configure({
 
 describe(`E2E GenresList tests`, () => {
   const mock = [
-    {
-      genre: `Comedies`,
-    },
-    {
-      genre: `Crime`,
-    },
-    {
-      genre: `Documentary`,
-    },
-    {
-      genre: `Drama`,
-    },
-    {
-      genre: `Horror`,
-    },
-    {
-      genre: `Kids & Family`,
-    },
-    {
-      genre: `Romance`,
-    },
-    {
-      genre: `Sci-Fi`,
-    },
-    {
-      genre: `Thrillers`,
-    },
-    {
-      genre: `Drama`,
-    }
+    `Comedies`,
+    `Crime`,
+    `Documentary`,
+    `Drama`,
+    `Horror`,
+    `Kids & Family`,
+    `Romance`,
+    `Sci-Fi`,
+    `Thrillers`,
+    `Drama`,
   ];
 
   it(`Should GenresList Item be clicked`, () => {
-    const mockMovieList = mock;
-    const mockGenresList = getGenresList(mockMovieList);
+    const mockGenresList = mock;
     const onGenreItemClick = jest.fn();
 
     const genresListComponent = shallow(
         <GenresList
-          moviesList = {mockMovieList}
+          genresList = {mockGenresList}
           currentGenre = {GENRE_ALL}
           onGenreItemClick = {onGenreItemClick}
         />

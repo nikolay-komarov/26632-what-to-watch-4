@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer/state/state.js";
+import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
+import {ActionCreator as StateActionCreator} from "../../reducer/state/state.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
@@ -16,14 +17,16 @@ import {
 
 import {
   getCurrentAppPage,
+} from "../../reducer/state/selectors.js";
+import {
+  getPromoMovieCard,
+  getMoviesList,
+  getGenresList,
   getCurrentGenre,
   getShowedItemsInMoviesList,
   getCurrentMovie,
   getCurrentMovieComments,
-} from "../../reducer/state/selectors.js";
-import {
-  getPromoMovieCard,
-  getMoviesList
+  getMoviesByGenre,
 } from "../../reducer/data/selectors.js";
 
 const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
@@ -34,6 +37,8 @@ const App = (props) => {
     promoMovieCard,
     currentGenre,
     moviesList,
+    moviesByGenreList,
+    genresList,
     showedItemsInMoviesList,
     currentMovie,
     currentMovieComments,
@@ -51,8 +56,9 @@ const App = (props) => {
         appPageElement = (
           <Main
             movieCard = {promoMovieCard}
+            genresList = {genresList}
             currentGenre = {currentGenre}
-            moviesList = {moviesList}
+            moviesByGenreList = {moviesByGenreList}
             showedItemsInMoviesList = {showedItemsInMoviesList}
             onSmallMovieCardClick = {onSmallMovieCardClick}
             onGenreItemClick = {onGenreItemClick}
@@ -66,7 +72,7 @@ const App = (props) => {
           <MoviePage
             movieDetails = {currentMovie}
             movieComments = {currentMovieComments}
-            moviesList = {moviesList}
+            moviesList = {moviesList} // ToDo - передать только 4 похожих?
             onSmallMovieCardClick = {onSmallMovieCardClick}
             onPlayButtonClick = {onPlayButtonClick}
           />
@@ -96,7 +102,7 @@ const App = (props) => {
           <MoviePage
             movieDetails = {currentMovie}
             movieComments = {currentMovieComments}
-            moviesList = {moviesList}
+            moviesList = {moviesList} // ToDo - передать только 4 похожих?
             onSmallMovieCardClick = {onSmallMovieCardClick}
           />
         </Route>
@@ -128,8 +134,15 @@ App.propTypes = {
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
   }).isRequired,
+  genresList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+  })).isRequired,
+  moviesByGenreList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
@@ -168,8 +181,10 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   currentAppPage: getCurrentAppPage(state),
   promoMovieCard: getPromoMovieCard(state),
+  genresList: getGenresList(state),
   currentGenre: getCurrentGenre(state),
   moviesList: getMoviesList(state),
+  moviesByGenreList: getMoviesByGenre(state),
   showedItemsInMoviesList: getShowedItemsInMoviesList(state),
   currentMovie: getCurrentMovie(state),
   currentMovieComments: getCurrentMovieComments(state),
@@ -177,22 +192,22 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSmallMovieCardClick(movie) {
-    dispatch(ActionCreator.changeCurrentMovie(movie));
-    dispatch(ActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
+    dispatch(DataActionCreator.changeCurrentMovie(movie));
+    dispatch(StateActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
   },
   onGenreItemClick(genre) {
-    dispatch(ActionCreator.changeGenre(genre));
-    dispatch(ActionCreator.resetShowedItemsInMoviesList());
+    dispatch(DataActionCreator.changeGenre(genre));
+    dispatch(DataActionCreator.resetShowedItemsInMoviesList());
   },
   onShowMoreButtonClick() {
-    dispatch(ActionCreator.showMoreItemsInMoviesList());
+    dispatch(DataActionCreator.showMoreItemsInMoviesList());
   },
   onPlayButtonClick(movie) {
-    dispatch(ActionCreator.changeCurrentMovie(movie));
-    dispatch(ActionCreator.changeAppPage(AppPage.BIG_MOVIE_PLAYER));
+    dispatch(DataActionCreator.changeCurrentMovie(movie));
+    dispatch(StateActionCreator.changeAppPage(AppPage.BIG_MOVIE_PLAYER));
   },
   onBigPlayerExitButtonClick() {
-    dispatch(ActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
+    dispatch(StateActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
   }
 });
 
