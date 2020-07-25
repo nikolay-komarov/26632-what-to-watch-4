@@ -5,7 +5,10 @@ import SignIn from "./sign-in.jsx";
 describe(`Render SignIn`, () => {
   it(`SignIn is rendered correctly`, () => {
     const tree = renderer.create(
-        <SignIn />
+        <SignIn
+          authorizationError = {false}
+          onSubmit = {() => {}}
+        />
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

@@ -9,11 +9,13 @@ import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 import {
   getShowedMovies
 } from "../../utils/utils.js";
+import {AuthorizationStatus} from "../../utils/const.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
 const Main = (props) => {
   const {
+    authorizationStatus,
     movieCard,
     genresList,
     currentGenre,
@@ -23,6 +25,7 @@ const Main = (props) => {
     onGenreItemClick,
     onShowMoreButtonClick,
     onPlayButtonClick,
+    onSignInClick,
   } = props;
 
   return (
@@ -44,9 +47,22 @@ const Main = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
+            {
+              authorizationStatus === AuthorizationStatus.NO_AUTH && (
+                <a
+                  onClick = {onSignInClick}
+                >
+                  Sign In
+                </a>
+              )
+            }
+            {
+              authorizationStatus === AuthorizationStatus.AUTH && (
+                <div className="user-block__avatar">
+                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                </div>
+              )
+            }
           </div>
         </header>
 
@@ -127,6 +143,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   movieCard: PropTypes.shape({
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
@@ -153,6 +170,7 @@ Main.propTypes = {
   onGenreItemClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
+  onSignInClick: PropTypes.func.isRequired,
 };
 
 export default Main;

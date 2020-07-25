@@ -4,7 +4,8 @@ import Main from "./main.jsx";
 
 import {
   GENRE_ALL,
-  SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
+  SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
+  AuthorizationStatus,
 } from "../../utils/const.js";
 import {getGenresList} from "../../utils/utils.js";
 
@@ -80,6 +81,8 @@ describe(`Render Main`, () => {
     const tree = renderer
       .create(
           <Main
+            authorizationStatus = {AuthorizationStatus.NO_AUTH}
+            onSignInClick = {() => {}}
             movieCard = {movieCard}
             genresList = {genresList}
             currentGenre = {GENRE_ALL}

@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {ActionCreator as StateActionCreator} from "../../reducer/state/state.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
@@ -29,11 +30,17 @@ import {
   getCurrentMovieComments,
   getMoviesByGenre,
 } from "../../reducer/data/selectors.js";
+import {
+  getAuthorizationError,
+  getAuthorizationStatus
+} from "../../reducer/user/selector.js";
 
 const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
 
 const App = (props) => {
   const {
+    authorizationStatus,
+    authorizationError,
     currentAppPage,
     promoMovieCard,
     currentGenre,
@@ -48,6 +55,8 @@ const App = (props) => {
     onShowMoreButtonClick,
     onPlayButtonClick,
     onBigPlayerExitButtonClick,
+    onSignInClick,
+    login,
   } = props;
 
   const renderApp = () => {
@@ -56,6 +65,8 @@ const App = (props) => {
       case AppPage.MAIN_PAGE:
         appPageElement = (
           <Main
+            authorizationStatus = {authorizationStatus}
+            onSignInClick = {onSignInClick}
             movieCard = {promoMovieCard}
             genresList = {genresList}
             currentGenre = {currentGenre}
@@ -88,6 +99,13 @@ const App = (props) => {
           />
         );
         break;
+      case AppPage.SIGN_IN:
+        appPageElement = (
+          <SignIn
+            authorizationError = {authorizationError}
+            onSubmit = {login}
+          />
+        );
     }
 
     return appPageElement;
@@ -115,7 +133,10 @@ const App = (props) => {
           />
         </Route>
         <Route exact path="/dev-sign-in">
-          <SignIn />
+          <SignIn
+            authorizationError = {authorizationError}
+            onSubmit = {login}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -123,6 +144,8 @@ const App = (props) => {
 };
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  authorizationError: PropTypes.bool.isRequired,
   currentAppPage: PropTypes.string.isRequired,
   promoMovieCard: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -180,9 +203,13 @@ App.propTypes = {
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onBigPlayerExitButtonClick: PropTypes.func.isRequired,
+  onSignInClick: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  authorizationError: getAuthorizationError(state),
   currentAppPage: getCurrentAppPage(state),
   promoMovieCard: getPromoMovieCard(state),
   genresList: getGenresList(state),
@@ -195,6 +222,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
   onSmallMovieCardClick(movie) {
     dispatch(DataActionCreator.changeCurrentMovie(movie));
     dispatch(StateActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
@@ -212,6 +242,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onBigPlayerExitButtonClick() {
     dispatch(StateActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
+  },
+  onSignInClick() {
+    dispatch(StateActionCreator.changeAppPage(AppPage.SIGN_IN));
   }
 });
 

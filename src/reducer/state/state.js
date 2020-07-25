@@ -3,7 +3,6 @@ import {
   AppPage,
 } from "../../utils/const.js";
 
-
 const initialState = {
   currentAppPage: AppPage.MAIN_PAGE,
 };
