@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {getGenresList} from "../../utils.js";
-
 const GenresList = (props) => {
   const {
-    moviesList,
+    genresList,
     currentGenre,
     onGenreItemClick
   } = props;
@@ -13,7 +11,7 @@ const GenresList = (props) => {
   return (
     <ul className="catalog__genres-list">
       {
-        getGenresList(moviesList).map((genre, index) => (
+        genresList.map((genre, index) => (
           <li
             className={`catalog__genres-item ${
               genre === currentGenre ? `catalog__genres-item--active` : ``
@@ -34,9 +32,7 @@ const GenresList = (props) => {
 };
 
 GenresList.propTypes = {
-  moviesList: PropTypes.arrayOf(PropTypes.shape({
-    genre: PropTypes.string.isRequired,
-  })).isRequired,
+  genresList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
 };

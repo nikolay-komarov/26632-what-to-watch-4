@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import PropTypes from "prop-types";
 
 import withVideoPlayer from "./with-video-player.jsx";
-import {VideoPlayerMode} from "../../const.js";
+import {VideoPlayerMode} from "../../utils/const.js";
 
 describe(`Render withVideoPlayer`, () => {
   const MockComponent = (props) => {

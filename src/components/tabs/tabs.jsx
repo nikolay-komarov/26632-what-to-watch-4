@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import {
   getMovieRatingLevel,
   getTimeFromMins
-} from "../../utils.js";
-import {TabName} from "../../const.js";
+} from "../../utils/utils.js";
+import {TabName} from "../../utils/const.js";
 
 const Tabs = (props) => {
   const {

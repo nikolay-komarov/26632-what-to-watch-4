@@ -8,7 +8,8 @@ import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
   AppPage
-} from "../../const.js";
+} from "../../utils/const.js";
+import {getGenresList} from "../../utils/utils.js";
 
 const mockStore = configureStore([]);
 
@@ -119,6 +120,7 @@ const moviesList = [
     genre: `Drama`,
   },
 ];
+const genresList = getGenresList(moviesList);
 const showedItemsInMoviesList = SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT;
 
 describe(`Render App`, () => {
@@ -131,9 +133,13 @@ describe(`Render App`, () => {
             <App
               currentAppPage = {AppPage.MAIN_PAGE}
               promoMovieCard = {movieCard}
+              genresList = {genresList}
               currentGenre = {GENRE_ALL}
               moviesList = {moviesList}
+              moviesByGenreList = {moviesList}
               showedItemsInMoviesList = {showedItemsInMoviesList}
+              currentMovie = {movieCard}
+              currentMovieComments = {movieComments}
               onSmallMovieCardClick = {() => {}}
               onGenreItemClick = {() => {}}
               onShowMoreButtonClick = {() => {}}
@@ -159,8 +165,10 @@ describe(`Render App`, () => {
             <App
               currentAppPage = {AppPage.MOVIE_PAGE}
               promoMovieCard = {movieCard}
+              genresList = {genresList}
               currentGenre = {GENRE_ALL}
               moviesList = {moviesList}
+              moviesByGenreList = {moviesList}
               showedItemsInMoviesList = {showedItemsInMoviesList}
               currentMovie = {movieCard}
               currentMovieComments = {movieComments}
@@ -189,9 +197,13 @@ describe(`Render App`, () => {
             <App
               currentAppPage = {AppPage.BIG_MOVIE_PLAYER}
               promoMovieCard = {movieCard}
+              genresList = {genresList}
               currentGenre = {GENRE_ALL}
               moviesList = {moviesList}
+              moviesByGenreList = {moviesList}
               showedItemsInMoviesList = {showedItemsInMoviesList}
+              currentMovie = {movieCard}
+              currentMovieComments = {movieComments}
               onSmallMovieCardClick = {() => {}}
               onGenreItemClick = {() => {}}
               onShowMoreButtonClick = {() => {}}

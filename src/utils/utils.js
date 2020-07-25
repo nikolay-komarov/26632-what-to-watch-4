@@ -68,3 +68,42 @@ export const formatTime = (time) => {
     seconds.toString().padStart(2, `0`)
   ].join(`:`);
 };
+
+export const normalizeMovieData = (movie) =>
+  Object.keys(movie).length
+    ? {
+      // : movie.id,
+      name: movie.name,
+      posterImage: movie.poster_image,
+      previewImage: movie.preview_image,
+      backgroundImage: movie.background_image,
+      // : movie.background_color,
+      // : movie.video_link,
+      previewVideoLink: movie.preview_video_link,
+      description: movie.description,
+      rating: movie.rating,
+      scoreCount: movie.scores_count,
+      director: movie.director,
+      staring: movie.starring,
+      runTime: movie.run_time,
+      genre: movie.genre,
+      released: movie.released,
+      // : movie.is_favorite,
+    }
+    : {};
+
+export const normalizeMoviesData = (movies) => movies.map(normalizeMovieData);
+
+export const normalizeMovieCommentData = (comment) =>
+  Object.keys(comment).length
+    ? {
+      id: comment.id,
+      userId: comment.user.id,
+      userName: comment.user.name,
+      rating: comment.rating,
+      comment: comment.comment,
+      date: comment.date
+    }
+    : {};
+
+export const normalizeMovieCommentsData = (movies) => movies.map(normalizeMovieCommentData);

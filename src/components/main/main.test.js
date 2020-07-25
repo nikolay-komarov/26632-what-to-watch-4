@@ -5,7 +5,8 @@ import Main from "./main.jsx";
 import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
-} from "../../const.js";
+} from "../../utils/const.js";
+import {getGenresList} from "../../utils/utils.js";
 
 describe(`Render Main`, () => {
   it(`Should Main render correctly`, () => {
@@ -23,48 +24,6 @@ describe(`Render Main`, () => {
       genre: `Drama`,
       released: 2014,
     };
-    const movieComments = [
-      {
-        id: 1,
-        userId: 4,
-        userName: `Kate Muir`,
-        rating: 8.9,
-        comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-        date: `2016-12-24`,
-      },
-      {
-        id: 2,
-        userId: 4,
-        userName: `Kate Muir`,
-        rating: 8.9,
-        comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-        date: `2016-12-24`,
-      },
-      {
-        id: 3,
-        userId: 4,
-        userName: `Kate Muir`,
-        rating: 8.9,
-        comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-        date: `2016-12-24`,
-      },
-      {
-        id: 4,
-        userId: 4,
-        userName: `Kate Muir`,
-        rating: 8.9,
-        comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-        date: `2016-12-24`,
-      },
-      {
-        id: 5,
-        userId: 4,
-        userName: `Kate Muir`,
-        rating: 8.9,
-        comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-        date: `2016-12-24`,
-      },
-    ];
     const moviesList = [
       {
         name: `Fantastic Beasts: The Crimes of Grindelwald`,
@@ -115,16 +74,17 @@ describe(`Render Main`, () => {
         genre: `Drama`,
       },
     ];
+    const genresList = getGenresList(moviesList);
     const showedItemsInMoviesList = SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT;
 
     const tree = renderer
       .create(
           <Main
             movieCard = {movieCard}
+            genresList = {genresList}
             currentGenre = {GENRE_ALL}
-            movieComments = {movieComments}
+            moviesByGenreList = {moviesList}
             showedItemsInMoviesList = {showedItemsInMoviesList}
-            moviesList = {moviesList}
             onSmallMovieCardClick = {() => {}}
             onGenreItemClick = {() => {}}
             onShowMoreButtonClick = {() => {}}

@@ -7,17 +7,17 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 
 import {
-  getMoviesByGenre,
   getShowedMovies
-} from "../../utils.js";
+} from "../../utils/utils.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
 const Main = (props) => {
   const {
     movieCard,
+    genresList,
     currentGenre,
-    moviesList,
+    moviesByGenreList,
     showedItemsInMoviesList,
     onSmallMovieCardClick,
     onGenreItemClick,
@@ -91,18 +91,18 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList
-            moviesList = {moviesList}
+            genresList = {genresList}
             currentGenre = {currentGenre}
             onGenreItemClick = {onGenreItemClick}
           />
 
           <MoviesListWrapped
-            moviesList = {getShowedMovies(getMoviesByGenre(moviesList, currentGenre), showedItemsInMoviesList)}
+            moviesList = {getShowedMovies(moviesByGenreList, showedItemsInMoviesList)}
             onSmallMovieCardClick = {onSmallMovieCardClick}
           />
 
           <ShowMoreButton
-            moviesListLength = {getMoviesByGenre(moviesList, currentGenre).length}
+            moviesListLength = {moviesByGenreList.length}
             showedItemsInMoviesList = {showedItemsInMoviesList}
             onShowMoreButtonClick = {onShowMoreButtonClick}
           />
@@ -141,8 +141,9 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
   }).isRequired,
+  genresList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
-  moviesList: PropTypes.arrayOf(PropTypes.shape({
+  moviesByGenreList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
