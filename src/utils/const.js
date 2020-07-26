@@ -34,4 +34,10 @@ export const AppPage = {
   MAIN_PAGE: `main screen`,
   MOVIE_PAGE: `movie screen`,
   BIG_MOVIE_PLAYER: `big movie player`,
+  SIGN_IN: `sign in screen`
+};
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
 };

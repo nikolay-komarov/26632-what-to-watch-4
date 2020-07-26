@@ -7,7 +7,8 @@ import {App} from "./app.jsx";
 import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
-  AppPage
+  AppPage,
+  AuthorizationStatus,
 } from "../../utils/const.js";
 import {getGenresList} from "../../utils/utils.js";
 
@@ -131,6 +132,8 @@ describe(`Render App`, () => {
       .create(
           <Provider store = {store}>
             <App
+              authorizationStatus = {AuthorizationStatus.NO_AUTH}
+              authorizationError = {false}
               currentAppPage = {AppPage.MAIN_PAGE}
               promoMovieCard = {movieCard}
               genresList = {genresList}
@@ -145,6 +148,8 @@ describe(`Render App`, () => {
               onShowMoreButtonClick = {() => {}}
               onPlayButtonClick = {() => {}}
               onBigPlayerExitButtonClick = {() => {}}
+              onSignInClick = {() => {}}
+              login = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -163,6 +168,8 @@ describe(`Render App`, () => {
       .create(
           <Provider store = {store}>
             <App
+              authorizationStatus = {AuthorizationStatus.NO_AUTH}
+              authorizationError = {false}
               currentAppPage = {AppPage.MOVIE_PAGE}
               promoMovieCard = {movieCard}
               genresList = {genresList}
@@ -177,6 +184,8 @@ describe(`Render App`, () => {
               onShowMoreButtonClick = {() => {}}
               onPlayButtonClick = {() => {}}
               onBigPlayerExitButtonClick = {() => {}}
+              onSignInClick = {() => {}}
+              login = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -195,6 +204,8 @@ describe(`Render App`, () => {
       .create(
           <Provider store = {store}>
             <App
+              authorizationStatus = {AuthorizationStatus.NO_AUTH}
+              authorizationError = {false}
               currentAppPage = {AppPage.BIG_MOVIE_PLAYER}
               promoMovieCard = {movieCard}
               genresList = {genresList}
@@ -209,6 +220,8 @@ describe(`Render App`, () => {
               onShowMoreButtonClick = {() => {}}
               onPlayButtonClick = {() => {}}
               onBigPlayerExitButtonClick = {() => {}}
+              onSignInClick = {() => {}}
+              login = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
