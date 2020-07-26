@@ -8,6 +8,7 @@ import {ActionCreator as StateActionCreator} from "../../reducer/state/state.js"
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import AddReview from "../add-review/add-review.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
@@ -136,6 +137,12 @@ const App = (props) => {
           <SignIn
             authorizationError = {authorizationError}
             onSubmit = {login}
+          />
+        </Route>
+        <Route exact path="/dev-add-review">
+          <AddReview
+            // authorizationStatus = {authorizationStatus}
+            movie = {promoMovieCard}
           />
         </Route>
       </Switch>
