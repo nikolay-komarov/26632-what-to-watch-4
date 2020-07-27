@@ -106,6 +106,7 @@ exports[`Render AddReview Should AddReview render correctly 1`] = `
     <form
       action="#"
       className="add-review__form"
+      onSubmit={[Function]}
     >
       <div
         className="rating"
@@ -141,6 +142,7 @@ exports[`Render AddReview Should AddReview render correctly 1`] = `
           </label>
           <input
             className="rating__input"
+            defaultChecked={true}
             id="star-3"
             name="rating"
             type="radio"
@@ -186,7 +188,10 @@ exports[`Render AddReview Should AddReview render correctly 1`] = `
         <textarea
           className="add-review__textarea"
           id="review-text"
+          maxLength={400}
+          minLength={5}
           name="review-text"
+          onChange={[Function]}
           placeholder="Review text"
         />
         <div

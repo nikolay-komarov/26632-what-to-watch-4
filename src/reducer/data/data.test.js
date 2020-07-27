@@ -223,7 +223,7 @@ const films = [
   },
 ];
 const initialMovie = {
-  // : ``,
+  id: 0,
   name: ``,
   posterImage: ``,
   previewImage: ``,

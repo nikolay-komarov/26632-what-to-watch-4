@@ -5,7 +5,10 @@ import Tabs from "../tabs/tabs.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
-import {TabName} from "../../utils/const.js";
+import {
+  TabName,
+  AuthorizationStatus,
+} from "../../utils/const.js";
 import {getFourSimilarMovies} from "../../utils/utils.js";
 
 const TabsWrapped = withActiveItem(Tabs, TabName.OVERVIEW);
@@ -13,6 +16,7 @@ const MoviesListWrapped = withActiveItem(MoviesList, null);
 
 const MoviePage = (props) => {
   const {
+    authorizationStatus,
     movieDetails,
     movieComments,
     moviesList,
@@ -80,7 +84,12 @@ const MoviePage = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+
+                {
+                  authorizationStatus === AuthorizationStatus.AUTH && (
+                    <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                  )
+                }
               </div>
             </div>
           </div>
@@ -134,6 +143,7 @@ const MoviePage = (props) => {
 };
 
 MoviePage.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   movieDetails: PropTypes.shape({
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,

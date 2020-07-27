@@ -15,7 +15,7 @@ import {
 import movieComments from "../../mocks/comments.js"; // временно, ToDo - заменить на получение комментариев с сервера
 
 const initialMovie = {
-  // : ``,
+  id: 0,
   name: ``,
   posterImage: ``,
   previewImage: ``,
@@ -107,6 +107,15 @@ const Operation = {
   //     dispatch(ActionCreator.loadMoviesList(normalizeMovieComments(response.data)));
   //   });
   // },
+
+  sendComment: (reviewData, movieId, handleResponse) => (dispatch, getState, api) => {
+    return api.post(`/comments/` + movieId, reviewData)
+      .then(() => handleResponse.onSuccess())
+      .catch((err) => {
+        handleResponse.onError();
+        throw err;
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {

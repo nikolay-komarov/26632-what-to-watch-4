@@ -15,6 +15,7 @@ import {getGenresList} from "../../utils/utils.js";
 const mockStore = configureStore([]);
 
 const movieCard = {
+  id: 0,
   name: `The Grand Budapest Hotel`,
   posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
   backgroundImage: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -150,6 +151,7 @@ describe(`Render App`, () => {
               onBigPlayerExitButtonClick = {() => {}}
               onSignInClick = {() => {}}
               login = {() => {}}
+              onReviewSend = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -186,6 +188,7 @@ describe(`Render App`, () => {
               onBigPlayerExitButtonClick = {() => {}}
               onSignInClick = {() => {}}
               login = {() => {}}
+              onReviewSend = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -222,6 +225,7 @@ describe(`Render App`, () => {
               onBigPlayerExitButtonClick = {() => {}}
               onSignInClick = {() => {}}
               login = {() => {}}
+              onReviewSend = {() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
