@@ -205,6 +205,11 @@ exports[`Render AddReview Should AddReview render correctly 1`] = `
           </button>
         </div>
       </div>
+      <p
+        className="visually-hidden"
+      >
+        sending review error, try again...
+      </p>
     </form>
   </div>
 </section>

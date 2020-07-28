@@ -13,7 +13,7 @@ class AddReview extends PureComponent {
     this.ratingStarsRef = createRef();
     this.reviewTextRef = createRef();
     this.postButton = createRef();
-    // this.errorSendCommentMessage = createRef();
+    this.errorSendCommentMessage = createRef();
 
     this.handleReviewTextInput = this.handleReviewTextInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,11 +22,11 @@ class AddReview extends PureComponent {
 
     this.handleResponse = {
       onSuccess: () => {
-        // this.errorSendCommentMessage.current.classList.add(`visually-hidden`);
+        this.errorSendCommentMessage.current.classList.add(`visually-hidden`);
         this.enableForm();
       },
       onError: () => {
-        // this.errorSendCommentMessage.current.classList.remove(`visually-hidden`);
+        this.errorSendCommentMessage.current.classList.remove(`visually-hidden`);
         this.enableForm();
       },
     };
@@ -53,7 +53,6 @@ class AddReview extends PureComponent {
   }
 
   componentDidMount() {
-    // this.errorSendCommentMessage.current.classList.add(`visually-hidden`);
     this.postButton.current.disabled = true;
   }
 
@@ -180,7 +179,7 @@ class AddReview extends PureComponent {
               </div>
             </div>
 
-            {/* <p ref={this.errorSendCommentMessage}>sending review error, try again...</p> */}
+            <p ref={this.errorSendCommentMessage} className="visually-hidden" >sending review error, try again...</p>
           </form>
         </div>
       </section>
