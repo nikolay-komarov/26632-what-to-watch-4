@@ -4,10 +4,12 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {ActionCreator as StateActionCreator} from "../../reducer/state/state.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import AddReview from "../add-review/add-review.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
@@ -57,6 +59,7 @@ const App = (props) => {
     onBigPlayerExitButtonClick,
     onSignInClick,
     login,
+    onReviewSend,
   } = props;
 
   const renderApp = () => {
@@ -82,6 +85,7 @@ const App = (props) => {
       case AppPage.MOVIE_PAGE:
         appPageElement = (
           <MoviePage
+            authorizationStatus = {authorizationStatus}
             movieDetails = {currentMovie}
             movieComments = {currentMovieComments}
             moviesList = {moviesList} // ToDo - передать только 4 похожих?
@@ -119,6 +123,7 @@ const App = (props) => {
         </Route>
         <Route exact path="/dev-film">
           <MoviePage
+            authorizationStatus = {authorizationStatus}
             movieDetails = {currentMovie}
             movieComments = {currentMovieComments}
             moviesList = {moviesList} // ToDo - передать только 4 похожих?
@@ -138,6 +143,12 @@ const App = (props) => {
             onSubmit = {login}
           />
         </Route>
+        <Route exact path="/dev-add-review">
+          <AddReview
+            movie = {promoMovieCard}
+            onReviewSend = {onReviewSend}
+          />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
@@ -148,6 +159,7 @@ App.propTypes = {
   authorizationError: PropTypes.bool.isRequired,
   currentAppPage: PropTypes.string.isRequired,
   promoMovieCard: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
@@ -205,6 +217,7 @@ App.propTypes = {
   onBigPlayerExitButtonClick: PropTypes.func.isRequired,
   onSignInClick: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  onReviewSend: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -245,6 +258,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSignInClick() {
     dispatch(StateActionCreator.changeAppPage(AppPage.SIGN_IN));
+  },
+  onReviewSend(review, id, handleResponse) {
+    dispatch(DataOperation.sendComment(review, id, handleResponse));
   }
 });
 

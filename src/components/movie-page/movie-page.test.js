@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import MoviePage from "./movie-page.jsx";
 
+import {AuthorizationStatus} from "../../utils/const.js";
+
 describe(`Render MoviePage`, () => {
   it(`Should MoviePage render correctly`, () => {
     const movie = {
@@ -106,6 +108,7 @@ describe(`Render MoviePage`, () => {
     const tree = renderer
       .create(
           <MoviePage
+            authorizationStatus = {AuthorizationStatus.AUTH}
             movieDetails = {movie}
             movieComments = {movieComments}
             moviesList = {moviesList}

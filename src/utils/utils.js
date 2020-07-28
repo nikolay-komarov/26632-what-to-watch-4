@@ -72,7 +72,7 @@ export const formatTime = (time) => {
 export const normalizeMovieData = (movie) =>
   Object.keys(movie).length
     ? {
-      // : movie.id,
+      id: movie.id,
       name: movie.name,
       posterImage: movie.poster_image,
       previewImage: movie.preview_image,
