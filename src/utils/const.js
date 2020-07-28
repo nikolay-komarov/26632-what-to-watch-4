@@ -41,3 +41,11 @@ export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
+
+export const AppRoute = {
+  MAIN: `/`,
+  SING_IN: `/sign-in`,
+  MY_LIST: `/mylist`,
+  FILM: `/films/:id`,
+  ADD_REVIEW: `/films/:id/review`,
+};
