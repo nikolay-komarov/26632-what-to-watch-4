@@ -44,7 +44,7 @@ export const AuthorizationStatus = {
 
 export const AppRoute = {
   MAIN: `/`,
-  SING_IN: `/sign-in`,
+  SIGN_IN: `/sign-in`,
   MY_LIST: `/mylist`,
   FILM: `/films/:id`,
   ADD_REVIEW: `/films/:id/review`,
