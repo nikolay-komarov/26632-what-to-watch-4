@@ -156,10 +156,14 @@ class MoviePage extends PureComponent {
                     <span>My list</span>
                   </button>
 
-                  {/* ToDo - реализовать переход на AddReview */}
                   {
                     authorizationStatus === AuthorizationStatus.AUTH && (
-                      <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                      <Link
+                        to={`${AppRoute.FILM}/${movieDetails.id}${AppRoute.ADD_REVIEW}`}
+                        className="btn movie-card__button"
+                      >
+                        Add review
+                      </Link>
                     )
                   }
                 </div>
