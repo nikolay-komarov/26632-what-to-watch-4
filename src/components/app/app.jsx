@@ -13,6 +13,7 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
+import MyList from "../my-list/my-list.jsx";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
 
 import {
@@ -42,7 +43,6 @@ import {
   getAuthorizationError,
   getAuthorizationStatus
 } from "../../reducer/user/selector.js";
-
 
 const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
 
@@ -150,6 +150,16 @@ const App = (props) => {
                 />
                 :
                 <Loader />
+            );
+          }}>
+        </Route>
+
+        <Route
+          exact
+          path={AppRoute.MY_LIST}
+          render = {() => {
+            return (
+              <MyList />
             );
           }}>
         </Route>

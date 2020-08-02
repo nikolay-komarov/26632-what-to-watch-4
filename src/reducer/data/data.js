@@ -2,7 +2,6 @@ import {
   extend,
   normalizeMovieData,
   normalizeMoviesData,
-  // normalizeMovieComments,
   normalizeMovieCommentsData,
   getGenresList,
 } from "../../utils/utils.js";
@@ -46,13 +45,17 @@ const initialState = {
 
   currentMovieComments: [],
   isCurrentMovieLoaded: false,
+
+  favoriteMoviesList: [],
+  isFavoriteMoviesListLoaded: false,
 };
 
 const ActionType = {
   LOAD_PROMO_MOVIE_CARD: `LOAD_PROMO_MOVIE_CARD`,
   LOAD_MOVIES_LIST: `LOAD_MOVIES_LIST`,
-
   LOAD_CURRENT_MOVIE_COMMENTS: `LOAD_CURRENT_MOVIE_COMMENTS`,
+
+  LOAD_FAVORITE_MOVIES_LIST: `LOAD_FAVORITE_MOVIES_LIST`,
 
   CHANGE_GENRE: `CHANGE_GENRE`,
   CHANGE_CURRENT_MOVIE: `CHANGE_CURRENT_MOVIE`,
@@ -69,10 +72,13 @@ const ActionCreator = {
     type: ActionType.LOAD_MOVIES_LIST,
     payload: list,
   }),
-
   loadCurrentMovieComments: (comments) => ({
     type: ActionType.LOAD_CURRENT_MOVIE_COMMENTS,
     payload: comments,
+  }),
+  loadFavoriteMoviesList: (list) => ({
+    type: ActionType.LOAD_FAVORITE_MOVIES_LIST,
+    payload: list,
   }),
 
   changeGenre: (genre) => ({
@@ -102,6 +108,12 @@ const Operation = {
     return api.get(`/films`)
      .then((response) => {
        dispatch(ActionCreator.loadMoviesList(normalizeMoviesData(response.data)));
+     });
+  },
+  loadFavoriteMoviesList: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+     .then((response) => {
+       dispatch(ActionCreator.loadFavoriteMoviesList(normalizeMoviesData(response.data)));
      });
   },
 
@@ -139,6 +151,11 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentMovieComments: action.payload,
         isCurrentMovieCommentsLoaded: true,
+      });
+    case ActionType.LOAD_FAVORITE_MOVIES_LIST:
+      return extend(state, {
+        favoriteMoviesList: action.payload,
+        isMoviesListLoaded: true,
       });
 
     case ActionType.CHANGE_GENRE:

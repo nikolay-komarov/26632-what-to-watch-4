@@ -11,6 +11,10 @@ export const getMoviesList = (state) => {
   return state[NameSpace.DATA].moviesList;
 };
 
+export const getFavoriteMoviesList = (state) => {
+  return state[NameSpace.DATA].favoriteMoviesList;
+};
+
 export const getGenresList = (state) => {
   return state[NameSpace.DATA].genresList;
 };
@@ -53,4 +57,8 @@ export const getIsPromoMovieLoaded = (state) => {
 
 export const getIsCurrentMovieCommentsLoaded = (state) => {
   return state[NameSpace.DATA].isCurrentMovieCommentsLoaded;
+};
+
+export const getIsFavoriteMoviesListLoaded = (state) => {
+  return state[NameSpace.DATA].isFavoriteMoviesListLoaded;
 };
