@@ -57,6 +57,7 @@ class MoviePage extends PureComponent {
       movieDetails,
       movieComments,
       moviesList,
+      onSendIsFavoriteMovie,
     } = this.props;
     const {
       name,
@@ -133,8 +134,9 @@ class MoviePage extends PureComponent {
                     <span>Play</span>
                   </Link>
 
-                  {/* ToDo - реализовать добавление в MyList */}
-                  <button className="btn btn--list movie-card__button" type="button">
+                  <button className="btn btn--list movie-card__button" type="button"
+                    onClick = {() => onSendIsFavoriteMovie(movieDetails.id, !isFavorite)}
+                  >
                     {
                       (isFavorite)
                         ?
@@ -247,6 +249,7 @@ MoviePage.propTypes = {
   })).isRequired,
   movieId: PropTypes.number.isRequired,
   loadCurrentMovieComments: PropTypes.func.isRequired,
+  onSendIsFavoriteMovie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -260,6 +263,10 @@ const mapDispatchToProps = (dispatch) => ({
   loadCurrentMovieComments(movieId) {
     dispatch(DataOperation.loadCurrentMovieComments(movieId));
   },
+  onSendIsFavoriteMovie(movieId, isFavorite) {
+    dispatch(DataOperation.sendIsFavoriteMovie(movieId, isFavorite));
+    dispatch(DataOperation.loadMoviesList());
+  }
 });
 
 export {MoviePage};

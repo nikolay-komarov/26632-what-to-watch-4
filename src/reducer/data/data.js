@@ -133,6 +133,13 @@ const Operation = {
         throw err;
       });
   },
+
+  sendIsFavoriteMovie: (movieId, isFavorite) => (dispatch, getState, api) => {
+    const status = isFavorite ? 1 : 0;
+
+    return api.post(`/favorite/${movieId}/${status}`)
+      .then(() => {});
+  }
 };
 
 const reducer = (state = initialState, action) => {
