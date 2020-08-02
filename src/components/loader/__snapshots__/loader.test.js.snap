@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader tests Loader render correctly 1`] = `
+<section>
+  <div
+    className="movie-card__bg"
+  >
+    <img
+      src="https://via.placeholder.com/1300x555"
+    />
+  </div>
+  <header
+    className="page-header"
+  >
+    <div
+      className="logo"
+    >
+      <a
+        className="logo__link"
+      >
+        <span
+          className="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          className="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          className="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <div
+      className="page-title"
+      style={
+        Object {
+          "marginLeft": "50px",
+        }
+      }
+    >
+      Loading...
+    </div>
+  </header>
+</section>
+`;

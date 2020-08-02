@@ -43,9 +43,25 @@ export const AuthorizationStatus = {
 };
 
 export const AppRoute = {
-  MAIN: `/`,
-  SIGN_IN: `/sign-in`,
+  ROOT: `/`,
+  LOGIN: `/login`,
   MY_LIST: `/mylist`,
-  FILM: `/films/:id`,
-  ADD_REVIEW: `/films/:id/review`,
+  FILM: `/films`, // -> /fillms/:id
+  ADD_REVIEW: `/review`, // -> /films/:id/review
+  PLAYER: `/player`, // -> /films/:id/player
+};
+
+export const MonthToString = {
+  0: `January`,
+  1: `February`,
+  2: `March`,
+  3: `April`,
+  4: `May`,
+  5: `June`,
+  6: `July`,
+  7: `August`,
+  8: `September`,
+  9: `October`,
+  10: `November`,
+  11: `December`,
 };

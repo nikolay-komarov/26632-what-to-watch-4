@@ -2,6 +2,7 @@ import {
   MovieScore,
   MovieLevel,
   GENRE_ALL,
+  MonthToString,
 } from "./const.js";
 
 export const getMovieRatingLevel = (movieScore) => {
@@ -31,6 +32,12 @@ export const getTimeFromMins = (mins) => {
   return (
     hours + `h ` + minutes + `m`
   );
+};
+
+export const getDateToReview = (date) => {
+  const dateToReview = new Date(date);
+
+  return (`${MonthToString[dateToReview.getMonth()]} ${dateToReview.getDate()}, ${dateToReview.getFullYear()}`);
 };
 
 export const getFourSimilarMovies = (movie, movies) => {
@@ -106,4 +113,14 @@ export const normalizeMovieCommentData = (comment) =>
     }
     : {};
 
-export const normalizeMovieCommentsData = (movies) => movies.map(normalizeMovieCommentData);
+export const normalizeMovieCommentsData = (comments) => comments.map(normalizeMovieCommentData);
+
+export const getMovieById = (movieId, movies) => {
+  // const movieIdNumber = parseInt(movieId, 10);
+
+  console.log(`get movie + ` + movies
+  .find((movie) => movie.id === movieId));
+
+  return movies
+    .find((movie) => movie.id === movieId);
+};

@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router, Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {ActionCreator as StateActionCreator} from "../../reducer/state/state.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import Loader from "../loader/loader.jsx";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import AddReview from "../add-review/add-review.jsx";
@@ -17,7 +18,10 @@ import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx"
 import {
   VideoPlayerMode,
   AppPage,
+  AppRoute,
 } from "../../utils/const.js";
+import {getMovieById} from "../../utils/utils.js";
+import history from "../../history.js";
 
 import {
   getCurrentAppPage,
@@ -31,11 +35,14 @@ import {
   getCurrentMovie,
   getCurrentMovieComments,
   getMoviesByGenre,
+  getIsMoviesListLoaded,
+  getIsPromoMovieLoaded
 } from "../../reducer/data/selectors.js";
 import {
   getAuthorizationError,
   getAuthorizationStatus
 } from "../../reducer/user/selector.js";
+
 
 const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
 
@@ -43,114 +50,124 @@ const App = (props) => {
   const {
     authorizationStatus,
     authorizationError,
-    currentAppPage,
     promoMovieCard,
     currentGenre,
     moviesList,
     moviesByGenreList,
     genresList,
     showedItemsInMoviesList,
-    currentMovie,
-    currentMovieComments,
     onSmallMovieCardClick,
     onGenreItemClick,
     onShowMoreButtonClick,
     onPlayButtonClick,
-    onBigPlayerExitButtonClick,
     onSignInClick,
     login,
     onReviewSend,
+    isMoviesListLoaded,
+    IsPromoMovieLoaded,
   } = props;
 
-  const renderApp = () => {
-    let appPageElement;
-    switch (currentAppPage) {
-      case AppPage.MAIN_PAGE:
-        appPageElement = (
-          <Main
-            authorizationStatus = {authorizationStatus}
-            onSignInClick = {onSignInClick}
-            movieCard = {promoMovieCard}
-            genresList = {genresList}
-            currentGenre = {currentGenre}
-            moviesByGenreList = {moviesByGenreList}
-            showedItemsInMoviesList = {showedItemsInMoviesList}
-            onSmallMovieCardClick = {onSmallMovieCardClick}
-            onGenreItemClick = {onGenreItemClick}
-            onShowMoreButtonClick = {onShowMoreButtonClick}
-            onPlayButtonClick = {onPlayButtonClick}
-          />
-        );
-        break;
-      case AppPage.MOVIE_PAGE:
-        appPageElement = (
-          <MoviePage
-            authorizationStatus = {authorizationStatus}
-            movieDetails = {currentMovie}
-            movieComments = {currentMovieComments}
-            moviesList = {moviesList} // ToDo - передать только 4 похожих?
-            onSmallMovieCardClick = {onSmallMovieCardClick}
-            onPlayButtonClick = {onPlayButtonClick}
-          />
-        );
-        break;
-      case AppPage.BIG_MOVIE_PLAYER:
-        appPageElement = (
-          <BigVideoPlayerWrapped
-            movieCard = {currentMovie ? currentMovie : promoMovieCard}
-            isPlaying = {false}
-            onExitButtonClick = {onBigPlayerExitButtonClick}
-          />
-        );
-        break;
-      case AppPage.SIGN_IN:
-        appPageElement = (
-          <SignIn
-            authorizationError = {authorizationError}
-            onSubmit = {login}
-          />
-        );
-    }
-
-    return appPageElement;
-  };
-
   return (
-    <BrowserRouter>
+    <Router
+      history = {history}
+    >
       <Switch>
-        <Route exact path="/">
-          {renderApp()}
+        <Route
+          exact path={AppRoute.ROOT}
+          render = {() => {
+            return (
+              (isMoviesListLoaded && IsPromoMovieLoaded)
+                ?
+                <Main
+                  authorizationStatus = {authorizationStatus}
+                  onSignInClick = {onSignInClick}
+                  movieCard = {promoMovieCard}
+                  genresList = {genresList}
+                  currentGenre = {currentGenre}
+                  moviesByGenreList = {moviesByGenreList}
+                  showedItemsInMoviesList = {showedItemsInMoviesList}
+                  onSmallMovieCardClick = {onSmallMovieCardClick}
+                  onGenreItemClick = {onGenreItemClick}
+                  onShowMoreButtonClick = {onShowMoreButtonClick}
+                  onPlayButtonClick = {onPlayButtonClick}
+                />
+                : <Loader />
+            );
+          }}>
         </Route>
-        <Route exact path="/dev-film">
-          <MoviePage
-            authorizationStatus = {authorizationStatus}
-            movieDetails = {currentMovie}
-            movieComments = {currentMovieComments}
-            moviesList = {moviesList} // ToDo - передать только 4 похожих?
-            onSmallMovieCardClick = {onSmallMovieCardClick}
-          />
-        </Route>
-        <Route exact path="/dev-big-player">
-          <BigVideoPlayerWrapped
-            movieCard = {moviesList[0]}
-            isPlaying = {false}
-            onExitButtonClick = {onBigPlayerExitButtonClick}
-          />
-        </Route>
-        <Route exact path="/dev-sign-in">
+
+        <Route exact path={AppRoute.LOGIN}>
           <SignIn
             authorizationError = {authorizationError}
             onSubmit = {login}
           />
         </Route>
-        <Route exact path="/dev-add-review">
-          <AddReview
-            movie = {promoMovieCard}
-            onReviewSend = {onReviewSend}
-          />
+
+        <Route
+          exact path={`${AppRoute.FILM}/:id`}
+          render = {(routeProps) => {
+            const movieIdNumber = parseInt(routeProps.match.params.id, 10);
+
+            // ToDo - добавить обработку выхода параметра за границы массива фильмов
+            return (
+              (isMoviesListLoaded)
+                ?
+                <MoviePage
+                  movieId = {movieIdNumber}
+                />
+                : <Loader />
+            );
+          }}>
         </Route>
+
+        <Route
+          exact
+          path={`${AppRoute.FILM}/:id${AppRoute.PLAYER}`}
+          render = {(routeProps) => {
+            return (
+              (isMoviesListLoaded)
+                ?
+                <BigVideoPlayerWrapped
+                  movieCard = {getMovieById(parseInt(routeProps.match.params.id, 10), moviesList)}
+                  isPlaying = {false}
+                />
+                :
+                <Loader />
+            );
+          }}>
+        </Route>
+
+        <Route
+          exact
+          path={AppRoute.ADD_REVIEW}
+          render = {() => {
+            return (
+              (isMoviesListLoaded)
+                ?
+                <AddReview
+                  movie = {promoMovieCard}
+                  onReviewSend = {onReviewSend}
+                />
+                :
+                <Loader />
+            );
+          }}>
+        </Route>
+
+        <Route
+          render = {() => (
+            <>
+              <h1>
+                404.
+                <br />
+                <small>Page not found</small>
+              </h1>
+              <Link to={AppRoute.ROOT}>Go to main page</Link>
+            </>
+          )}
+        />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
@@ -172,7 +189,7 @@ App.propTypes = {
     runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
-  }).isRequired,
+  }),
   genresList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
   moviesList: PropTypes.arrayOf(PropTypes.shape({
@@ -189,6 +206,7 @@ App.propTypes = {
   })).isRequired,
   showedItemsInMoviesList: PropTypes.number.isRequired,
   currentMovie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
@@ -214,10 +232,11 @@ App.propTypes = {
   onGenreItemClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
-  onBigPlayerExitButtonClick: PropTypes.func.isRequired,
   onSignInClick: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   onReviewSend: PropTypes.func.isRequired,
+  isMoviesListLoaded: PropTypes.bool.isRequired,
+  IsPromoMovieLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -232,6 +251,8 @@ const mapStateToProps = (state) => ({
   showedItemsInMoviesList: getShowedItemsInMoviesList(state),
   currentMovie: getCurrentMovie(state),
   currentMovieComments: getCurrentMovieComments(state),
+  isMoviesListLoaded: getIsMoviesListLoaded(state),
+  IsPromoMovieLoaded: getIsPromoMovieLoaded(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -240,7 +261,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSmallMovieCardClick(movie) {
     dispatch(DataActionCreator.changeCurrentMovie(movie));
-    dispatch(StateActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
   },
   onGenreItemClick(genre) {
     dispatch(DataActionCreator.changeGenre(genre));
@@ -252,9 +272,6 @@ const mapDispatchToProps = (dispatch) => ({
   onPlayButtonClick(movie) {
     dispatch(DataActionCreator.changeCurrentMovie(movie));
     dispatch(StateActionCreator.changeAppPage(AppPage.BIG_MOVIE_PLAYER));
-  },
-  onBigPlayerExitButtonClick() {
-    dispatch(StateActionCreator.changeAppPage(AppPage.MOVIE_PAGE));
   },
   onSignInClick() {
     dispatch(StateActionCreator.changeAppPage(AppPage.SIGN_IN));

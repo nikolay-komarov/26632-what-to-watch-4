@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../utils/const";
 
 const BigVideoPlayer = (props) => {
   const {
@@ -9,7 +11,6 @@ const BigVideoPlayer = (props) => {
     onFullScreenButtonClick,
     getPlaybackProgress,
     getTimeLeft,
-    onExitButtonClick,
     children,
   } = props;
 
@@ -17,13 +18,13 @@ const BigVideoPlayer = (props) => {
     <div className="player">
       {children}
 
-      <button
+      <Link
         type="button"
         className="player__exit"
-        onClick={onExitButtonClick}
+        to={`${AppRoute.FILM}/${movieCard.id}`}
       >
         Exit
-      </button>
+      </Link>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -85,6 +86,7 @@ const BigVideoPlayer = (props) => {
 
 BigVideoPlayer.propTypes = {
   movieCard: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
   }).isRequired,
@@ -93,7 +95,6 @@ BigVideoPlayer.propTypes = {
   onFullScreenButtonClick: PropTypes.func.isRequired,
   getPlaybackProgress: PropTypes.func.isRequired,
   getTimeLeft: PropTypes.func.isRequired,
-  onExitButtonClick: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 import GenresList from "../genres-list/genres-list.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
@@ -9,7 +10,10 @@ import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 import {
   getShowedMovies
 } from "../../utils/utils.js";
-import {AuthorizationStatus} from "../../utils/const.js";
+import {
+  AuthorizationStatus,
+  AppRoute
+} from "../../utils/const.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
@@ -21,11 +25,8 @@ const Main = (props) => {
     currentGenre,
     moviesByGenreList,
     showedItemsInMoviesList,
-    onSmallMovieCardClick,
     onGenreItemClick,
     onShowMoreButtonClick,
-    onPlayButtonClick,
-    onSignInClick,
   } = props;
 
   return (
@@ -49,11 +50,12 @@ const Main = (props) => {
           <div className="user-block">
             {
               authorizationStatus === AuthorizationStatus.NO_AUTH && (
-                <a
-                  onClick = {onSignInClick}
+                <Link
+                  className="user-block__link"
+                  to={AppRoute.LOGIN}
                 >
                   Sign In
-                </a>
+                </Link>
               )
             }
             {
@@ -80,16 +82,16 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button
+                <Link
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick = {() => onPlayButtonClick(movieCard)}
+                  to={`${AppRoute.FILM}/${movieCard.id}${AppRoute.PLAYER}`}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
@@ -114,7 +116,6 @@ const Main = (props) => {
 
           <MoviesListWrapped
             moviesList = {getShowedMovies(moviesByGenreList, showedItemsInMoviesList)}
-            onSmallMovieCardClick = {onSmallMovieCardClick}
           />
 
           <ShowMoreButton
@@ -145,6 +146,7 @@ const Main = (props) => {
 Main.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   movieCard: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
@@ -166,11 +168,8 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
   })).isRequired,
   showedItemsInMoviesList: PropTypes.number.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  onSignInClick: PropTypes.func.isRequired,
 };
 
 export default Main;

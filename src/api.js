@@ -1,5 +1,8 @@
 import axios from "axios";
 
+import {AppRoute} from "./utils/const";
+import history from "./history.js";
+
 const TIMEOUT = 5000;
 const Error = {
   UNAUTHORIZED: 401
@@ -9,8 +12,8 @@ export const createAPI = (onUnauthorized) => {
   const api = axios.create({
     baseURL: `https://4.react.pages.academy/wtw`,
     timeout: TIMEOUT,
-    withCredentials: true,
-    // withCredentials: false, // временно для отладки
+    // withCredentials: true,
+    withCredentials: false, // временно для отладки
   });
 
   const onSuccess = (response) => {
@@ -22,6 +25,7 @@ export const createAPI = (onUnauthorized) => {
 
     if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
+      history.push(AppRoute.SIGN_IN);
 
       // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
       // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.

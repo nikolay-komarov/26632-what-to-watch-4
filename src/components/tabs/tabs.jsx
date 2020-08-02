@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 
 import {
   getMovieRatingLevel,
-  getTimeFromMins
+  getTimeFromMins,
+  getDateToReview,
 } from "../../utils/utils.js";
 import {TabName} from "../../utils/const.js";
 
@@ -131,8 +132,8 @@ const Tabs = (props) => {
                       <blockquote className="review__quote">
                         <p className="review__text">{review.comment}</p>
                         <footer className="review__details">
-                          <cite className="review__author">{review.useName}</cite>
-                          <time className="review__date" dateTime={review.date}>{review.date}</time>
+                          <cite className="review__author">{review.userName}</cite>
+                          <time className="review__date" dateTime={review.date}>{getDateToReview(review.date)}</time>
                         </footer>
                       </blockquote>
                       <div className="review__rating">{review.rating}</div>
