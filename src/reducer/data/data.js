@@ -28,6 +28,7 @@ const initialMovie = {
   runTime: 0,
   genre: ``,
   released: 0,
+  isFavorite: false,
 };
 
 const initialState = {

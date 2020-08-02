@@ -95,7 +95,7 @@ export const normalizeMovieData = (movie) =>
       runTime: movie.run_time,
       genre: movie.genre,
       released: movie.released,
-      // : movie.is_favorite,
+      isFavorite: movie.is_favorite,
     }
     : {};
 
