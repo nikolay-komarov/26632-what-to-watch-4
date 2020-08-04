@@ -65,6 +65,7 @@ const App = (props) => {
     onReviewSend,
     isMoviesListLoaded,
     IsPromoMovieLoaded,
+    onSendIsFavoriteMovie,
   } = props;
 
   return (
@@ -90,6 +91,7 @@ const App = (props) => {
                   onGenreItemClick = {onGenreItemClick}
                   onShowMoreButtonClick = {onShowMoreButtonClick}
                   onPlayButtonClick = {onPlayButtonClick}
+                  onSendIsFavoriteMovie = {onSendIsFavoriteMovie}
                 />
                 : <Loader />
             );
@@ -248,6 +250,7 @@ App.propTypes = {
   onReviewSend: PropTypes.func.isRequired,
   isMoviesListLoaded: PropTypes.bool.isRequired,
   IsPromoMovieLoaded: PropTypes.bool.isRequired,
+  onSendIsFavoriteMovie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -289,6 +292,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onReviewSend(review, id, handleResponse) {
     dispatch(DataOperation.sendComment(review, id, handleResponse));
+  },
+
+  onSendIsFavoriteMovie(movieId, isFavorite) {
+    dispatch(DataOperation.sendIsFavoriteMovie(movieId, isFavorite));
+    dispatch(DataOperation.loadMoviesList());
+    dispatch(DataOperation.loadPromoMovieCard());
   }
 });
 

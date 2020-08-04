@@ -14,6 +14,7 @@ import {
   AuthorizationStatus,
   AppRoute
 } from "../../utils/const.js";
+import history from "../../history.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
@@ -27,7 +28,10 @@ const Main = (props) => {
     showedItemsInMoviesList,
     onGenreItemClick,
     onShowMoreButtonClick,
+    onSendIsFavoriteMovie,
   } = props;
+
+  const isUserLogin = authorizationStatus === AuthorizationStatus.AUTH;
 
   return (
     <>
@@ -49,7 +53,7 @@ const Main = (props) => {
 
           <div className="user-block">
             {
-              authorizationStatus === AuthorizationStatus.NO_AUTH && (
+              !isUserLogin && (
                 <Link
                   className="user-block__link"
                   to={AppRoute.LOGIN}
@@ -59,10 +63,10 @@ const Main = (props) => {
               )
             }
             {
-              authorizationStatus === AuthorizationStatus.AUTH && (
+              isUserLogin && (
                 <div className="user-block__avatar">
                   <Link to={AppRoute.MY_LIST}>
-                    <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                    <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
                   </Link>
                 </div>
               )
@@ -94,10 +98,25 @@ const Main = (props) => {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+
+                <button className="btn btn--list movie-card__button" type="button"
+                  onClick = {() => isUserLogin ? onSendIsFavoriteMovie(movieCard.id, !movieCard.isFavorite) : history.push(`${AppRoute.LOGIN}`)}
+                >
+                  {
+                    (movieCard.isFavorite)
+                      ?
+                      <>
+                        <svg viewBox="0 0 18 14" width="18" height="14">
+                          <use xlinkHref="#in-list"></use>
+                        </svg>
+                      </>
+                      :
+                      <>
+                        <svg viewBox="0 0 19 20" width="19" height="20">
+                          <use xlinkHref="#add"></use>
+                        </svg>
+                      </>
+                  }
                   <span>My list</span>
                 </button>
               </div>
@@ -161,6 +180,7 @@ Main.propTypes = {
     runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
   genresList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentGenre: PropTypes.string.isRequired,
@@ -172,6 +192,7 @@ Main.propTypes = {
   showedItemsInMoviesList: PropTypes.number.isRequired,
   onGenreItemClick: PropTypes.func.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
+  onSendIsFavoriteMovie: PropTypes.func.isRequired,
 };
 
 export default Main;

@@ -23,6 +23,7 @@ import {
   AppRoute,
 } from "../../utils/const.js";
 import {getFourSimilarMovies} from "../../utils/utils.js";
+import history from "../../history.js";
 
 const TabsWrapped = withActiveItem(Tabs, TabName.OVERVIEW);
 const MoviesListWrapped = withActiveItem(MoviesList, null);
@@ -69,6 +70,7 @@ class MoviePage extends PureComponent {
     } = movieDetails;
 
     const fourSimilarMovies = getFourSimilarMovies(movieDetails, moviesList);
+    const isUserLogin = authorizationStatus === AuthorizationStatus.AUTH;
 
     return (
       <>
@@ -94,7 +96,7 @@ class MoviePage extends PureComponent {
 
               <div className="user-block">
                 {
-                  authorizationStatus === AuthorizationStatus.NO_AUTH && (
+                  !isUserLogin && (
                     <Link
                       className="user-block__link"
                       to={AppRoute.LOGIN}
@@ -104,10 +106,10 @@ class MoviePage extends PureComponent {
                   )
                 }
                 {
-                  authorizationStatus === AuthorizationStatus.AUTH && (
+                  isUserLogin && (
                     <div className="user-block__avatar">
                       <Link to={AppRoute.MY_LIST}>
-                        <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                        <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
                       </Link>
                     </div>
                   )
@@ -136,7 +138,7 @@ class MoviePage extends PureComponent {
                   </Link>
 
                   <button className="btn btn--list movie-card__button" type="button"
-                    onClick = {() => onSendIsFavoriteMovie(movieDetails.id, !isFavorite)}
+                    onClick = {() => isUserLogin ? onSendIsFavoriteMovie(movieDetails.id, !isFavorite) : history.push(`${AppRoute.LOGIN}`)}
                   >
                     {
                       (isFavorite)
@@ -157,7 +159,7 @@ class MoviePage extends PureComponent {
                   </button>
 
                   {
-                    authorizationStatus === AuthorizationStatus.AUTH && (
+                    isUserLogin && (
                       <Link
                         to={`${AppRoute.FILM}/${movieDetails.id}${AppRoute.ADD_REVIEW}`}
                         className="btn movie-card__button"
