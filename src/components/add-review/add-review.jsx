@@ -217,7 +217,7 @@ class AddReview extends PureComponent {
 }
 
 AddReview.propTypes = {
-  authorizationStatus: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

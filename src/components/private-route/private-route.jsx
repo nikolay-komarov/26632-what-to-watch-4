@@ -6,7 +6,6 @@ import {AppRoute} from "../../utils/const.js";
 import {AuthorizationStatus} from "../../utils/const.js";
 import {getAuthorizationStatus} from "../../reducer/user/selector.js";
 
-
 const PrivateRoute = (props) => {
   const {
     render,
@@ -19,11 +18,11 @@ const PrivateRoute = (props) => {
     <Route
       path={path}
       exact={exact}
-      render={() => {
+      render={(routeProps) => {
         return (
           authorizationStatus === AuthorizationStatus.AUTH
-            ? render()
-            : <Redirect to={AppRoute.SIGN_IN} />
+            ? render(routeProps)
+            : <Redirect to={AppRoute.LOGIN} />
         );
       }}
     />

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, Router, Link} from "react-router-dom";
+import {Switch, Route, Router, Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data.js";
@@ -14,12 +14,14 @@ import AddReview from "../add-review/add-review.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import BigVideoPlayer from "../big-video-player/big-video-player.jsx";
 import MyList from "../my-list/my-list.jsx";
+import PrivateRoute from "../private-route/private-route.jsx";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
 
 import {
   VideoPlayerMode,
   AppPage,
   AppRoute,
+  AuthorizationStatus,
 } from "../../utils/const.js";
 import {getMovieById} from "../../utils/utils.js";
 import history from "../../history.js";
@@ -98,15 +100,25 @@ const App = (props) => {
           }}>
         </Route>
 
-        <Route exact path={AppRoute.LOGIN}>
-          <SignIn
-            authorizationError = {authorizationError}
-            onSubmit = {login}
-          />
+        <Route
+          exact path={AppRoute.LOGIN}
+          render = {() => {
+            return (
+              (authorizationStatus === AuthorizationStatus.NO_AUTH)
+                ?
+                <SignIn
+                  authorizationError = {authorizationError}
+                  onSubmit = {login}
+                />
+                :
+                <Redirect to={AppRoute.ROOT} />
+            );
+          }}>
+
         </Route>
 
         <Route
-          exact path={`${AppRoute.FILM}/:id`}
+          exact path={`${AppRoute.FILM}/:id`} // -> /fillms/:id
           render = {(routeProps) => {
             const movieIdNumber = parseInt(routeProps.match.params.id, 10);
 
@@ -124,7 +136,7 @@ const App = (props) => {
 
         <Route
           exact
-          path={`${AppRoute.FILM}/:id${AppRoute.PLAYER}`}
+          path={`${AppRoute.FILM}/:id${AppRoute.PLAYER}`} // -> /films/:id/player
           render = {(routeProps) => {
             return (
               (isMoviesListLoaded)
@@ -139,7 +151,7 @@ const App = (props) => {
           }}>
         </Route>
 
-        <Route
+        <PrivateRoute
           exact
           path={`${AppRoute.FILM}/:id${AppRoute.ADD_REVIEW}`} // ADD_REVIEW: `/review`, -> /films/:id/review
           render = {(routeProps) => {
@@ -155,9 +167,9 @@ const App = (props) => {
                 <Loader />
             );
           }}>
-        </Route>
+        </PrivateRoute>
 
-        <Route
+        <PrivateRoute
           exact
           path={AppRoute.MY_LIST}
           render = {() => {
@@ -165,7 +177,7 @@ const App = (props) => {
               <MyList />
             );
           }}>
-        </Route>
+        </PrivateRoute>
 
         <Route
           render = {() => (

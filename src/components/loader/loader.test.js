@@ -1,5 +1,5 @@
 import React from "react";
-import renderer, { create } from "react-test-renderer";
+import renderer from "react-test-renderer";
 
 import Loader from "./loader.jsx";
 
