@@ -1,5 +1,11 @@
 import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+
+import {
+  AppRoute,
+  AuthorizationStatus,
+} from "../../utils/const.js";
 
 const ReviewTextLengths = {
   MIN_LENGTH: 5,
@@ -90,13 +96,17 @@ class AddReview extends PureComponent {
 
   render() {
     const {
+      authorizationStatus,
       movie,
     } = this.props;
     const {
+      id,
       name,
       backgroundImage,
       posterImage,
     } = movie;
+
+    const isUserLogin = authorizationStatus === AuthorizationStatus.AUTH;
 
     return (
       <section className="movie-card movie-card--full">
@@ -109,21 +119,24 @@ class AddReview extends PureComponent {
 
           <header className="page-header">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link
+                className="logo__link"
+                to={AppRoute.ROOT}
+              >
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link"
-                    onClick = {() => {}} // ToDo - добавить переход на MoviePage
+                  <Link className="breadcrumbs__link"
+                    to={`${AppRoute.FILM}/${id}`}
                   >
                     {name}
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -133,9 +146,25 @@ class AddReview extends PureComponent {
 
             {/* ToDo - передать информацию о пользователе */}
             <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
+              {
+                !isUserLogin && (
+                  <Link
+                    className="user-block__link"
+                    to={AppRoute.LOGIN}
+                  >
+                    Sign In
+                  </Link>
+                )
+              }
+              {
+                isUserLogin && (
+                  <div className="user-block__avatar">
+                    <Link to={AppRoute.MY_LIST}>
+                      <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                    </Link>
+                  </div>
+                )
+              }
             </div>
           </header>
 
@@ -188,6 +217,7 @@ class AddReview extends PureComponent {
 }
 
 AddReview.propTypes = {
+  authorizationStatus: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

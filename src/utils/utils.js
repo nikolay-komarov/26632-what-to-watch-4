@@ -116,11 +116,6 @@ export const normalizeMovieCommentData = (comment) =>
 export const normalizeMovieCommentsData = (comments) => comments.map(normalizeMovieCommentData);
 
 export const getMovieById = (movieId, movies) => {
-  // const movieIdNumber = parseInt(movieId, 10);
-
-  console.log(`get movie + ` + movies
-  .find((movie) => movie.id === movieId));
-
   return movies
     .find((movie) => movie.id === movieId);
 };

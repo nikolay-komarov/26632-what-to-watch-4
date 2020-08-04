@@ -141,13 +141,13 @@ const App = (props) => {
 
         <Route
           exact
-          path={`${AppRoute.FILM}/:id${AppRoute.ADD_REVIEW}`}
-          // ADD_REVIEW: `/review`, // -> /films/:id/review
+          path={`${AppRoute.FILM}/:id${AppRoute.ADD_REVIEW}`} // ADD_REVIEW: `/review`, -> /films/:id/review
           render = {(routeProps) => {
             return (
               (isMoviesListLoaded)
                 ?
                 <AddReview
+                  authorizationStatus = {authorizationStatus}
                   movie = {getMovieById(parseInt(routeProps.match.params.id, 10), moviesList)}
                   onReviewSend = {onReviewSend}
                 />
