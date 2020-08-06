@@ -6,6 +6,7 @@ import {
   AppRoute,
   AuthorizationStatus,
 } from "../../utils/const.js";
+import history from "../../history.js";
 
 const ReviewTextLengths = {
   MIN_LENGTH: 5,
@@ -15,6 +16,8 @@ const ReviewTextLengths = {
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.movie = this.props.movie;
 
     this.ratingStarsRef = createRef();
     this.reviewTextRef = createRef();
@@ -29,7 +32,7 @@ class AddReview extends PureComponent {
     this.handleResponse = {
       onSuccess: () => {
         this.errorSendCommentMessage.current.classList.add(`visually-hidden`);
-        this.enableForm();
+        history.push(`${AppRoute.FILM}/${this.movie.id}`);
       },
       onError: () => {
         this.errorSendCommentMessage.current.classList.remove(`visually-hidden`);

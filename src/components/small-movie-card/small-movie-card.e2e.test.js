@@ -1,7 +1,11 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import {Router} from "react-router-dom";
+import Enzyme, {shallow, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import SmallMovieCard from "./small-movie-card.jsx";
+
+import {AppRoute} from "../../utils/const.js";
+import history from "../../history.js";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -9,6 +13,7 @@ Enzyme.configure({
 
 describe(`E2E SmallMovieCard tests`, () => {
   const mock = {
+    id: 1,
     name: `Firefly`,
     previewImage: `previewImage`,
     previewVideoLink: `previewVideoLink`,
@@ -27,7 +32,6 @@ describe(`E2E SmallMovieCard tests`, () => {
           onActiveItemChange = {onActiveItemChange}
           onSmallMovieCardHover = {onSmallMovieCardHover}
           onSmallMovieCardLeave = {onSmallMovieCardLeave}
-          onSmallMovieCardClick = {() => {}}
           isPlaying = {false}
         >
           {children}
@@ -47,27 +51,25 @@ describe(`E2E SmallMovieCard tests`, () => {
     expect(onSmallMovieCardLeave).toHaveBeenCalledTimes(1);
   });
 
-  it(`Should SmallMovieCard be clicked`, () => {
+  it(`Should SmallMovieCard title contains correct link`, () => {
     const movieCard = mock;
-    const onSmallMovieCardClick = jest.fn();
 
-    const smallMovieCardComponent = shallow(
-        <SmallMovieCard
-          movieCard = {movieCard}
-          onActiveItemChange = {() => {}}
-          onSmallMovieCardHover = {() => {}}
-          onSmallMovieCardLeave = {() => {}}
-          onSmallMovieCardClick = {onSmallMovieCardClick}
-          isPlaying = {true}
-        >
-          {children}
-        </SmallMovieCard>
+    const smallMovieCardComponent = mount(
+        <Router history = {history} >
+          <SmallMovieCard
+            movieCard = {movieCard}
+            onActiveItemChange = {() => {}}
+            onSmallMovieCardHover = {() => {}}
+            onSmallMovieCardLeave = {() => {}}
+            isPlaying = {true}
+          >
+            {children}
+          </SmallMovieCard>
+        </Router>
     );
 
-    const smallMovieCardArticle = smallMovieCardComponent.find(`.small-movie-card`);
+    const smallMovieCardTitleLink = smallMovieCardComponent.find(`.small-movie-card__title`).find(`a`).prop(`href`);
 
-    smallMovieCardArticle.simulate(`click`, movieCard);
-    expect(onSmallMovieCardClick).toHaveBeenCalledTimes(1);
-    expect(onSmallMovieCardClick.mock.calls[0][0]).toMatchObject(movieCard);
+    expect(smallMovieCardTitleLink).toEqual(`${AppRoute.FILM}/${movieCard.id}`);
   });
 });

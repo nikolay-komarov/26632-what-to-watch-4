@@ -6,7 +6,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
@@ -23,7 +22,8 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/1"
+        onClick={[Function]}
       >
         Fantastic Beasts: The Crimes of Grindelwald
       </a>
@@ -31,7 +31,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
@@ -48,7 +47,8 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/2"
+        onClick={[Function]}
       >
         Bohemian Rhapsody
       </a>
@@ -56,7 +56,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
@@ -73,7 +72,8 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/3"
+        onClick={[Function]}
       >
         Macbeth
       </a>
@@ -81,7 +81,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
@@ -98,7 +97,8 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/4"
+        onClick={[Function]}
       >
         Aviator
       </a>
@@ -106,7 +106,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
@@ -123,7 +122,8 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/5"
+        onClick={[Function]}
       >
         We need to talk about Kevin
       </a>
@@ -131,7 +131,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
@@ -148,7 +147,8 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/6"
+        onClick={[Function]}
       >
         What We Do in the Shadows
       </a>
@@ -156,7 +156,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
@@ -173,7 +172,8 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/7"
+        onClick={[Function]}
       >
         Revenant
       </a>
@@ -181,7 +181,6 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
@@ -198,7 +197,8 @@ exports[`Render MoviesList Should MoviesList render correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/8"
+        onClick={[Function]}
       >
         Johnny English
       </a>

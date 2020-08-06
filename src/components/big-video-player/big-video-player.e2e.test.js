@@ -9,6 +9,7 @@ Enzyme.configure({
 
 describe(`E2E BigVideoPlayer tests`, () => {
   const mock = {
+    id: 1,
     name: `Firefly`,
     previewImage: `previewImage`,
     previewVideoLink: `previewVideoLink`,
@@ -64,29 +65,5 @@ describe(`E2E BigVideoPlayer tests`, () => {
 
     playerFullScreen.simulate(`click`);
     expect(onFullScreenButtonClick).toHaveBeenCalledTimes(1);
-  });
-
-  it(`Should BigVideoPlayer be clicked to ExitButton`, () => {
-    const movieCard = mock;
-    const onExitButtonClick = jest.fn();
-
-    const bigVideoPlayerComponent = shallow(
-        <BigVideoPlayer
-          movieCard = {movieCard}
-          isPlaying = {false}
-          onPlayButtonClick = {() => {}}
-          onFullScreenButtonClick = {() => {}}
-          getPlaybackProgress = {() => {}}
-          getTimeLeft = {() => {}}
-          onExitButtonClick = {onExitButtonClick}
-        >
-          {children}
-        </BigVideoPlayer>
-    );
-
-    const playerExitButton = bigVideoPlayerComponent.find(`.player__exit`);
-
-    playerExitButton.simulate(`click`);
-    expect(onExitButtonClick).toHaveBeenCalledTimes(1);
   });
 });

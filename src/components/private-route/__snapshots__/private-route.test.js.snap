@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render PrivateRoute PrivateRoute render with AuthorizationStatus.AUTH 1`] = `<div />`;
+
+exports[`Render PrivateRoute PrivateRoute render with AuthorizationStatus.AUTH 2`] = `<div />`;

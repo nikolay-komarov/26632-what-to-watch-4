@@ -1,10 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Router} from "react-router-dom";
 import BigVideoPlayer from "./big-video-player.jsx";
+
+import history from "../../history.js";
 
 describe(`Render BigVideoPlayer`, () => {
   it(`Should BigVideoPlayer render correctly`, () => {
     const movieCard = {
+      id: 1,
       name: `Fantastic Beasts: The Crimes of Grindelwald`,
       previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     };
@@ -12,17 +16,19 @@ describe(`Render BigVideoPlayer`, () => {
 
     const tree = renderer
       .create(
-          <BigVideoPlayer
-            movieCard = {movieCard}
-            isPlaying = {false}
-            onPlayButtonClick = {() => {}}
-            onFullScreenButtonClick = {() => {}}
-            getPlaybackProgress = {() => {}}
-            getTimeLeft = {() => {}}
-            onExitButtonClick = {() => {}}
-          >
-            {children}
-          </BigVideoPlayer>, {
+          <Router history = {history}>
+            <BigVideoPlayer
+              movieCard = {movieCard}
+              isPlaying = {false}
+              onPlayButtonClick = {() => {}}
+              onFullScreenButtonClick = {() => {}}
+              getPlaybackProgress = {() => {}}
+              getTimeLeft = {() => {}}
+              onExitButtonClick = {() => {}}
+            >
+              {children}
+            </BigVideoPlayer>
+          </Router>, {
             createNodeMock: () => {
               return {};
             }

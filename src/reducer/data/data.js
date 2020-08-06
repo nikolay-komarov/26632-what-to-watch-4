@@ -17,8 +17,8 @@ const initialMovie = {
   posterImage: ``,
   previewImage: ``,
   backgroundImage: ``,
-  // : ``,
-  // : ``,
+  backgroundColor: ``,
+  videoLink: ``,
   previewVideoLink: ``,
   description: ``,
   rating: 0,
@@ -34,19 +34,13 @@ const initialMovie = {
 const initialState = {
   promoMovieCard: initialMovie,
   moviesList: [initialMovie],
-  // promoMovieCard: null,
-  // moviesList: [],
   isPromoMovieLoaded: false,
   isMoviesListLoaded: false,
-
   genresList: [GENRE_ALL],
   currentGenre: GENRE_ALL,
   showedItemsInMoviesList: SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
-  currentMovie: null,
-
   currentMovieComments: [],
   isCurrentMovieLoaded: false,
-
   favoriteMoviesList: [],
   isFavoriteMoviesListLoaded: false,
 };
@@ -55,11 +49,8 @@ const ActionType = {
   LOAD_PROMO_MOVIE_CARD: `LOAD_PROMO_MOVIE_CARD`,
   LOAD_MOVIES_LIST: `LOAD_MOVIES_LIST`,
   LOAD_CURRENT_MOVIE_COMMENTS: `LOAD_CURRENT_MOVIE_COMMENTS`,
-
   LOAD_FAVORITE_MOVIES_LIST: `LOAD_FAVORITE_MOVIES_LIST`,
-
   CHANGE_GENRE: `CHANGE_GENRE`,
-  CHANGE_CURRENT_MOVIE: `CHANGE_CURRENT_MOVIE`,
   SHOW_MORE_ITEMS_IN_MOVIES_LIST: `SHOW_MORE_ITEMS_IN_MOVIES_LIST`,
   RESET_SHOWED_ITEMS_IN_MOVIES_LIST: `RESET_SHOWED_ITEMS_IN_MOVIES_LIST`,
 };
@@ -85,10 +76,6 @@ const ActionCreator = {
   changeGenre: (genre) => ({
     type: ActionType.CHANGE_GENRE,
     payload: genre,
-  }),
-  changeCurrentMovie: (movie) => ({
-    type: ActionType.CHANGE_CURRENT_MOVIE,
-    payload: movie,
   }),
   showMoreItemsInMoviesList: () => ({
     type: ActionType.SHOW_MORE_ITEMS_IN_MOVIES_LIST
@@ -169,10 +156,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_GENRE:
       return extend(state, {
         currentGenre: action.payload
-      });
-    case ActionType.CHANGE_CURRENT_MOVIE:
-      return extend(state, {
-        currentMovie: action.payload,
       });
     case ActionType.SHOW_MORE_ITEMS_IN_MOVIES_LIST:
       return extend(state, {
