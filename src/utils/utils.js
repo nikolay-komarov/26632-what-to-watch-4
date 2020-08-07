@@ -2,6 +2,7 @@ import {
   MovieScore,
   MovieLevel,
   GENRE_ALL,
+  MonthToString,
 } from "./const.js";
 
 export const getMovieRatingLevel = (movieScore) => {
@@ -31,6 +32,12 @@ export const getTimeFromMins = (mins) => {
   return (
     hours + `h ` + minutes + `m`
   );
+};
+
+export const getDateToReview = (date) => {
+  const dateToReview = new Date(date);
+
+  return (`${MonthToString[dateToReview.getMonth()]} ${dateToReview.getDate()}, ${dateToReview.getFullYear()}`);
 };
 
 export const getFourSimilarMovies = (movie, movies) => {
@@ -77,8 +84,8 @@ export const normalizeMovieData = (movie) =>
       posterImage: movie.poster_image,
       previewImage: movie.preview_image,
       backgroundImage: movie.background_image,
-      // : movie.background_color,
-      // : movie.video_link,
+      backgroundColor: movie.background_color,
+      videoLink: movie.video_link,
       previewVideoLink: movie.preview_video_link,
       description: movie.description,
       rating: movie.rating,
@@ -88,7 +95,7 @@ export const normalizeMovieData = (movie) =>
       runTime: movie.run_time,
       genre: movie.genre,
       released: movie.released,
-      // : movie.is_favorite,
+      isFavorite: movie.is_favorite,
     }
     : {};
 
@@ -106,4 +113,9 @@ export const normalizeMovieCommentData = (comment) =>
     }
     : {};
 
-export const normalizeMovieCommentsData = (movies) => movies.map(normalizeMovieCommentData);
+export const normalizeMovieCommentsData = (comments) => comments.map(normalizeMovieCommentData);
+
+export const getMovieById = (movieId, movies) => {
+  return movies
+    .find((movie) => movie.id === movieId);
+};

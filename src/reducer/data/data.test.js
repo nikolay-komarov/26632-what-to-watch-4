@@ -13,7 +13,7 @@ import {
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
 } from "../../utils/const.js";
 
-const film = {
+const movie = {
   name: `The Grand Budapest Hotel`,
   posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
   previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
@@ -70,7 +70,7 @@ const comments = [
     date: `2016-12-24`,
   },
 ];
-const films = [
+const movies = [
   {
     name: `Fantastic Beasts: The Crimes of Grindelwald`,
     posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
@@ -223,13 +223,13 @@ const films = [
   },
 ];
 const initialMovie = {
-  id: 0,
+  id: -1,
   name: ``,
   posterImage: ``,
   previewImage: ``,
   backgroundImage: ``,
-  // : ``,
-  // : ``,
+  backgroundColor: ``,
+  videoLink: ``,
   previewVideoLink: ``,
   description: ``,
   rating: 0,
@@ -239,6 +239,7 @@ const initialMovie = {
   runTime: 0,
   genre: ``,
   released: 0,
+  isFavorite: false,
 };
 
 describe(`Data Reducer tests`, () => {
@@ -246,12 +247,15 @@ describe(`Data Reducer tests`, () => {
     expect(reducer(void 0, {})).toEqual({
       promoMovieCard: initialMovie,
       moviesList: [initialMovie],
-
+      isPromoMovieLoaded: false,
+      isMoviesListLoaded: false,
       genresList: [GENRE_ALL],
       currentGenre: GENRE_ALL,
       showedItemsInMoviesList: SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
-      currentMovie: null,
-      currentMovieComments: null,
+      currentMovieComments: [],
+      isCurrentMovieLoaded: false,
+      favoriteMoviesList: [],
+      isFavoriteMoviesListLoaded: false,
     });
   });
 
@@ -260,9 +264,10 @@ describe(`Data Reducer tests`, () => {
       promoMovieCard: null,
     }, {
       type: ActionType.LOAD_PROMO_MOVIE_CARD,
-      payload: film,
+      payload: movie,
     })).toEqual({
-      promoMovieCard: film,
+      promoMovieCard: movie,
+      isPromoMovieLoaded: true,
     });
   });
 
@@ -271,10 +276,23 @@ describe(`Data Reducer tests`, () => {
       moviesList: null,
     }, {
       type: ActionType.LOAD_MOVIES_LIST,
-      payload: films,
+      payload: movies,
     })).toEqual({
-      moviesList: films,
-      genresList: getGenresList(films),
+      moviesList: movies,
+      genresList: getGenresList(movies),
+      isMoviesListLoaded: true,
+    });
+  });
+
+  it(`Reducer should load current movie comments`, () => {
+    expect(reducer({
+      currentMovieComments: [],
+    }, {
+      type: ActionType.LOAD_CURRENT_MOVIE_COMMENTS,
+      payload: comments,
+    })).toEqual({
+      currentMovieComments: comments,
+      isCurrentMovieCommentsLoaded: true,
     });
   });
 
@@ -286,19 +304,6 @@ describe(`Data Reducer tests`, () => {
       payload: `Drama`,
     })).toEqual({
       currentGenre: `Drama`,
-    });
-  });
-
-  it(`Reducer should change currentMovie`, () => {
-    expect(reducer({
-      currentMovie: null,
-      currentMovieComments: null,
-    }, {
-      type: ActionType.CHANGE_CURRENT_MOVIE,
-      payload: film,
-    })).toEqual({
-      currentMovie: film,
-      currentMovieComments: comments,
     });
   });
 
@@ -325,16 +330,16 @@ describe(`Data Reducer tests`, () => {
 
 describe(`Data ActionCreator tests`, () => {
   it(`ActionCreator for loadPromoMovieCard return correct action`, () => {
-    expect(ActionCreator.loadPromoMovieCard(film)).toEqual({
+    expect(ActionCreator.loadPromoMovieCard(movie)).toEqual({
       type: ActionType.LOAD_PROMO_MOVIE_CARD,
-      payload: film,
+      payload: movie,
     });
   });
 
   it(`ActionCreator for loadMoviesList return correct action`, () => {
-    expect(ActionCreator.loadMoviesList(films)).toEqual({
+    expect(ActionCreator.loadMoviesList(movies)).toEqual({
       type: ActionType.LOAD_MOVIES_LIST,
-      payload: films,
+      payload: movies,
     });
   });
 
@@ -342,13 +347,6 @@ describe(`Data ActionCreator tests`, () => {
     expect(ActionCreator.changeGenre(`Drama`)).toEqual({
       type: ActionType.CHANGE_GENRE,
       payload: `Drama`,
-    });
-  });
-
-  it(`ActionCreator for changeCurrentMovie return correct action`, () => {
-    expect(ActionCreator.changeCurrentMovie(film)).toEqual({
-      type: ActionType.CHANGE_CURRENT_MOVIE,
-      payload: film,
     });
   });
 

@@ -7,13 +7,14 @@ exports[`Render BigVideoPlayer Should BigVideoPlayer render correctly 1`] = `
   <div
     className="children-mock-component"
   />
-  <button
+  <a
     className="player__exit"
+    href="/films/1"
     onClick={[Function]}
     type="button"
   >
     Exit
-  </button>
+  </a>
   <div
     className="player__controls"
   >

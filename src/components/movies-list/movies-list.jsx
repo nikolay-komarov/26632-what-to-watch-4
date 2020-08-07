@@ -13,7 +13,6 @@ const MoviesList = (props) => {
     moviesList,
     activeItem,
     onActiveItemChange,
-    onSmallMovieCardClick,
   } = props;
   return (
     <div className="catalog__movies-list">
@@ -24,7 +23,6 @@ const MoviesList = (props) => {
               key = {`${index}-${movie.name}`}
               movieCard = {movie}
               onActiveItemChange = {onActiveItemChange}
-              onSmallMovieCardClick = {onSmallMovieCardClick}
               isPlaying = {(activeItem === movie) ? true : false}
             />
           );
@@ -36,17 +34,18 @@ const MoviesList = (props) => {
 
 MoviesList.propTypes = {
   moviesList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
   activeItem: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
   }),
   onActiveItemChange: PropTypes.func.isRequired,
-  onSmallMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default MoviesList;

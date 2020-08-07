@@ -1,13 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-// import Enzyme, {mount, shallow} from "enzyme";
-// import Adapter from "enzyme-adapter-react-16";
+import {Router} from "react-router-dom";
 
 import AddReview from "./add-review.jsx";
 
-// Enzyme.configure({
-//   adapter: new Adapter(),
-// });
+import history from "../../history.js";
+import {AuthorizationStatus} from "../../utils/const.js";
 
 describe(`Render AddReview`, () => {
   const movie = {
@@ -20,26 +18,18 @@ describe(`Render AddReview`, () => {
   it(`Should AddReview render correctly`, () => {
     const tree = renderer
       .create(
-          <AddReview
-            movie = {movie}
-            onReviewSend = {() => {}}
-          />,
+          <Router history = {history} >
+            <AddReview
+              authorizationStatus = {AuthorizationStatus.AUTH}
+              movie = {movie}
+              onReviewSend = {() => {}}
+            />
+          </Router>,
           {
             createNodeMock: (element) => element
-            // createNodeMock: () => {
-            //   return {};
-            // }
           }
       )
       .toJSON();
-
-    // const tree = shallow(
-    //     <AddReview
-    //       movie = {movie}
-    //       onReviewSend = {() => {}}
-    //     />
-    // );
-
     expect(tree).toMatchSnapshot();
   });
 });

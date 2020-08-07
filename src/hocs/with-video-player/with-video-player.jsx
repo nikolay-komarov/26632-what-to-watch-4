@@ -71,27 +71,32 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
     }
 
     componentDidMount() {
-      const {movieCard} = this.props;
-      const video = this._videoRef.current;
+      try {
+        const {movieCard} = this.props;
+        const video = this._videoRef.current;
 
-      video.src = movieCard.previewVideoLink;
-      video.poster = movieCard.previewImage;
+        video.src = movieCard.previewVideoLink;
+        video.poster = movieCard.previewImage;
 
-      switch (this._videoPlayerMode) {
-        case VideoPlayerMode.SMALL_MOVIE_CARD:
-          video.muted = true;
-          break;
-        case VideoPlayerMode.BIG_MOVIE_PLAYER:
-          video.muted = false;
-          break;
+        switch (this._videoPlayerMode) {
+          case VideoPlayerMode.SMALL_MOVIE_CARD:
+            video.muted = true;
+            break;
+          case VideoPlayerMode.BIG_MOVIE_PLAYER:
+            video.muted = false;
+            break;
+        }
+
+        video.oncanplaythrough = () => this.setState({isLoading: false});
+        video.onplay = () => this.setState({isPlaying: true});
+        video.onpause = () => this.setState({isPlaying: false});
+        video.onload = () => this.setState({isPlaying: false});
+        video.onloadedmetadata = () => this.setState({videoDuration: Math.floor(video.duration)});
+        video.ontimeupdate = () => this.setState({progress: video.currentTime});
+      } catch (error) {
+        return error;
       }
-
-      video.oncanplaythrough = () => this.setState({isLoading: false});
-      video.onplay = () => this.setState({isPlaying: true});
-      video.onpause = () => this.setState({isPlaying: false});
-      video.onload = () => this.setState({isPlaying: false});
-      video.onloadedmetadata = () => this.setState({videoDuration: Math.floor(video.duration)});
-      video.ontimeupdate = () => this.setState({progress: video.currentTime});
+      return true;
     }
 
     componentDidUpdate() {
