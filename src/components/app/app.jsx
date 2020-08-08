@@ -94,11 +94,6 @@ const App = (props) => {
           exact path={AppRoute.LOGIN}
           render = {() => {
             return (
-            // <SignIn
-            //   authorizationError = {authorizationError}
-            //   onSubmit = {login}
-            // />
-
               (authorizationStatus === AuthorizationStatus.NO_AUTH)
                 ?
                 <SignIn
