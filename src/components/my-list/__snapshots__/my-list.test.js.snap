@@ -46,7 +46,7 @@ exports[`Render MyList Should MyList render correctly 1`] = `
         <img
           alt="User avatar"
           height="63"
-          src="/img/avatar.jpg"
+          src="avatar_url"
           width="63"
         />
       </div>

@@ -87,6 +87,12 @@ describe(`Render Main`, () => {
         genre: `Drama`,
       },
     ];
+    const userAuthData = {
+      id: 1,
+      email: `1@1.ru`,
+      name: `Name`,
+      avatarUrl: `avatar_url`,
+    };
     const genresList = getGenresList(moviesList);
     const showedItemsInMoviesList = SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT;
 
@@ -95,6 +101,7 @@ describe(`Render Main`, () => {
           <Router history = {history}>
             <Main
               authorizationStatus = {AuthorizationStatus.NO_AUTH}
+              userAuthData = {userAuthData}
               onSignInClick = {() => {}}
               movieCard = {movieCard}
               genresList = {genresList}

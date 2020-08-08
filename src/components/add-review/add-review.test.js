@@ -14,6 +14,12 @@ describe(`Render AddReview`, () => {
     posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
     backgroundImage: `img/bg-the-grand-budapest-hotel.jpg`,
   };
+  const userAuthData = {
+    id: 1,
+    email: `1@1.ru`,
+    name: `Name`,
+    avatarUrl: `avatar_url`,
+  };
 
   it(`Should AddReview render correctly`, () => {
     const tree = renderer
@@ -21,6 +27,7 @@ describe(`Render AddReview`, () => {
           <Router history = {history} >
             <AddReview
               authorizationStatus = {AuthorizationStatus.AUTH}
+              userAuthData = {userAuthData}
               movie = {movie}
               onReviewSend = {() => {}}
             />

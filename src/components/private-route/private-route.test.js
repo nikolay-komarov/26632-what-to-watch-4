@@ -23,6 +23,7 @@ describe(`Render PrivateRoute`, () => {
                 path = {`/`}
                 exact = {true}
                 authorizationStatus = {AuthorizationStatus.AUTH}
+                authorizationStatusLoaded = {true}
                 render = {() => {
                   return (
                     <MockComponent />
@@ -36,7 +37,7 @@ describe(`Render PrivateRoute`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`PrivateRoute render with AuthorizationStatus.AUTH`, () => {
+  it(`PrivateRoute render with AuthorizationStatus.NO_AUTH`, () => {
     const tree = renderer
       .create(
           <Provider store = {store}>
@@ -44,7 +45,8 @@ describe(`Render PrivateRoute`, () => {
               <PrivateRoute
                 path = {`/`}
                 exact = {true}
-                authorizationStatus = {AuthorizationStatus.AUTH}
+                authorizationStatus = {AuthorizationStatus.NO_AUTH}
+                authorizationStatusLoaded = {true}
                 render = {() => {
                   return (
                     <MockComponent />

@@ -9,7 +9,7 @@ import {
 import history from "../../history.js";
 
 const ReviewTextLengths = {
-  MIN_LENGTH: 5,
+  MIN_LENGTH: 50,
   MAX_LENGTH: 400,
 };
 
@@ -100,6 +100,7 @@ class AddReview extends PureComponent {
   render() {
     const {
       authorizationStatus,
+      userAuthData,
       movie,
     } = this.props;
     const {
@@ -163,7 +164,7 @@ class AddReview extends PureComponent {
                 isUserLogin && (
                   <div className="user-block__avatar">
                     <Link to={AppRoute.MY_LIST}>
-                      <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                      <img src={userAuthData.avatarUrl} alt="User avatar" width="63" height="63" />
                     </Link>
                   </div>
                 )
@@ -221,6 +222,12 @@ class AddReview extends PureComponent {
 
 AddReview.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  userAuthData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

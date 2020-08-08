@@ -98,6 +98,12 @@ describe(`Render MoviePage`, () => {
         previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
       },
     ];
+    const userAuthData = {
+      id: 1,
+      email: `1@1.ru`,
+      name: `Name`,
+      avatarUrl: `avatar_url`,
+    };
 
     const tree = renderer
       .create(
@@ -105,6 +111,7 @@ describe(`Render MoviePage`, () => {
             <Router history = {history} >
               <MoviePage
                 authorizationStatus = {AuthorizationStatus.AUTH}
+                userAuthData = {userAuthData}
                 movieDetails = {movie}
                 movieComments = {movieComments}
                 moviesList = {moviesList}

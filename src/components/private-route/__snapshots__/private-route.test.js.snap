@@ -2,4 +2,4 @@
 
 exports[`Render PrivateRoute PrivateRoute render with AuthorizationStatus.AUTH 1`] = `<div />`;
 
-exports[`Render PrivateRoute PrivateRoute render with AuthorizationStatus.AUTH 2`] = `<div />`;
+exports[`Render PrivateRoute PrivateRoute render with AuthorizationStatus.NO_AUTH 1`] = `null`;

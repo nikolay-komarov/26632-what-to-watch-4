@@ -89,7 +89,7 @@ exports[`Render AddReview Should AddReview render correctly 1`] = `
             <img
               alt="User avatar"
               height="63"
-              src="/img/avatar.jpg"
+              src="avatar_url"
               width="63"
             />
           </a>
@@ -196,7 +196,7 @@ exports[`Render AddReview Should AddReview render correctly 1`] = `
           className="add-review__textarea"
           id="review-text"
           maxLength={400}
-          minLength={5}
+          minLength={50}
           name="review-text"
           onChange={[Function]}
           placeholder="Review text"

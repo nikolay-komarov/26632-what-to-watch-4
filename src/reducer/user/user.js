@@ -1,18 +1,27 @@
-import {extend} from "../../utils/utils.js";
+import {
+  extend,
+  normalizeUserAuthData,
+} from "../../utils/utils.js";
 import {
   AuthorizationStatus,
-  AppPage,
 } from "../../utils/const.js";
-import {ActionCreator as StateActionCreator} from "../state/state.js";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationStatusLoaded: false,
   authorizationError: false,
+  userAuthInfo: {
+    id: 0,
+    email: ``,
+    name: ``,
+    avatarUrl: ``,
+  }
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   CHANGE_AUTHORIZATION_ERROR: `CHANGE_AUTHORIZATION_ERROR`,
+  CHANGE_USER_DATE: `CHANGE_USER_DATE`,
 };
 
 const ActionCreator = {
@@ -28,13 +37,20 @@ const ActionCreator = {
       payload: status,
     };
   },
+  changeUserData: (userAuthInfo) => {
+    return {
+      type: ActionType.CHANGE_USER_DATE,
+      payload: userAuthInfo,
+    };
+  }
 };
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.changeUserData(normalizeUserAuthData(response.data)));
       })
       .catch((err) => {
         throw err;
@@ -46,10 +62,10 @@ const Operation = {
       email: authData.email,
       password: authData.password,
     })
-      .then(() => {
+      .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.changeAuthorizaitionError(false));
-        dispatch(StateActionCreator.changeAppPage(AppPage.MAIN_PAGE));
+        dispatch(ActionCreator.changeUserData(normalizeUserAuthData(response.data)));
       })
       .catch((err) => {
         dispatch(ActionCreator.changeAuthorizaitionError(true));
@@ -62,11 +78,18 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUIRED_AUTHORIZATION:
       return extend(state, {
-        authorizationStatus: action.payload
+        authorizationStatus: action.payload,
+        authorizationStatusLoaded: true,
       });
     case ActionType.CHANGE_AUTHORIZATION_ERROR:
       return extend(state, {
-        authorizationError: action.payload
+        authorizationError: action.payload,
+        authorizationStatusLoaded: true,
+      });
+    case ActionType.CHANGE_USER_DATE:
+      return extend(state, {
+        userAuthInfo: action.payload,
+        authorizationStatusLoaded: true,
       });
   }
 

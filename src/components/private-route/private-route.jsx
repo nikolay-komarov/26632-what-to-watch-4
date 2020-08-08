@@ -4,14 +4,19 @@ import {Route, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {AppRoute} from "../../utils/const.js";
 import {AuthorizationStatus} from "../../utils/const.js";
-import {getAuthorizationStatus} from "../../reducer/user/selector.js";
+import {
+  getAuthorizationStatus,
+  getAuthorizationStatusLoaded,
+} from "../../reducer/user/selector.js";
+import Loader from "../loader/loader.jsx";
 
 const PrivateRoute = (props) => {
   const {
     render,
     path,
     exact,
-    authorizationStatus
+    authorizationStatus,
+    authorizationStatusLoaded,
   } = props;
 
   return (
@@ -19,11 +24,15 @@ const PrivateRoute = (props) => {
       path={path}
       exact={exact}
       render={(routeProps) => {
-        return (
-          authorizationStatus === AuthorizationStatus.AUTH
-            ? render(routeProps)
-            : <Redirect to={AppRoute.LOGIN} />
-        );
+        if (authorizationStatusLoaded) {
+          return (
+            authorizationStatus === AuthorizationStatus.AUTH
+              ? render(routeProps)
+              : <Redirect to={AppRoute.LOGIN} />
+          );
+        }
+
+        return <Loader />;
       }}
     />
   );
@@ -31,6 +40,7 @@ const PrivateRoute = (props) => {
 
 PrivateRoute.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  authorizationStatusLoaded: PropTypes.bool.isRequired,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
@@ -38,6 +48,7 @@ PrivateRoute.propTypes = {
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
+  authorizationStatusLoaded: getAuthorizationStatusLoaded(state),
 });
 
 export {PrivateRoute};

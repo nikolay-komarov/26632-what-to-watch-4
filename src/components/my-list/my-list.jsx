@@ -10,6 +10,7 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {getFavoriteMoviesList} from "../../reducer/data/selectors.js";
 import {AppRoute} from "../../utils/const.js";
+import {getUserAuthData} from "../../reducer/user/selector.js";
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
@@ -25,7 +26,10 @@ class MyList extends PureComponent {
   }
 
   render() {
-    const {favoriteMoviesList} = this.props;
+    const {
+      userAuthData,
+      favoriteMoviesList
+    } = this.props;
 
     return (
       <div className="user-page">
@@ -45,7 +49,7 @@ class MyList extends PureComponent {
 
           <div className="user-block">
             <div className="user-block__avatar">
-              <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              <img src={userAuthData.avatarUrl} alt="User avatar" width="63" height="63" />
             </div>
           </div>
         </header>
@@ -81,6 +85,12 @@ class MyList extends PureComponent {
 }
 
 MyList.propTypes = {
+  userAuthData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
   favoriteMoviesList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -91,7 +101,8 @@ MyList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  favoriteMoviesList: getFavoriteMoviesList(state)
+  favoriteMoviesList: getFavoriteMoviesList(state),
+  userAuthData: getUserAuthData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

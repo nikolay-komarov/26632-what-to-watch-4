@@ -15,7 +15,8 @@ import {
   getCurrentMovieComments,
 } from "../../reducer/data/selectors.js";
 import {
-  getAuthorizationStatus
+  getAuthorizationStatus,
+  getUserAuthData
 } from "../../reducer/user/selector.js";
 import {
   TabName,
@@ -55,6 +56,7 @@ class MoviePage extends PureComponent {
   render() {
     const {
       authorizationStatus,
+      userAuthData,
       movieDetails,
       movieComments,
       moviesList,
@@ -109,7 +111,7 @@ class MoviePage extends PureComponent {
                   isUserLogin && (
                     <div className="user-block__avatar">
                       <Link to={AppRoute.MY_LIST}>
-                        <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                        <img src={userAuthData.avatarUrl} alt="User avatar" width="63" height="63" />
                       </Link>
                     </div>
                   )
@@ -225,6 +227,12 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  userAuthData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
   movieDetails: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -264,6 +272,7 @@ const mapStateToProps = (state, props) => ({
   moviesList: getMoviesList(state),
   movieDetails: getCurrentMovie(state, props.movieId),
   movieComments: getCurrentMovieComments(state),
+  userAuthData: getUserAuthData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

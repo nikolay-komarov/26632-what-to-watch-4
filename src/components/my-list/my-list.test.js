@@ -22,6 +22,12 @@ const moviesList = [
     previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
   },
 ];
+const userAuthData = {
+  id: 1,
+  email: `1@1.ru`,
+  name: `Name`,
+  avatarUrl: `avatar_url`,
+};
 
 describe(`Render MyList`, () => {
   const store = mockStore({
@@ -34,6 +40,7 @@ describe(`Render MyList`, () => {
           <Provider store = {store}>
             <Router history = {history} >
               <MyList
+                userAuthData = {userAuthData}
                 favoriteMoviesList = {moviesList}
                 loadFavoriteMoviesList = {() => {}}
               />

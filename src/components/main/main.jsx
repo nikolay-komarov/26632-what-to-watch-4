@@ -21,6 +21,7 @@ const MoviesListWrapped = withActiveItem(MoviesList, null);
 const Main = (props) => {
   const {
     authorizationStatus,
+    userAuthData,
     movieCard,
     genresList,
     currentGenre,
@@ -66,7 +67,7 @@ const Main = (props) => {
               isUserLogin && (
                 <div className="user-block__avatar">
                   <Link to={AppRoute.MY_LIST}>
-                    <img src="/img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                    <img src={userAuthData.avatarUrl} alt="User avatar" width="63" height="63" />
                   </Link>
                 </div>
               )
@@ -166,6 +167,12 @@ const Main = (props) => {
 
 Main.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  userAuthData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
   movieCard: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

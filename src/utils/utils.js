@@ -113,6 +113,16 @@ export const normalizeMovieCommentData = (comment) =>
     }
     : {};
 
+export const normalizeUserAuthData = (userAuthInfo) =>
+  Object.keys(userAuthInfo).length
+    ? {
+      id: userAuthInfo.id,
+      email: userAuthInfo.email,
+      name: userAuthInfo.name,
+      avatarUrl: `https://4.react.pages.academy` + userAuthInfo.avatar_url,
+    }
+    : {};
+
 export const normalizeMovieCommentsData = (comments) => comments.map(normalizeMovieCommentData);
 
 export const getMovieById = (movieId, movies) => {

@@ -90,6 +90,13 @@ const moviesList = [
     genre: `Drama`,
   },
 ];
+const userAuthData = {
+  id: 1,
+  email: `1@1.ru`,
+  name: `Name`,
+  avatarUrl: `avatar_url`,
+};
+
 const genresList = getGenresList(moviesList);
 const showedItemsInMoviesList = SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT;
 
@@ -104,6 +111,7 @@ describe(`Render App`, () => {
               <App
                 authorizationStatus = {AuthorizationStatus.NO_AUTH}
                 authorizationError = {false}
+                userAuthData = {userAuthData}
                 promoMovieCard = {movieCard}
                 genresList = {genresList}
                 currentGenre = {GENRE_ALL}

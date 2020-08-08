@@ -35,6 +35,7 @@ import {
   getIsPromoMovieLoaded
 } from "../../reducer/data/selectors.js";
 import {
+  getUserAuthData,
   getAuthorizationError,
   getAuthorizationStatus
 } from "../../reducer/user/selector.js";
@@ -45,6 +46,7 @@ const App = (props) => {
   const {
     authorizationStatus,
     authorizationError,
+    userAuthData,
     promoMovieCard,
     currentGenre,
     moviesList,
@@ -73,6 +75,7 @@ const App = (props) => {
                 ?
                 <Main
                   authorizationStatus = {authorizationStatus}
+                  userAuthData = {userAuthData}
                   movieCard = {promoMovieCard}
                   genresList = {genresList}
                   currentGenre = {currentGenre}
@@ -91,6 +94,11 @@ const App = (props) => {
           exact path={AppRoute.LOGIN}
           render = {() => {
             return (
+            // <SignIn
+            //   authorizationError = {authorizationError}
+            //   onSubmit = {login}
+            // />
+
               (authorizationStatus === AuthorizationStatus.NO_AUTH)
                 ?
                 <SignIn
@@ -146,6 +154,7 @@ const App = (props) => {
                 ?
                 <AddReview
                   authorizationStatus = {authorizationStatus}
+                  userAuthData = {userAuthData}
                   movie = {getMovieById(parseInt(routeProps.match.params.id, 10), moviesList)}
                   onReviewSend = {onReviewSend}
                 />
@@ -222,6 +231,12 @@ App.propTypes = {
   isMoviesListLoaded: PropTypes.bool.isRequired,
   IsPromoMovieLoaded: PropTypes.bool.isRequired,
   onSendIsFavoriteMovie: PropTypes.func.isRequired,
+  userAuthData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = (state) => ({
@@ -235,6 +250,7 @@ const mapStateToProps = (state) => ({
   showedItemsInMoviesList: getShowedItemsInMoviesList(state),
   isMoviesListLoaded: getIsMoviesListLoaded(state),
   IsPromoMovieLoaded: getIsPromoMovieLoaded(state),
+  userAuthData: getUserAuthData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
