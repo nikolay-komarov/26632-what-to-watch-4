@@ -1,10 +1,10 @@
 import {
   extend,
   normalizeUserAuthData,
-} from "../../utils/utils.js";
+} from "../../utils/utils";
 import {
   AuthorizationStatus,
-} from "../../utils/const.js";
+} from "../../utils/const";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,

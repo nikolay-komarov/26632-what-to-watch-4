@@ -4,12 +4,12 @@ import {
   normalizeMoviesData,
   normalizeMovieCommentsData,
   getGenresList,
-} from "../../utils/utils.js";
+} from "../../utils/utils";
 
 import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT,
-} from "../../utils/const.js";
+} from "../../utils/const";
 
 const initialMovie = {
   id: -1,

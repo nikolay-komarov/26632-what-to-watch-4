@@ -1,7 +1,7 @@
 import {createSelector} from "reselect";
 
-import NameSpace from "../name-space.js";
-import {GENRE_ALL} from "../../utils/const.js";
+import NameSpace from "../name-space";
+import {GENRE_ALL} from "../../utils/const";
 
 export const getPromoMovieCard = (state) => {
   return state[NameSpace.DATA].promoMovieCard;

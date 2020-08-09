@@ -3,7 +3,7 @@ import {
   MovieLevel,
   GENRE_ALL,
   MonthToString,
-} from "./const.js";
+} from "./const";
 
 export const getMovieRatingLevel = (movieScore) => {
   if (movieScore < 0) {

@@ -1,17 +1,17 @@
-import {reducer, ActionType, ActionCreator, Operation} from "./data.js";
+import {reducer, ActionType, ActionCreator, Operation} from "./data";
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
+import {createAPI} from "../../api";
 
 const api = createAPI(() => {});
 import {
   normalizeMovieData,
   normalizeMoviesData,
   getGenresList
-} from "../../utils/utils.js";
+} from "../../utils/utils";
 import {
   GENRE_ALL,
   SHOWED_ITEMS_IN_MOVIES_LIST_DEFAULT
-} from "../../utils/const.js";
+} from "../../utils/const";
 
 const movie = {
   name: `The Grand Budapest Hotel`,

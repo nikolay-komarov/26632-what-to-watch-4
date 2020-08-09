@@ -1,12 +1,12 @@
-import {reducer, ActionType, ActionCreator, Operation} from "./user.js";
+import {reducer, ActionType, ActionCreator, Operation} from "./user";
 
 import {
   AuthorizationStatus,
-} from "../../utils/const.js";
+} from "../../utils/const";
 
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
-import {normalizeUserAuthData} from "../../utils/utils.js";
+import {createAPI} from "../../api";
+import {normalizeUserAuthData} from "../../utils/utils";
 
 const api = createAPI(() => {});
 
