@@ -1,15 +1,15 @@
-import React, {PureComponent, createRef} from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
 
 import {VideoPlayerMode} from "../../utils/const";
 import {formatTime} from "../../utils/utils";
 
 const withVideoPlayer = (Component, videoPlayerMode) => {
-  class WithVideoPlayer extends PureComponent {
+  class WithVideoPlayer extends React.PureComponent {
     constructor(props) {
       super(props);
 
-      this._videoRef = createRef();
+      this._videoRef = React.createRef();
 
       this.state = {
         progress: 0,

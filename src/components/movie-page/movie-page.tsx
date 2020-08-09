@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import * as  React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
@@ -29,7 +29,7 @@ import history from "../../history";
 const TabsWrapped = withActiveItem(Tabs, TabName.OVERVIEW);
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
-class MoviePage extends PureComponent {
+class MoviePage extends React.PureComponent {
   constructor(props) {
     super(props);
   }

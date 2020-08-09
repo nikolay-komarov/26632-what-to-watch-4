@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
@@ -14,7 +14,7 @@ import {getUserAuthData} from "../../reducer/user/selector";
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
-class MyList extends PureComponent {
+class MyList extends React.PureComponent {
   constructor(props) {
     super(props);
   }

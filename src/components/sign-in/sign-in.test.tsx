@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import {Router} from "react-router-dom";
-import renderer from "react-test-renderer";
+import * as renderer from "react-test-renderer";
 import SignIn from "./sign-in";
 
 import history from "../../history";
