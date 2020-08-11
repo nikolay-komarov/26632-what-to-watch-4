@@ -1,16 +1,29 @@
 import * as React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, shallow} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
+
+import {
+  MovieType,
+  CommentsType,
+} from "../../types";
 
 import Tabs from "./tabs";
 import {TabName} from "../../utils/const";
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
 describe(`E2E Tabs tests`, () => {
-  const movieDetails = {
+  const movieDetails: MovieType = {
+    id: 1,
+    name: `The Grand Budapest Hotel`,
+    posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
+    backgroundColor: `#ccc`,
+    backgroundImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    videoLink: `videoLink`,
+    previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&aposs friend and protege.`,
     rating: 8.9,
     scoreCount: 240,
@@ -19,8 +32,9 @@ describe(`E2E Tabs tests`, () => {
     runTime: 99,
     genre: `Drama`,
     released: 2014,
+    isFavorite: true,
   };
-  const movieComments = [
+  const movieComments: CommentsType = [
     {
       id: 1,
       userId: 4,

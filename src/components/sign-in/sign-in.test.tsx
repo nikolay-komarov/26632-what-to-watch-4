@@ -4,6 +4,7 @@ import * as renderer from "react-test-renderer";
 import SignIn from "./sign-in";
 
 import history from "../../history";
+import {noop} from "../../utils/utils";
 
 describe(`Render SignIn`, () => {
   it(`SignIn is rendered correctly`, () => {
@@ -12,7 +13,7 @@ describe(`Render SignIn`, () => {
           <Router history = {history}>
             <SignIn
               authorizationError = {false}
-              onSubmit = {() => {}}
+              onSubmit = {noop}
             />
           </Router>
       ).toJSON();

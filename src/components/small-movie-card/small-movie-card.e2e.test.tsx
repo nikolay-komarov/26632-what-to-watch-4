@@ -1,27 +1,46 @@
 import * as React from "react";
 import {Router} from "react-router-dom";
-import Enzyme, {shallow, mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, shallow, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 import SmallMovieCard from "./small-movie-card";
 
 import {AppRoute} from "../../utils/const";
 import history from "../../history";
 
-Enzyme.configure({
+import {noop} from "../../utils/utils";
+
+import {
+  MovieType,
+} from "../../types";
+
+configure({
   adapter: new Adapter(),
 });
 
 describe(`E2E SmallMovieCard tests`, () => {
-  const mock = {
-    id: 1,
-    name: `Firefly`,
-    previewImage: `previewImage`,
-    previewVideoLink: `previewVideoLink`,
+  const mock: MovieType = {
+    id: 0,
+    name: `The Grand Budapest Hotel`,
+    posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
+    backgroundColor: `#ccc`,
+    backgroundImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    videoLink: `videoLink`,
+    previewImage: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    previewVideoLink: `https://www.kinomania.ru/load/n?file=//fs.kinomania.ru/media/video/a/e1/ae1ea61fe9c315fbd913c38d6ddc7c0d.480.mp4`,
+    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&aposs friend and protege.`,
+    rating: 8.9,
+    scoreCount: 240,
+    director: `Wes Andreson`,
+    staring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+    runTime: 99,
+    genre: `Drama`,
+    released: 2014,
+    isFavorite: true,
   };
-  const children = <div className="children-mock-component" />;
+  const children: React.ReactNode = <div className="children-mock-component" />;
 
   it(`Should SmallMovieCard be hovered & leaved`, () => {
-    const movieCard = mock;
+    const movieCard: MovieType = mock;
     const onActiveItemChange = jest.fn();
     const onSmallMovieCardLeave = jest.fn();
     const onSmallMovieCardHover = jest.fn();
@@ -32,7 +51,6 @@ describe(`E2E SmallMovieCard tests`, () => {
           onActiveItemChange = {onActiveItemChange}
           onSmallMovieCardHover = {onSmallMovieCardHover}
           onSmallMovieCardLeave = {onSmallMovieCardLeave}
-          isPlaying = {false}
         >
           {children}
         </SmallMovieCard>
@@ -52,16 +70,15 @@ describe(`E2E SmallMovieCard tests`, () => {
   });
 
   it(`Should SmallMovieCard title contains correct link`, () => {
-    const movieCard = mock;
+    const movieCard: MovieType = mock;
 
     const smallMovieCardComponent = mount(
         <Router history = {history} >
           <SmallMovieCard
             movieCard = {movieCard}
-            onActiveItemChange = {() => {}}
-            onSmallMovieCardHover = {() => {}}
-            onSmallMovieCardLeave = {() => {}}
-            isPlaying = {true}
+            onActiveItemChange = {noop}
+            onSmallMovieCardHover = {noop}
+            onSmallMovieCardLeave = {noop}
           >
             {children}
           </SmallMovieCard>

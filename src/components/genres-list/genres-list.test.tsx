@@ -3,10 +3,11 @@ import * as renderer from "react-test-renderer";
 import GenresList from "./genres-list";
 
 import {GENRE_ALL} from "../../utils/const";
+import {noop} from "../../utils/utils";
 
 describe(`Render GenresList`, () => {
   it(`Should GenresList render correctly`, () => {
-    const genresList = [
+    const genresList: string[] = [
       `Comedies`,
       `Crime`,
       `Documentary`,
@@ -24,7 +25,7 @@ describe(`Render GenresList`, () => {
           <GenresList
             genresList = {genresList}
             currentGenre = {GENRE_ALL}
-            onGenreItemClick = {() => {}}
+            onGenreItemClick = {noop}
           />)
         .toJSON();
 

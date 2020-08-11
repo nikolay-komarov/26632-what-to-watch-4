@@ -19,7 +19,7 @@ import {
 interface Props {
   userAuthData: UserAuthDataType;
   favoriteMoviesList: MoviesListType;
-  loadFavoriteMoviesList: () => void; // ToDo
+  loadFavoriteMoviesList: () => void;
 }
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);

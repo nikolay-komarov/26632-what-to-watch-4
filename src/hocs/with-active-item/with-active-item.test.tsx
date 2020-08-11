@@ -1,11 +1,16 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import PropTypes from "prop-types";
 
 import withActiveItem from "./with-active-item";
 
+import {noop} from "../../utils/utils";
+
 describe(`Render withActiveItem`, () => {
-  const MockComponent = (props) => {
+  interface MockComponentProps {
+    children: React.ReactNode;
+  }
+
+  const MockComponent = (props: MockComponentProps) => {
     const {children} = props;
 
     return (
@@ -15,20 +20,13 @@ describe(`Render withActiveItem`, () => {
     );
   };
 
-  MockComponent.propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ])
-  };
-
-  const MockComponentWrapped = withActiveItem(MockComponent);
+  const MockComponentWrapped = withActiveItem(MockComponent, `defaultItem`);
 
   it(`withActiveItem is rendered correctly`, () => {
     const tree = renderer.create((
       <MockComponentWrapped
         activeItem = {false}
-        onActiveItemChange = {() => {}}
+        onActiveItemChange = {noop}
       />), {
       createNodeMock() {
         return {};

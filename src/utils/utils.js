@@ -129,3 +129,7 @@ export const getMovieById = (movieId, movies) => {
   return movies
     .find((movie) => movie.id === movieId);
 };
+
+export const noop = () => {
+  // do nothing
+};

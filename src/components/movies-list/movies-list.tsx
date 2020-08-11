@@ -13,7 +13,7 @@ import {
 interface Props {
   moviesList: MoviesListType;
   activeItem: MovieType;
-  onActiveItemChange: () => void; // ToDo
+  onActiveItemChange: () => void;
 }
 
 const SmallMovieCardWraped = withVideoPlayer(SmallMovieCard, VideoPlayerMode.SMALL_MOVIE_CARD);

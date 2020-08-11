@@ -16,7 +16,7 @@ interface Props {
   movieDetails: MovieType;
   movieComments: CommentsType;
   activeItem: string;
-  onActiveItemChange: (activeItem: string | MovieType) => void; // ToDo
+  onActiveItemChange: (activeItem: string | MovieType) => void;
 }
 
 const Tabs: React.FC<Props> = (props: Props) => {

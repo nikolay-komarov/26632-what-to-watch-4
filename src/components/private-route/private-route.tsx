@@ -15,14 +15,6 @@ type Props = RouteProps & {
   render: () => React.ReactNode;
 }
 
-// PrivateRoute.propTypes = {
-//   authorizationStatus: PropTypes.string.isRequired,
-//   authorizationStatusLoaded: PropTypes.bool.isRequired,
-//   exact: PropTypes.bool.isRequired,
-//   path: PropTypes.string.isRequired,
-//   render: PropTypes.func.isRequired,
-// };
-
 const PrivateRoute: React.FunctionComponent<Props> = (props: Props) => {
   const {
     render,

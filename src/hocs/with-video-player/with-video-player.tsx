@@ -13,13 +13,13 @@ interface State {
 
 interface InjectingProps {
   isPlaying: boolean;
-  onSmallMovieCardHover: () => void; // ToDo
-  onSmallMovieCardLeave: () => void; // ToDo
-  onPlayButtonClick: () => void; // ToDo
-  onFullScreenButtonClick: () => void; // ToDo
-  getPlaybackProgress: () => number; // ToDo
-  getTimeLeft: () => number; // ToDo
-  onExitButtonClick: () => void; // ToDo
+  onSmallMovieCardHover: () => void;
+  onSmallMovieCardLeave: () => void;
+  onPlayButtonClick: () => void;
+  onFullScreenButtonClick: () => void;
+  getPlaybackProgress: () => number;
+  getTimeLeft: () => number;
+  onExitButtonClick: () => void;
 }
 
 const withVideoPlayer = (Component, videoPlayerMode: string) => {
@@ -176,16 +176,6 @@ const withVideoPlayer = (Component, videoPlayerMode: string) => {
       );
     }
   }
-
-  // WithVideoPlayer.propTypes = {
-  //   isPlaying: PropTypes.bool.isRequired,
-  //   movieCard: PropTypes.shape({
-  //     name: PropTypes.string,
-  //     previewImage: PropTypes.string.isRequired,
-  //     previewVideoLink: PropTypes.string.isRequired,
-  //   }).isRequired,
-  //   onExitButtonClick: PropTypes.func,
-  // };
 
   return WithVideoPlayer;
 };

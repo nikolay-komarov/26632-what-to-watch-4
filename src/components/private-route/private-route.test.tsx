@@ -9,7 +9,7 @@ import {AuthorizationStatus} from "../../utils/const";
 import history from "../../history";
 
 const mockStore = configureStore([]);
-const MockComponent = () => <div />;
+const MockComponent: React.FC = () => <div />;
 
 describe(`Render PrivateRoute`, () => {
   const store = mockStore({});

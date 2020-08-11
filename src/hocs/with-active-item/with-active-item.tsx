@@ -44,8 +44,6 @@ const withActiveItem = (Component, defaultActiveItem) => {
     }
   }
 
-  // WithActiveItem.propTypes = {};
-
   return WithActiveItem;
 };
 

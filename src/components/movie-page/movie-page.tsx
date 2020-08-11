@@ -38,9 +38,9 @@ interface Props {
   movieDetails: MovieType;
   movieComments: CommentsType;
   moviesList: MoviesListType;
-  movieId: string; // ?
-  loadCurrentMovieComments: (movieId: number) => void; // ToDo
-  onSendIsFavoriteMovie: (movieId: number, isFavorite: boolean) => void; // ToDo
+  movieId: string;
+  loadCurrentMovieComments: (movieId: number) => void;
+  onSendIsFavoriteMovie: (movieId: number, isFavorite: boolean) => void;
 }
 
 const TabsWrapped = withActiveItem(Tabs, TabName.OVERVIEW);

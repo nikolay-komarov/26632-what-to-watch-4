@@ -113,6 +113,56 @@ exports[`Render MyList Should MyList render correctly 1`] = `
           </a>
         </h3>
       </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="/films/3"
+            onClick={[Function]}
+          >
+            Macbeth
+          </a>
+        </h3>
+      </article>
+      <article
+        className="small-movie-card catalog__movies-card"
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          <a
+            className="small-movie-card__link"
+            href="/films/4"
+            onClick={[Function]}
+          >
+            Aviator
+          </a>
+        </h3>
+      </article>
     </div>
   </section>
   <footer

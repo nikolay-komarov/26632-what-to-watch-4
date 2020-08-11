@@ -29,9 +29,9 @@ interface Props {
   currentGenre: string;
   moviesByGenreList: MoviesListType;
   showedItemsInMoviesList: number;
-  onGenreItemClick: () => void; // ToD;
-  onShowMoreButtonClick: () => void; // Tod;
-  onSendIsFavoriteMovie: (movieId: number, isFavorite: boolean) => void; // ToD;
+  onGenreItemClick: () => void;
+  onShowMoreButtonClick: () => void;
+  onSendIsFavoriteMovie: (movieId: number, isFavorite: boolean) => void;
 }
 
 const MoviesListWrapped = withActiveItem(MoviesList, null);

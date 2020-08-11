@@ -31,7 +31,7 @@ interface Props {
       onSuccess: () => void;
       onError: () => void;
     }
-  ) => void; // ToDo
+  ) => void;
 }
 
 class AddReview extends React.PureComponent<Props, {}> {
@@ -251,22 +251,5 @@ class AddReview extends React.PureComponent<Props, {}> {
     );
   }
 }
-
-// AddReview.propTypes = {
-//   authorizationStatus: PropTypes.string.isRequired,
-//   userAuthData: PropTypes.shape({
-//     id: PropTypes.number.isRequired,
-//     email: PropTypes.string.isRequired,
-//     name: PropTypes.string.isRequired,
-//     avatarUrl: PropTypes.string.isRequired,
-//   }),
-//   movie: PropTypes.shape({
-//     id: PropTypes.number.isRequired,
-//     name: PropTypes.string.isRequired,
-//     posterImage: PropTypes.string.isRequired,
-//     backgroundImage: PropTypes.string.isRequired,
-//   }).isRequired,
-//   onReviewSend: PropTypes.func,
-// };
 
 export default AddReview;

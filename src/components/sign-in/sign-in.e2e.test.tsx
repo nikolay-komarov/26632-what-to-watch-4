@@ -1,17 +1,21 @@
 import * as React from "react";
 import {Router} from "react-router-dom";
-import Enzyme, {mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {configure, mount} from "enzyme";
+import * as Adapter from "enzyme-adapter-react-16";
 
 import history from "../../history";
 import SignIn from "./sign-in";
 
-Enzyme.configure({
+import {
+  AuthDataType,
+} from "../../types";
+
+configure({
   adapter: new Adapter(),
 });
 
 describe(`E2E SignIn tests`, () => {
-  const mock = {
+  const mock: AuthDataType = {
     email: `email`,
     password: `password`,
   };

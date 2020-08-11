@@ -9,9 +9,9 @@ import {
 
 interface Props {
   movieCard: MovieType;
-  onActiveItemChange: (movieCard: MovieType | null) => void; // ToDo
-  onSmallMovieCardLeave: () => void; // ToDo
-  onSmallMovieCardHover: () => void; // ToDo
+  onActiveItemChange: (movieCard: MovieType | null) => void;
+  onSmallMovieCardLeave: () => void;
+  onSmallMovieCardHover: () => void;
   children: React.ReactNode;
 }
 

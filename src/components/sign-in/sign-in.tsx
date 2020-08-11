@@ -9,7 +9,7 @@ import {
 
 interface Props {
   authorizationError: boolean;
-  onSubmit: (authData: AuthDataType) => void; // Todo
+  onSubmit: (authData: AuthDataType) => void;
 }
 
 class SignIn extends React.PureComponent<Props, {}> {

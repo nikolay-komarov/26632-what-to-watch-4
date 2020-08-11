@@ -21,7 +21,7 @@ exports[`Render SmallMovieCard Should SmallMovieCard render correctly 1`] = `
       href="/films/1"
       onClick={[Function]}
     >
-      Fantastic Beasts: The Crimes of Grindelwald
+      The Grand Budapest Hotel
     </a>
   </h3>
 </article>
