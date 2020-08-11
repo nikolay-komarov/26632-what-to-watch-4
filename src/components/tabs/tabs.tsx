@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 
 import {
   getMovieRatingLevel,
@@ -8,7 +7,19 @@ import {
 } from "../../utils/utils";
 import {TabName} from "../../utils/const";
 
-const Tabs = (props) => {
+import {
+  MovieType,
+  CommentsType,
+} from "../../types";
+
+interface Props {
+  movieDetails: MovieType;
+  movieComments: CommentsType;
+  activeItem: string;
+  onActiveItemChange: (activeItem: string | MovieType) => void; // ToDo
+}
+
+const Tabs: React.FC<Props> = (props: Props) => {
   const {
     movieDetails,
     movieComments,
@@ -147,29 +158,6 @@ const Tabs = (props) => {
       </div>
     </>
   );
-};
-
-Tabs.propTypes = {
-  movieDetails: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoreCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    runTime: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-  }),
-  movieComments: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    userId: PropTypes.number.isRequired,
-    userName: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
-  })).isRequired,
-  activeItem: PropTypes.string.isRequired,
-  onActiveItemChange: PropTypes.func.isRequired,
 };
 
 export default Tabs;

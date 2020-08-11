@@ -1,7 +1,12 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 
-const GenresList = (props) => {
+interface Props {
+  genresList: string[];
+  currentGenre: string;
+  onGenreItemClick: (genre: string) => void;
+}
+
+const GenresList = (props: Props) => {
   const {
     genresList,
     currentGenre,
@@ -29,12 +34,6 @@ const GenresList = (props) => {
       }
     </ul>
   );
-};
-
-GenresList.propTypes = {
-  genresList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  currentGenre: PropTypes.string.isRequired,
-  onGenreItemClick: PropTypes.func.isRequired,
 };
 
 export default GenresList;

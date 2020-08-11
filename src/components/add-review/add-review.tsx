@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 import {
@@ -13,16 +12,49 @@ const ReviewTextLengths = {
   MAX_LENGTH: 400,
 };
 
-class AddReview extends React.PsureComponent {
+import {
+  MovieType,
+  UserAuthDataType,
+} from "../../types";
+
+interface Props {
+  authorizationStatus: string;
+  userAuthData: UserAuthDataType;
+  movie: MovieType;
+  onReviewSend: (
+    reviewData: {
+      rating: number;
+      comment: string;
+    },
+    movieId: number,
+    handleResponse: {
+      onSuccess: () => void;
+      onError: () => void;
+    }
+  ) => void; // ToDo
+}
+
+class AddReview extends React.PureComponent<Props, {}> {
+  props: Props;
+  private movie: MovieType;
+  private ratingStarsRef: React.RefObject<HTMLDivElement>;
+  private reviewTextRef: React.RefObject<HTMLTextAreaElement>;
+  private postButton: React.RefObject<HTMLButtonElement>;
+  private errorSendCommentMessage: React.RefObject<HTMLParagraphElement>;
+  private handleResponse: {
+    onSuccess: () => void;
+    onError: () => void;
+  };
+
   constructor(props) {
     super(props);
 
     this.movie = this.props.movie;
 
-    this.ratingStarsRef = createRef();
-    this.reviewTextRef = createRef();
-    this.postButton = createRef();
-    this.errorSendCommentMessage = createRef();
+    this.ratingStarsRef = React.createRef();
+    this.reviewTextRef = React.createRef();
+    this.postButton = React.createRef();
+    this.errorSendCommentMessage = React.createRef();
 
     this.handleReviewTextInput = this.handleReviewTextInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +73,11 @@ class AddReview extends React.PsureComponent {
     };
   }
 
-  enableForm() {
+  componentDidMount() {
+    this.postButton.current.disabled = true;
+  }
+
+  private enableForm() {
     const ratingInputs = this.ratingStarsRef.current.querySelectorAll(`input`);
     for (let item of ratingInputs) {
       item.disabled = false;
@@ -51,7 +87,7 @@ class AddReview extends React.PsureComponent {
     this.postButton.current.disabled = false;
   }
 
-  disableForm() {
+  private disableForm() {
     const ratingInputs = this.ratingStarsRef.current.querySelectorAll(`input`);
     for (let item of ratingInputs) {
       item.disabled = true;
@@ -61,11 +97,7 @@ class AddReview extends React.PsureComponent {
     this.postButton.current.disabled = true;
   }
 
-  componentDidMount() {
-    this.postButton.current.disabled = true;
-  }
-
-  handleReviewTextInput() {
+  private handleReviewTextInput() {
     const reviewText = this.reviewTextRef.current;
     const reviewTextLength = reviewText.value.length;
 
@@ -76,7 +108,7 @@ class AddReview extends React.PsureComponent {
     }
   }
 
-  handleSubmit(evt) {
+  private handleSubmit(evt) {
     const {
       movie,
       onReviewSend,
@@ -220,21 +252,21 @@ class AddReview extends React.PsureComponent {
   }
 }
 
-AddReview.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  userAuthData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }),
-  movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-  }).isRequired,
-  onReviewSend: PropTypes.func,
-};
+// AddReview.propTypes = {
+//   authorizationStatus: PropTypes.string.isRequired,
+//   userAuthData: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     email: PropTypes.string.isRequired,
+//     name: PropTypes.string.isRequired,
+//     avatarUrl: PropTypes.string.isRequired,
+//   }),
+//   movie: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     name: PropTypes.string.isRequired,
+//     posterImage: PropTypes.string.isRequired,
+//     backgroundImage: PropTypes.string.isRequired,
+//   }).isRequired,
+//   onReviewSend: PropTypes.func,
+// };
 
 export default AddReview;

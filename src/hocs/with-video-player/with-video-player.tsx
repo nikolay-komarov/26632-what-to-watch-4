@@ -1,15 +1,41 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+import {Subtract} from "utility-types";
 
 import {VideoPlayerMode} from "../../utils/const";
 import {formatTime} from "../../utils/utils";
 
-const withVideoPlayer = (Component, videoPlayerMode) => {
-  class WithVideoPlayer extends React.PureComponent {
+interface State {
+  progress: number;
+  videoDuration: number;
+  isLoading: boolean;
+  isPlaying: boolean;
+}
+
+interface InjectingProps {
+  isPlaying: boolean;
+  onSmallMovieCardHover: () => void; // ToDo
+  onSmallMovieCardLeave: () => void; // ToDo
+  onPlayButtonClick: () => void; // ToDo
+  onFullScreenButtonClick: () => void; // ToDo
+  getPlaybackProgress: () => number; // ToDo
+  getTimeLeft: () => number; // ToDo
+  onExitButtonClick: () => void; // ToDo
+}
+
+const withVideoPlayer = (Component, videoPlayerMode: string) => {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>
+
+  class WithVideoPlayer extends React.PureComponent<T, State> {
+    private videoRef: React.RefObject<HTMLVideoElement>;
+    private videoPlayerMode: string;
+    private renderVideoElement: string;
+
+
     constructor(props) {
       super(props);
 
-      this._videoRef = React.createRef();
+      this.videoRef = React.createRef();
 
       this.state = {
         progress: 0,
@@ -26,19 +52,19 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
       this.getPlaybackProgress = this.getPlaybackProgress.bind(this);
       this.getTimeLeft = this.getTimeLeft.bind(this);
 
-      this._videoPlayerMode = videoPlayerMode;
-      this._renderVideoElement = this.setRenderVideoElement();
+      this.videoPlayerMode = videoPlayerMode;
+      this.renderVideoElement = this.setRenderVideoElement();
     }
 
     componentDidMount() {
       try {
         const {movieCard} = this.props;
-        const video = this._videoRef.current;
+        const video = this.videoRef.current;
 
         video.src = movieCard.previewVideoLink;
         video.poster = movieCard.previewImage;
 
-        switch (this._videoPlayerMode) {
+        switch (this.videoPlayerMode) {
           case VideoPlayerMode.SMALL_MOVIE_CARD:
             video.muted = true;
             break;
@@ -60,13 +86,13 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
     }
 
     componentDidUpdate() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       const {isPlaying} = this.state;
 
       if (isPlaying) {
         video.play();
       } else {
-        switch (this._videoPlayerMode) {
+        switch (this.videoPlayerMode) {
           case VideoPlayerMode.SMALL_MOVIE_CARD:
             video.load();
             break;
@@ -78,7 +104,7 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
     }
 
     componentWillUnmount() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.oncanplaythrough = null;
       video.onplay = null;
@@ -91,12 +117,12 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
 
     setRenderVideoElement() {
       let elementVideo;
-      switch (this._videoPlayerMode) {
+      switch (this.videoPlayerMode) {
         case VideoPlayerMode.SMALL_MOVIE_CARD:
-          elementVideo = <video width="280" height="175" ref={this._videoRef} />;
+          elementVideo = <video width="280" height="175" ref={this.videoRef} />;
           break;
         case VideoPlayerMode.BIG_MOVIE_PLAYER:
-          elementVideo = <video className="player__video" ref={this._videoRef} />;
+          elementVideo = <video className="player__video" ref={this.videoRef} />;
           break;
       }
 
@@ -116,7 +142,7 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
     }
 
     handleFullScreenButtonClick() {
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
 
       video.requestFullscreen();
     }
@@ -145,21 +171,21 @@ const withVideoPlayer = (Component, videoPlayerMode) => {
           getTimeLeft = {this.getTimeLeft}
           onExitButtonClick = {this.props.onExitButtonClick}
         >
-          {this._renderVideoElement}
+          {this.renderVideoElement}
         </Component>
       );
     }
   }
 
-  WithVideoPlayer.propTypes = {
-    isPlaying: PropTypes.bool.isRequired,
-    movieCard: PropTypes.shape({
-      name: PropTypes.string,
-      previewImage: PropTypes.string.isRequired,
-      previewVideoLink: PropTypes.string.isRequired,
-    }).isRequired,
-    onExitButtonClick: PropTypes.func,
-  };
+  // WithVideoPlayer.propTypes = {
+  //   isPlaying: PropTypes.bool.isRequired,
+  //   movieCard: PropTypes.shape({
+  //     name: PropTypes.string,
+  //     previewImage: PropTypes.string.isRequired,
+  //     previewVideoLink: PropTypes.string.isRequired,
+  //   }).isRequired,
+  //   onExitButtonClick: PropTypes.func,
+  // };
 
   return WithVideoPlayer;
 };

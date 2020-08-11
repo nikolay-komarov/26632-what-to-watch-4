@@ -1,5 +1,4 @@
-import * as  React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {Link} from "react-router-dom";
 
 import {connect} from "react-redux";
@@ -26,10 +25,30 @@ import {
 import {getFourSimilarMovies} from "../../utils/utils";
 import history from "../../history";
 
+import {
+  MovieType,
+  MoviesListType,
+  UserAuthDataType,
+  CommentsType,
+} from "../../types";
+
+interface Props {
+  authorizationStatus: string;
+  userAuthData: UserAuthDataType;
+  movieDetails: MovieType;
+  movieComments: CommentsType;
+  moviesList: MoviesListType;
+  movieId: string; // ?
+  loadCurrentMovieComments: (movieId: number) => void; // ToDo
+  onSendIsFavoriteMovie: (movieId: number, isFavorite: boolean) => void; // ToDo
+}
+
 const TabsWrapped = withActiveItem(Tabs, TabName.OVERVIEW);
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
-class MoviePage extends React.PureComponent {
+class MoviePage extends React.PureComponent<Props> {
+  props: Props;
+
   constructor(props) {
     super(props);
   }
@@ -224,48 +243,6 @@ class MoviePage extends React.PureComponent {
     );
   }
 }
-
-MoviePage.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  userAuthData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }),
-  movieDetails: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoreCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    runTime: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }),
-  movieComments: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    userId: PropTypes.number.isRequired,
-    userName: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    comment: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
-  })),
-  moviesList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-  })).isRequired,
-  movieId: PropTypes.number.isRequired,
-  loadCurrentMovieComments: PropTypes.func.isRequired,
-  onSendIsFavoriteMovie: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state, props) => ({
   authorizationStatus: getAuthorizationStatus(state),

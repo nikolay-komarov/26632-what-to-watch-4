@@ -1,10 +1,21 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 import {AppRoute} from "../../utils/const";
 
-const SmallMovieCard = (props) => {
+import {
+  MovieType,
+} from "../../types";
+
+interface Props {
+  movieCard: MovieType;
+  onActiveItemChange: (movieCard: MovieType | null) => void; // ToDo
+  onSmallMovieCardLeave: () => void; // ToDo
+  onSmallMovieCardHover: () => void; // ToDo
+  children: React.ReactNode;
+}
+
+const SmallMovieCard: React.FC<Props> = (props: Props) => {
   const {
     movieCard,
     onActiveItemChange,
@@ -40,21 +51,6 @@ const SmallMovieCard = (props) => {
       </h3>
     </article>
   );
-};
-
-SmallMovieCard.propTypes = {
-  movieCard: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-  }),
-  onActiveItemChange: PropTypes.func.isRequired,
-  onSmallMovieCardLeave: PropTypes.func.isRequired,
-  onSmallMovieCardHover: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
 };
 
 export default SmallMovieCard;

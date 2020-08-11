@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 import GenresList from "../genres-list/genres-list";
@@ -16,9 +15,28 @@ import {
 } from "../../utils/const";
 import history from "../../history";
 
+import {
+  MovieType,
+  MoviesListType,
+  UserAuthDataType,
+} from "../../types";
+
+interface Props {
+  authorizationStatus: string;
+  userAuthData: UserAuthDataType;
+  movieCard: MovieType;
+  genresList: string[];
+  currentGenre: string;
+  moviesByGenreList: MoviesListType;
+  showedItemsInMoviesList: number;
+  onGenreItemClick: () => void; // ToD;
+  onShowMoreButtonClick: () => void; // Tod;
+  onSendIsFavoriteMovie: (movieId: number, isFavorite: boolean) => void; // ToD;
+}
+
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
-const Main = (props) => {
+const Main: React.FC<Props> = (props: Props) => {
   const {
     authorizationStatus,
     userAuthData,
@@ -163,43 +181,6 @@ const Main = (props) => {
       </div>
     </>
   );
-};
-
-Main.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  userAuthData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }),
-  movieCard: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoreCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    runTime: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }).isRequired,
-  genresList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  currentGenre: PropTypes.string.isRequired,
-  moviesByGenreList: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-  })).isRequired,
-  showedItemsInMoviesList: PropTypes.number.isRequired,
-  onGenreItemClick: PropTypes.func.isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
-  onSendIsFavoriteMovie: PropTypes.func.isRequired,
 };
 
 export default Main;

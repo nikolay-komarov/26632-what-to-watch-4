@@ -1,10 +1,22 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
 
 import {AppRoute} from "../../utils/const";
 
-class SignIn extends React.PureComponent {
+import {
+  AuthDataType,
+} from "../../types";
+
+interface Props {
+  authorizationError: boolean;
+  onSubmit: (authData: AuthDataType) => void; // Todo
+}
+
+class SignIn extends React.PureComponent<Props, {}> {
+  props: Props;
+  private emailRef: React.RefObject<HTMLInputElement>;
+  private passwordRef: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
 
@@ -98,10 +110,5 @@ class SignIn extends React.PureComponent {
     );
   }
 }
-
-SignIn.propTypes = {
-  authorizationError: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
 
 export default SignIn;

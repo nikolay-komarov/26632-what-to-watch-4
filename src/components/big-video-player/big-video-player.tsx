@@ -1,9 +1,22 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../utils/const";
 
-const BigVideoPlayer = (props) => {
+import {
+  MovieType,
+} from "../../types";
+
+interface Props {
+  movieCard: MovieType;
+  isPlaying: boolean;
+  onPlayButtonClick: () => void;
+  onFullScreenButtonClick: () => void;
+  getPlaybackProgress: () => number;
+  getTimeLeft: () => number;
+  children: React.ReactNode;
+}
+
+const BigVideoPlayer: React.FC<Props> = (props: Props) => {
   const {
     movieCard,
     isPlaying,
@@ -82,23 +95,6 @@ const BigVideoPlayer = (props) => {
       </div>
     </div>
   );
-};
-
-BigVideoPlayer.propTypes = {
-  movieCard: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-  }).isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  onFullScreenButtonClick: PropTypes.func.isRequired,
-  getPlaybackProgress: PropTypes.func.isRequired,
-  getTimeLeft: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
 };
 
 export default BigVideoPlayer;

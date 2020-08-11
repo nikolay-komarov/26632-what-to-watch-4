@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 import {connect} from "react-redux";
@@ -12,9 +11,22 @@ import {getFavoriteMoviesList} from "../../reducer/data/selectors";
 import {AppRoute} from "../../utils/const";
 import {getUserAuthData} from "../../reducer/user/selector";
 
+import {
+  MoviesListType,
+  UserAuthDataType,
+} from "../../types";
+
+interface Props {
+  userAuthData: UserAuthDataType;
+  favoriteMoviesList: MoviesListType;
+  loadFavoriteMoviesList: () => void; // ToDo
+}
+
 const MoviesListWrapped = withActiveItem(MoviesList, null);
 
-class MyList extends React.PureComponent {
+class MyList extends React.PureComponent<Props, {}> {
+  props: Props;
+
   constructor(props) {
     super(props);
   }
@@ -83,22 +95,6 @@ class MyList extends React.PureComponent {
     );
   }
 }
-
-MyList.propTypes = {
-  userAuthData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }),
-  favoriteMoviesList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-  })),
-  loadFavoriteMoviesList: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   favoriteMoviesList: getFavoriteMoviesList(state),

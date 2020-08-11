@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {Switch, Route, Router, Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
@@ -40,9 +39,34 @@ import {
   getAuthorizationStatus
 } from "../../reducer/user/selector";
 
+import {
+  MovieType,
+  MoviesListType,
+  UserAuthDataType,
+} from "../../types";
+
+interface Props {
+  authorizationStatus: string;
+  authorizationError: boolean;
+  promoMovieCard: MovieType;
+  genresList: string[];
+  currentGenre: string;
+  moviesList: MoviesListType;
+  moviesByGenreList: MoviesListType;
+  showedItemsInMoviesList: number;
+  onGenreItemClick: () => void;
+  onShowMoreButtonClick: () => void;
+  login: () => void;
+  onReviewSend: () => void;
+  isMoviesListLoaded: boolean;
+  IsPromoMovieLoaded: boolean;
+  onSendIsFavoriteMovie: () => void;
+  userAuthData: UserAuthDataType;
+}
+
 const BigVideoPlayerWrapped = withVideoPlayer(BigVideoPlayer, VideoPlayerMode.BIG_MOVIE_PLAYER);
 
-const App = (props) => {
+const App: React.FC<Props> = (props: Props) => {
   const {
     authorizationStatus,
     authorizationError,
@@ -184,54 +208,6 @@ const App = (props) => {
       </Switch>
     </Router>
   );
-};
-
-App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  authorizationError: PropTypes.bool.isRequired,
-  promoMovieCard: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoreCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    staring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    runTime: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-  }),
-  genresList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  currentGenre: PropTypes.string.isRequired,
-  moviesList: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-  })).isRequired,
-  moviesByGenreList: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    previewVideoLink: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-  })).isRequired,
-  showedItemsInMoviesList: PropTypes.number.isRequired,
-  onGenreItemClick: PropTypes.func.isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
-  onReviewSend: PropTypes.func.isRequired,
-  isMoviesListLoaded: PropTypes.bool.isRequired,
-  IsPromoMovieLoaded: PropTypes.bool.isRequired,
-  onSendIsFavoriteMovie: PropTypes.func.isRequired,
-  userAuthData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    email: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }),
 };
 
 const mapStateToProps = (state) => ({

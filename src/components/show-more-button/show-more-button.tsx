@@ -1,7 +1,12 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 
-const ShowMoreButton = (props) => {
+interface Props {
+  moviesListLength: number;
+  showedItemsInMoviesList: number;
+  onShowMoreButtonClick: () => void;
+}
+
+const ShowMoreButton: React.FC<Props> = (props: Props) => {
   const {
     moviesListLength,
     showedItemsInMoviesList,
@@ -20,12 +25,6 @@ const ShowMoreButton = (props) => {
         </button>
       </div>)
     : null;
-};
-
-ShowMoreButton.propTypes = {
-  moviesListLength: PropTypes.number.isRequired,
-  showedItemsInMoviesList: PropTypes.number.isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 export default ShowMoreButton;
