@@ -115,13 +115,6 @@ class AddReview extends React.PureComponent<Props, {}> {
     } = this.props;
     evt.preventDefault();
 
-    // interface InputElementExtended extends HTMLElement {
-
-    // }
-
-    // const ratingChecedInputElement: React.ReactHTMLElement<HTMLSelectElement> = this.ratingStarsRef.current.querySelector(`input:checked`);
-    // const rating = ratingChecedInputElement.value;
-
     const rating = parseInt(this.ratingStarsRef.current.querySelector<HTMLInputElement>(`input:checked`).value, 10);
     const reviewText = this.reviewTextRef.current.value;
 
