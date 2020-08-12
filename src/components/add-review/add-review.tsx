@@ -79,7 +79,7 @@ class AddReview extends React.PureComponent<Props, {}> {
 
   private enableForm() {
     const ratingInputs = this.ratingStarsRef.current.querySelectorAll(`input`);
-    for (let item of ratingInputs) {
+    for (const item of ratingInputs) {
       item.disabled = false;
     }
 
@@ -89,7 +89,7 @@ class AddReview extends React.PureComponent<Props, {}> {
 
   private disableForm() {
     const ratingInputs = this.ratingStarsRef.current.querySelectorAll(`input`);
-    for (let item of ratingInputs) {
+    for (const item of ratingInputs) {
       item.disabled = true;
     }
 
@@ -115,7 +115,14 @@ class AddReview extends React.PureComponent<Props, {}> {
     } = this.props;
     evt.preventDefault();
 
-    const rating = this.ratingStarsRef.current.querySelector(`input:checked`).value;
+    // interface InputElementExtended extends HTMLElement {
+
+    // }
+
+    // const ratingChecedInputElement: React.ReactHTMLElement<HTMLSelectElement> = this.ratingStarsRef.current.querySelector(`input:checked`);
+    // const rating = ratingChecedInputElement.value;
+
+    const rating = parseInt(this.ratingStarsRef.current.querySelector<HTMLInputElement>(`input:checked`).value, 10);
     const reviewText = this.reviewTextRef.current.value;
 
     if (rating && reviewText) {
